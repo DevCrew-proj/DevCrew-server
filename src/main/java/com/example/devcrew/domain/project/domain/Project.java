@@ -19,19 +19,23 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
+    private String teamName;
+
+    private String period;
+
     @Enumerated(EnumType.STRING)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private ProjectTag projectTag;
 
-    private String summary;
+    private String imageUrl;
 
-    private String teamName;
+    private String summary;
 
     private String role;
 
-    private String period;
-
-    @OneToMany(mappedBy = "project")
-    private List<ProjectImage> projectImages=new ArrayList<>();
+//    @OneToMany(mappedBy = "project")
+//    private List<ProjectImage> projectImages=new ArrayList<>();
 
 }
