@@ -1,6 +1,5 @@
-package com.example.devcrew.domain.feeback_image.entity;
+package com.example.devcrew.domain.feedback.entity;
 
-import com.example.devcrew.domain.feedback.entity.Feedback;
 import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;

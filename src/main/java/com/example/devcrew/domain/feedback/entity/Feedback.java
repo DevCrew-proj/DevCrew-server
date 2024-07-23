@@ -16,13 +16,13 @@ public class Feedback extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    // 대표 키
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "normal_member_id", nullable = false)
-    private NormalMember normalMember;  // 일반 회원 외래 키
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_member_id", nullable = false)
-    private CompanyMember companyMember;    // 기업 회원 외래 키
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "normal_member_id", nullable = false)
+//    private NormalMember normalMember;  // 일반 회원 외래 키
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "company_member_id", nullable = false)
+//    private CompanyMember companyMember;    // 기업 회원 외래 키
 
     @Column(nullable = false, length = 50)
     private String title;   // 게시글 제목
