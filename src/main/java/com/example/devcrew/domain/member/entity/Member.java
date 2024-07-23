@@ -1,6 +1,7 @@
 package com.example.devcrew.domain.member.entity;
 
 import com.example.devcrew.domain.member.dto.request.UpdateMemberSignUpRequest;
+import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +10,7 @@ import lombok.*;
 @Entity
 @Builder
 @AllArgsConstructor
-public class Member {
+public class Member extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,8 +21,9 @@ public class Member {
 
     private String nickname;
     private String email;
-
     private String imageUrl;
+
+    private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -31,6 +33,12 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @Embedded
+    private CompanyMember companyMember;
+
+    @Embedded
+    private NormalMember normalMember;
 
     public void signUp(UpdateMemberSignUpRequest dto) {
         this.nickname = dto.getNickname();
