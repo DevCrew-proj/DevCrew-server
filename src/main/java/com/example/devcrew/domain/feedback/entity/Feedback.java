@@ -1,7 +1,6 @@
-package com.example.devcrew.domain.feedback.domain;
+package com.example.devcrew.domain.feedback.entity;
 
-import com.example.devcrew.domain.feedback.domain.enums.FeedbackTag;
-import com.example.devcrew.domain.feedback.domain.enums.Language;
+
 import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
