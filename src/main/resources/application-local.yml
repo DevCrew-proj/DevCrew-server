@@ -1,0 +1,65 @@
+Server:
+  port: 8080
+
+server:
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/devcrew
+    username: root
+    password: hello2024
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  logging:
+    level:
+      root: INFO
+      com.project: debug
+      org.springframework.web.servlet.DispatcherServlet: DEBUG
+
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: 3081d66ca530a5b5275e123c5b457e36  #rest api 키 값
+            client-secret: SuISd4xCoz7KgqYy2SauKFE4ncoWD1BU  #client secret 값
+            redirect-uri: http://localhost:8080/api/login/oauth2/code/kakao
+            client-authentication-method: client_secret_post
+            authorization-grant-type: authorization_code
+            client-name: Kakao
+            scope:
+              - profile_nickname
+              - profile_image
+              - account_email
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+oauth:
+  kakao:
+    admin-key: bf2c3e4eff32cd64749600120d27a41e
+    withdraw-uri: https://kapi.kakao.com/v1/user/unlink  # 다시 보기!!
+
+jwt:
+  secret-key: Y2hvcHBhLWRdBAOdnfos4Gps9adErfXsYebqh2mctYm9vdC1qd3QtdGVzdC1zZWNyZXQta2V5LWNob3BwYS1kb250LWJpdGUtbWUtc3ByaW5nLWJvb3Qtand0LXRlc3Qtc2VjcmV0LWtleQo=
+  access:
+    expiration: 604800000   #3600000  #1hours
+    header: Authorization
+  refresh:
+    expiration: 604800000  #7days
+    header: Authorization-refresh
