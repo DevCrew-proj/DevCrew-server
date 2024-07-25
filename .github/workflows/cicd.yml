@@ -92,3 +92,4 @@ jobs:
             sudo docker rm devcrewserver || true
             sudo docker run -d --name devcrewserver -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/devcrewserver:latest
           EOF
+
