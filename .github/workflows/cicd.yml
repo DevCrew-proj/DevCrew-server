@@ -37,7 +37,7 @@ jobs:
 
 
       - name: create application-prod.yml
-        if: contains(github.ref, 'main')
+        if: contains(github.ref, 'dev')
         run: |
           cd ./src/main/resources
           touch ./application-prod.yml
