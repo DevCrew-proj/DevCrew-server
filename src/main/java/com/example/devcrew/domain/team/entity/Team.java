@@ -32,8 +32,8 @@ public class Team extends BaseTimeEntity {
 
 */
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
-    private List<TeamMatching> teamMatchingId;
+    // @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
+    // private List<TeamMatching> teamMatchingId;
 
 
     @Column(length = 30)
