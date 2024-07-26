@@ -1,5 +1,6 @@
 package com.example.devcrew.domain.team.entity;
 
+import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -16,9 +17,13 @@ public class TeamMatching extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "team_id", nullable = false)
-    // private Team teamId;
+     @ManyToOne(fetch = FetchType.LAZY)
+     @JoinColumn(name = "team_id", nullable = false)
+     private Team team;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
     /* 일반 회원 테이블과 N:1 매핑
         @ManyToOne(fetch = FetchType.LAZY)

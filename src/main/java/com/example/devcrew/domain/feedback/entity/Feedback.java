@@ -1,9 +1,15 @@
 package com.example.devcrew.domain.feedback.entity;
 
 
+import com.example.devcrew.domain.comment.entity.Comment;
+import com.example.devcrew.domain.member.entity.Member;
+import com.example.devcrew.domain.team.entity.TeamMatching;
 import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,14 +21,6 @@ public class Feedback extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    // 대표 키
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "normal_member_id", nullable = false)
-//    private NormalMember normalMember;  // 일반 회원 외래 키
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "company_member_id", nullable = false)
-//    private CompanyMember companyMember;    // 기업 회원 외래 키
 
     @Column(nullable = false, length = 50)
     private String title;   // 게시글 제목
@@ -40,4 +38,16 @@ public class Feedback extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "language", nullable = false, length = 20)
     private Language language;      // 코드 리뷰 관련 태그(JAVA, JS, Kotlin, Python, Swift, C, 기타)
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
+
+    @OneToMany(mappedBy = "feedback", fetch = FetchType.LAZY)
+    private List<Comment> commentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "feedback", fetch = FetchType.LAZY)
+    private List<FeedbackImage> feedbackImageList = new ArrayList<>();
+
 }

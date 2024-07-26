@@ -1,6 +1,7 @@
 package com.example.devcrew.domain.comment.entity;
 
 import com.example.devcrew.domain.feedback.entity.Feedback;
+import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,13 +16,9 @@ public class Comment extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;        // 대표 키
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "normal_member_id", nullable = false)
-//    private NormalMember normalMember;  // 일반 회원 외래 키
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "company_member_id", nullable = false)
-//    private CompanyMember companyMember;    // 기업 회원 외래 키
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "feedback_id", nullable = false)

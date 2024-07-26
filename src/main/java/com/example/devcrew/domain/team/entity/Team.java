@@ -1,9 +1,13 @@
 package com.example.devcrew.domain.team.entity;
 
+import com.example.devcrew.domain.contest.entity.Contest;
+import com.example.devcrew.domain.member.entity.Member;
+import com.example.devcrew.domain.member.entity.NormalMember;
 import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,21 +23,20 @@ public class Team extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-/* **** Contest, NormalMember FK ****
+// **** Contest, NormalMember FK ****
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "contest_id", nullable = false)
-    private Contest contestId;
+    @JoinColumn(name = "contest_id", nullable = false)
+    private Contest contest;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "normal_member_id", nullable = false)
-    private NormalMember normalMemberId;
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
-*/
 
-    // @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
-    // private List<TeamMatching> teamMatchingId;
+     @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
+     private List<TeamMatching> teamMatchingList = new ArrayList<>();
 
 
     @Column(length = 30)

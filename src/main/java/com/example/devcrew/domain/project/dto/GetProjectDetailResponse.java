@@ -1,6 +1,6 @@
 package com.example.devcrew.domain.project.dto;
 
-import com.example.devcrew.domain.project.domain.Project;
+import com.example.devcrew.domain.project.entity.Project;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

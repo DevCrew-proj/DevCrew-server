@@ -1,9 +1,9 @@
-package com.example.devcrew.domain.project.domain;
+package com.example.devcrew.domain.project.entity;
 
+import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -36,7 +36,11 @@ public class Project extends BaseTimeEntity {
 
     private String role;
 
-//    @OneToMany(mappedBy = "project")
-//    private List<ProjectImage> projectImages=new ArrayList<>();
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<ProjectImage> projectImages=new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
 }

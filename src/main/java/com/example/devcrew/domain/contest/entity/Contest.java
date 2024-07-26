@@ -1,5 +1,7 @@
 package com.example.devcrew.domain.contest.entity;
 
+import com.example.devcrew.domain.member.entity.Member;
+import com.example.devcrew.domain.team.entity.Team;
 import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -52,10 +54,10 @@ public class Contest extends BaseTimeEntity {
     @Lob
     private String description;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "companyMember_id")
-//    private CompanyMember companyMember;
-//
-//    @OneToMany(mappedBy = "contest", cascade = CascadeType.ALL)
-//    private List<Team> teamList = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Member_id")
+    private Member member;
+
+    @OneToMany(mappedBy = "contest", cascade = CascadeType.ALL)
+    private List<Team> teamList = new ArrayList<>();
 }
