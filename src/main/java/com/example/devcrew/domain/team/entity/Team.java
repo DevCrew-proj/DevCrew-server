@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "Team")
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -53,6 +54,7 @@ public class Team extends BaseTimeEntity {
     @Column(length = 255)
     private String planUrl;
 
+    //대상 기기 web / app 피그마 구현한거 보고 enum인지 string인지 결정
     @Column(length = 30)
     private String formDevelop;
 
