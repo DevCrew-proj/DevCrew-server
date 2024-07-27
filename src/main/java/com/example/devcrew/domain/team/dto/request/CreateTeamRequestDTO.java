@@ -4,7 +4,7 @@ import com.example.devcrew.domain.team.entity.Os;
 import lombok.Getter;
 
 @Getter
-public class CreateTeamRequest {
+public class CreateTeamRequestDTO {
 
     private String name;
     private String password;
