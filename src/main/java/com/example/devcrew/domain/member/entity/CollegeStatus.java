@@ -7,8 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum SchoolStatus {
     ENROLLMENT("재학"),
-    GRADUATION("졸업"),
-    ;
+    GRADUATION("졸업");
 
     private final String status;
 }
