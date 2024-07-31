@@ -22,14 +22,14 @@ public class ProjectController {
 
     private final ProjectService projectService;
 
-    @Operation(summary = "프로젝트 업로드")
-    @PostMapping("/portfolio")
+    @Operation(summary = "참여 프로젝트 업로드")
+    @PostMapping("/projects")
     PostProjectResponse postProject(@RequestBody @Valid PostProjectRequest request){
         return projectService.postProject(request);
     }
 
     @Operation(summary = "참여 프로젝트들 조회")
-    @GetMapping("/portfolios")
+    @GetMapping("/projects")
     GetProjectsListResponse getProjects(){
         return projectService.getProjects();
     }
