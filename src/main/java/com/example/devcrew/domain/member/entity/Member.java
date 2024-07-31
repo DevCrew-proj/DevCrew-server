@@ -3,6 +3,7 @@ package com.example.devcrew.domain.member.entity;
 import com.example.devcrew.domain.comment.entity.Comment;
 import com.example.devcrew.domain.contest.entity.Contest;
 import com.example.devcrew.domain.feedback.entity.Feedback;
+import com.example.devcrew.domain.member.dto.request.PostMemberProfileRequest;
 import com.example.devcrew.domain.member.dto.request.UpdateMemberSignUpRequest;
 import com.example.devcrew.domain.project.entity.Project;
 import com.example.devcrew.domain.team.entity.Team;
@@ -49,27 +50,38 @@ public class Member extends BaseTimeEntity {
     @Embedded
     private NormalMember normalMember;
 
+
     public void signUp(UpdateMemberSignUpRequest dto) {
         this.nickname = dto.getNickname();
         this.role = Role.USER;
     }
+//
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+//    private List<Contest> contestList = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+//    private List<Team> teamList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Contest> contestList = new ArrayList<>();
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+//    private List<TeamMatching> teamMatchingList = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+//    private List<Project> projectList = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+//    private List<Feedback> feedbackList = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+//    private List<Comment> commentList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Team> teamList = new ArrayList<>();
+    public void updateMemberProfile(PostMemberProfileRequest request){
+        this.name=request.getName();
+        this.email=request.getEmail();
+        this.imageUrl=request.getImageUrl();
+        this.phoneNumber=request.getPhoneNumber();
+        this.normalMember.updateNormalMemberProfile(request);
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<TeamMatching> teamMatchingList = new ArrayList<>();
+    }
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Project> projectList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Feedback> feedbackList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Comment> commentList = new ArrayList<>();
 }
 
