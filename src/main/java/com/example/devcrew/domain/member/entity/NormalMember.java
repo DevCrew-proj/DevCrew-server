@@ -4,13 +4,18 @@ import com.example.devcrew.domain.member.dto.request.PostMemberProfileRequest;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Embeddable
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NormalMember {
     private String highSchool;
+
     private String college;
+
     private String introduction;
 
     @Enumerated(EnumType.STRING)
@@ -24,10 +29,11 @@ public class NormalMember {
 
     public void updateNormalMemberProfile(PostMemberProfileRequest request){
         this.highSchool=request.getHighSchool();
-        this.college=request.getCollege();
+        this.college= request.getCollege();
         this.introduction=request.getIntroduction();
+        this.gender=request.getGender();
         this.highSchoolStatus=request.getHighSchoolStatus();
-        this.college=request.getCollege();
+        this.collegeStatus=request.getCollegeStatus();
     }
 
 

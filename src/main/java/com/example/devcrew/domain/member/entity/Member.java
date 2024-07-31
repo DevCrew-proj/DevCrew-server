@@ -55,30 +55,29 @@ public class Member extends BaseTimeEntity {
         this.nickname = dto.getNickname();
         this.role = Role.USER;
     }
-//
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-//    private List<Contest> contestList = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-//    private List<Team> teamList = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-//    private List<TeamMatching> teamMatchingList = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-//    private List<Project> projectList = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-//    private List<Feedback> feedbackList = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-//    private List<Comment> commentList = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Contest> contestList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Team> teamList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<TeamMatching> teamMatchingList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Project> projectList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Feedback> feedbackList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Comment> commentList = new ArrayList<>();
 
     public void updateMemberProfile(PostMemberProfileRequest request){
         this.name=request.getName();
-        this.email=request.getEmail();
-        this.imageUrl=request.getImageUrl();
         this.phoneNumber=request.getPhoneNumber();
+        this.normalMember=new NormalMember();
         this.normalMember.updateNormalMemberProfile(request);
 
     }
