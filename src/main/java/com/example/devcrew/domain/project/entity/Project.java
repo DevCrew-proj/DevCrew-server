@@ -35,6 +35,8 @@ public class Project extends BaseTimeEntity {
 
     private String role;
 
+    private String imageUrl;
+
 //    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
 //    private List<ProjectImage> projectImages=new ArrayList<>();
 
@@ -51,6 +53,7 @@ public class Project extends BaseTimeEntity {
                 .projectTag(request.getProjectTag())
                 .summary(request.getSummary())
                 .role(request.getRole())
+                .imageUrl(request.getImageUrl())
                 .member(member)
                 .build();
     }

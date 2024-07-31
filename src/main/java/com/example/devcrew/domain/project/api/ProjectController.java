@@ -3,6 +3,7 @@ package com.example.devcrew.domain.project.api;
 
 import com.example.devcrew.domain.member.dto.request.PostMemberProfileRequest;
 import com.example.devcrew.domain.project.dto.request.PostProjectRequest;
+import com.example.devcrew.domain.project.dto.response.GetOneProjectResponse;
 import com.example.devcrew.domain.project.dto.response.GetProjectsListResponse;
 import com.example.devcrew.domain.project.dto.response.PostProjectResponse;
 import com.example.devcrew.domain.project.service.ProjectService;
@@ -32,5 +33,12 @@ public class ProjectController {
     @GetMapping("/projects")
     GetProjectsListResponse getProjects(){
         return projectService.getProjects();
+    }
+
+
+    @Operation(summary = "개별 프로젝트 조회")
+    @GetMapping("/project/{projectId}")
+    GetOneProjectResponse getOneProject(@PathVariable("projectId")Long projectId){
+        return projectService.getOneProject(projectId);
     }
 }

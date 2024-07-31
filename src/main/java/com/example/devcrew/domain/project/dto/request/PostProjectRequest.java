@@ -20,4 +20,5 @@ public class PostProjectRequest {
     private String summary;
 
     private String role;
+
 }

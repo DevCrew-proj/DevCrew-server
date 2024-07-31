@@ -9,6 +9,7 @@ import com.example.devcrew.domain.project.dto.response.GetOneProjectResponse;
 import com.example.devcrew.domain.project.dto.response.GetProjectsListResponse;
 import com.example.devcrew.domain.project.dto.response.PostProjectResponse;
 import com.example.devcrew.domain.project.entity.Project;
+import com.example.devcrew.domain.project.exception.ProjectNotFoundException;
 import com.example.devcrew.domain.project.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -50,9 +51,13 @@ public class ProjectService {
 
         return GetProjectsListResponse.of(member,projectList);
 
-
     }
 
     //개별 프로젝트 반환
+    public GetOneProjectResponse getOneProject(Long projectId){
+        Project project=projectRepository.findById(projectId)
+                .orElseThrow(()-> new ProjectNotFoundException());
+        return GetOneProjectResponse.from(project);
+    }
 
 }
