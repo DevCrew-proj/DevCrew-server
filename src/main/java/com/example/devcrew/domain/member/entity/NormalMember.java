@@ -19,7 +19,4 @@ public class NormalMember {
     @Enumerated(EnumType.STRING)
     private SchoolStatus collegeStatus;
 
-
-
-
 }
