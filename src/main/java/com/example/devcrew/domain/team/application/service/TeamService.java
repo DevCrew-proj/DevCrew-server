@@ -22,30 +22,29 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor //All 인가 NoArgsConstructor 인가
+@RequiredArgsConstructor
 public class TeamService {
 
     private final TeamRepository teamRepository;
     private final MemberRepository memberRepository;
     private final TeamMatchingRepository teamMatchingRepository;
     private final ContestRepository contestRepository;
-    @Autowired
     private final AuthService authService;
 
-//팀 구성하기
+
     @Transactional
     public Team createTeamsByContestAndMember(CreateTeamRequestDTO request) {
         Contest contest = contestRepository.findById(request.getContestId())
                 //예외처리 추가된거로 수정하기
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 공모전입니다."));
 
-                  // (임시) 공모전 테스트용
+                  // 테스트용
                   //Optional<Contest> contestOptional = contestRepository.findById(request.getContestId());
                   //Contest contest = contestOptional.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 공모전입니다."));
 
-       // Member member = memberRepository.findById(request.getMemberId())
-        //        .orElseThrow(MemberNotFoundException::new);
-        Member member = authService.getLoginUser();
+        Member member = memberRepository.findById(request.getMemberId())
+                .orElseThrow(MemberNotFoundException::new);
+       // Member member = authService.getLoginUser();
 
         Team team = Team.builder()
                 .contest(contest)
@@ -67,25 +66,21 @@ public class TeamService {
 
 
 
-    // 멤버 id로 정보 반환
     @Transactional
     public GetMemberInfoResponseDTO GetMemberInfoById(Long memberId) {
-        //Member member = memberRepository.findById(memberId)
-                //.orElseThrow(MemberNotFoundException::new);
-        Member member = authService.getLoginUser();
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(MemberNotFoundException::new);
+      //  Member member = authService.getLoginUser();
         return new GetMemberInfoResponseDTO(member.getName(), member.getPhoneNumber());
     }
 
-//팀원 신청하기
 @Transactional
 public TeamMatching applyToTeam(ApplyTeamRequestDTO requestDTO) {
-    Team team = teamRepository.findByIdAndPassword(requestDTO.getTeamId(), requestDTO.getTeamPassword());
-    if (team == null) {
-        throw new TeamNotFoundException();
-    }
-    // Member member = memberRepository.findById(request.getMemberId())
-    //        .orElseThrow(MemberNotFoundException::new);
-    Member member = authService.getLoginUser();
+    Team team = teamRepository.findByIdAndPassword(requestDTO.getTeamId(),  requestDTO.getTeamPassword())
+            .orElseThrow(TeamNotFoundException::new);
+     Member member = memberRepository.findById(requestDTO.getMemberId())
+            .orElseThrow(MemberNotFoundException::new);
+    //Member member = authService.getLoginUser();
 
     TeamMatching teamMatching = TeamMatching.builder()
             .team(team)
