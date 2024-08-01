@@ -3,7 +3,6 @@ package com.example.devcrew.domain.feedback.entity;
 
 import com.example.devcrew.domain.comment.entity.Comment;
 import com.example.devcrew.domain.member.entity.Member;
-import com.example.devcrew.domain.team.entity.TeamMatching;
 import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,7 +14,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Builder
 public class Feedback extends BaseTimeEntity {
 
     @Id
@@ -31,6 +30,12 @@ public class Feedback extends BaseTimeEntity {
     @Column(nullable = true, length = 255)
     private String fileUrl; // 첨부 파일 링크
 
+    @Embedded
+    private AdviceFeedback adviceFeedback;
+
+    @Embedded
+    private CodeFeedback codeFeedback;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
@@ -41,7 +46,7 @@ public class Feedback extends BaseTimeEntity {
     @OneToMany(mappedBy = "feedback", fetch = FetchType.LAZY)
     private List<FeedbackImage> feedbackImageList = new ArrayList<>();
 
-    protected void setMember(Member member) {
+    public void setMember(Member member) {
         this.member = member;
     }
 }
