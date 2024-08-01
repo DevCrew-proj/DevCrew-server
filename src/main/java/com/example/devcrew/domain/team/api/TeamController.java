@@ -1,7 +1,5 @@
 package com.example.devcrew.domain.team.api;
 
-import com.example.devcrew.domain.member.entity.Member;
-import com.example.devcrew.domain.member.repository.MemberRepository;
 import com.example.devcrew.domain.team.application.service.TeamService;
 import com.example.devcrew.domain.team.dto.request.ApplyTeamRequestDTO;
 import com.example.devcrew.domain.team.dto.request.CreateTeamRequestDTO;
@@ -19,18 +17,17 @@ import org.springframework.web.bind.annotation.*;
 public class TeamController {
 
     private final TeamService teamService;
-    private final MemberRepository memberRepository;
 
-// 아직 상단에 뜨는 관련된 공모전 상세 정보는 구현하지 않았음
+//####### 아직 상단에 뜨는 관련된 공모전 상세 정보는 구현하지 않았음 ######
     @GetMapping("create/{memberId}")
-    @Operation(summary = "팀 생성 기능에서 멤버 정보 조회", description = "팀 생성 시 해당 멤버의 이름과 전화번호 반환(자동완성기능).")
+    @Operation(summary = "팀 구성 기능에서 멤버 정보 조회", description = "팀 생성 시 해당 멤버의 이름과 전화번호 반환(자동완성기능).")
     public ResponseEntity<GetMemberInfoResponseDTO> getMemberInfoForCreate(@RequestParam Long memberId) {
         GetMemberInfoResponseDTO response = teamService.GetMemberInfoById(memberId);
         return ResponseEntity.ok(response);
     }
 
 
-    /*
+    // 팀 구성 기능
     @PostMapping("/create")
     @Operation(summary = "Create a new team")
     public ResponseEntity<Team> createTeamsByContestAndMember(@RequestBody CreateTeamRequestDTO createTeamRequestDTO) {
@@ -41,7 +38,6 @@ public class TeamController {
             return ResponseEntity.status(500).body(null);
         }
     }
-*/
 
 
 

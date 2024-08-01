@@ -12,6 +12,7 @@ public enum ErrorCode {
 
     //TEAM
     TEAM_NOT_FOUND_ERROR(404, "팀 정보를 찾지 못했습니다." )
+
     ;
 
     private final int status;
