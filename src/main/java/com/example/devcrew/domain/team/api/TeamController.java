@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/teams")
+@RequestMapping("v1/teams")
 @RequiredArgsConstructor
 public class TeamController {
 
