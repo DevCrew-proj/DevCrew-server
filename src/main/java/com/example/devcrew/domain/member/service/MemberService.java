@@ -24,7 +24,6 @@ public class MemberService {
 
         Member member = memberRepository.findById(1L)
                 .orElseThrow(() -> new MemberNotFoundException());
-
         member.updateMemberProfile(request);
         return PostMemberProfileResponse.from(member);
 

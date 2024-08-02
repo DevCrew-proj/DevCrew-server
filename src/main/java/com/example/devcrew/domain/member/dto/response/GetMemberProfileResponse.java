@@ -25,7 +25,6 @@ public class GetMemberProfileResponse {
 
     private String email;
 
-
     private String highSchool;
     private HighSchoolStatus highSchoolStatus;
 

@@ -29,7 +29,6 @@ public class MemberController {
     @GetMapping("/mypage")
     GetMemberProfileResponse getMemberProfile(){
         return memberService.getMemberProfile();
-
     }
 
 

@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum HighSchoolStatus {
-
     ENROLLMENT("재학"),
     GRADUATION("졸업");
 

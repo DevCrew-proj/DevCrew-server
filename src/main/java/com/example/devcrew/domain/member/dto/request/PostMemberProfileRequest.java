@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostMemberProfileRequest {
 
-
     private String name;
 
     private String phoneNumber;

@@ -36,7 +36,6 @@ public class PostMemberProfileResponse {
 
     private Gender gender;
 
-
     public static PostMemberProfileResponse from(Member member){
         return  PostMemberProfileResponse.builder()
                 .id(member.getId())
