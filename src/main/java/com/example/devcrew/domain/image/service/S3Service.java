@@ -23,8 +23,8 @@ public class S3Service {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
-    public CreateProfileImageResponse generatePresignedUrl(String bucketFolder,String fileExtension) {
-        String key = createPath(bucketFolder, fileExtension);
+    public CreateProfileImageResponse generatePresignedUrl(String bucketFolder,Long currentId,String fileExtension) {
+        String key = createPath(bucketFolder, currentId,fileExtension);
 
         GeneratePresignedUrlRequest generatePresignedUrlRequest = getGeneratePresignedUrlRequest(bucket, key, fileExtension);
         String url=amazonS3.generatePresignedUrl(generatePresignedUrlRequest).toString();
@@ -54,9 +54,9 @@ public class S3Service {
         return expiration;
     }
 
-    private String createPath(String bucketFolder, String fileExtension) {
+    private String createPath(String bucketFolder, Long currentId, String fileExtension) {
         String fileId = createFileId();
-        return bucketFolder+"/"+fileId+"."+fileExtension;
+        return bucketFolder+"/"+currentId.toString()+"/"+fileId+"."+fileExtension;
     }
 
     private String createFileId() {
