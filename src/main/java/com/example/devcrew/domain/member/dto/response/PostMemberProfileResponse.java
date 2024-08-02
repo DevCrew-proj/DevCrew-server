@@ -42,7 +42,7 @@ public class PostMemberProfileResponse {
                 .name(member.getName())
                 .email(member.getEmail())
                 .imageUrl(member.getImageUrl())
-                .phoneNumber(member.getPhoneNumber())
+                .phoneNumber(member.getNormalMember().getPhoneNumber())
                 .highSchool(member.getNormalMember().getHighSchool())
                 .highSchoolStatus(member.getNormalMember().getHighSchoolStatus())
                 .college(member.getNormalMember().getCollege())

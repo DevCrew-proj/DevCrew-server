@@ -37,7 +37,7 @@ public class GetMemberProfileResponse {
         return  GetMemberProfileResponse.builder()
                 .id(member.getId())
                 .imageUrl(member.getImageUrl())
-                .phoneNumber(member.getPhoneNumber())
+                .phoneNumber(member.getNormalMember().getPhoneNumber())
                 .name(member.getName())
                 .email(member.getEmail())
                 .highSchool(member.getNormalMember().getHighSchool())
