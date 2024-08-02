@@ -13,6 +13,7 @@ import java.util.List;
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class GetProjectsListResponse {
+
     private Long memberId;
     private List<GetOneProjectResponse> projectList;
 

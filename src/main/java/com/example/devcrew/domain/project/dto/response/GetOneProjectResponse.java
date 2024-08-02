@@ -12,6 +12,7 @@ import lombok.Getter;
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class GetOneProjectResponse {
+
     private Long id;
     private String name;
     private String imageUrl;
@@ -19,6 +20,7 @@ public class GetOneProjectResponse {
     private String summary;
     private String teamName;
     private String period;
+
     public static GetOneProjectResponse from (Project project){
         return GetOneProjectResponse.builder()
                 .id(project.getId())

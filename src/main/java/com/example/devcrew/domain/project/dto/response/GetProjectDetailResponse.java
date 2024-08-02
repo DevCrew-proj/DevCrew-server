@@ -10,6 +10,7 @@ import lombok.Getter;
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class GetProjectDetailResponse {
+
     private Long id;
 
     private String name;

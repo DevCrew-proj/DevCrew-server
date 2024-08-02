@@ -31,7 +31,6 @@ public class PostProjectResponse {
 
     private String role;
 
-
     public static PostProjectResponse from(Project project){
         return PostProjectResponse.builder()
                 .id(project.getId())

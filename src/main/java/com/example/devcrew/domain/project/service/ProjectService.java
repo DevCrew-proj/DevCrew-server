@@ -37,6 +37,7 @@ public class ProjectService {
 
     }
 
+
     //모든 프로젝트 반환
     public GetProjectsListResponse getProjects(){
         Member member = memberRepository.findById(1L)
@@ -52,6 +53,7 @@ public class ProjectService {
         return GetProjectsListResponse.of(member,projectList);
 
     }
+
 
     //개별 프로젝트 반환
     public GetOneProjectResponse getOneProject(Long projectId){

@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface ProjectRepository extends JpaRepository<Project,Long> {
     List<Project> findByMember(Member member);
+
 }
