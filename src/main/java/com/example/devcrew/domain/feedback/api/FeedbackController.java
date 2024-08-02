@@ -8,8 +8,10 @@ import com.example.devcrew.domain.feedback.entity.Feedback;
 import com.example.devcrew.domain.feedback.service.CreateAdviceFeedbackImpl;
 import com.example.devcrew.domain.feedback.service.CreateCodeFeedbackImpl;
 import com.example.devcrew.domain.feedback.service.ReadAdviceFeedbackImpl;
+import com.example.devcrew.domain.feedback.service.ReadCodeFeedbackImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,7 @@ public class FeedbackController {
     private final CreateAdviceFeedbackImpl createAdviceFeedbackImpl;
     private final CreateCodeFeedbackImpl createCodeFeedbackImpl;
     private final ReadAdviceFeedbackImpl readAdviceFeedbackImpl;
+    private final ReadCodeFeedbackImpl readCodeFeedbackImpl;
 
     // 현직자 조언 게시글 생성 API
     @PostMapping("/advice/create")
@@ -50,6 +53,14 @@ public class FeedbackController {
 
         Feedback newCodeFeedback = createCodeFeedbackImpl.createCodeFeedback(request);
         CreateCodeFeedbackResponseDTO responseDTO = CodeFeedbackConverter.toCreateCodeFeedbackResponseDTO(newCodeFeedback);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    // 코드 리뷰 단일 게시글 조회 API
+    @GetMapping("/codes/{feedbackId}")
+    @Operation(summary = "코드 리뷰 단일 게시글 조회 API")
+    public ResponseEntity<ReadCodeFeedbackResponseDTO> readCodeFeedback(@PathVariable Long feedbackId){
+        ReadCodeFeedbackResponseDTO responseDTO = readCodeFeedbackImpl.readCodeFeedback(feedbackId);
         return ResponseEntity.ok(responseDTO);
     }
 
