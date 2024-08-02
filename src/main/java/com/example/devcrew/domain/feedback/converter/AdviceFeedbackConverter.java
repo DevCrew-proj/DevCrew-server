@@ -2,6 +2,7 @@ package com.example.devcrew.domain.feedback.converter;
 
 import com.example.devcrew.domain.feedback.dto.CreateAdviceFeedbackRequestDTO;
 import com.example.devcrew.domain.feedback.dto.CreateAdviceFeedbackResponseDTO;
+import com.example.devcrew.domain.feedback.dto.ReadAdviceFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.entity.AdviceFeedback;
 import com.example.devcrew.domain.feedback.entity.Feedback;
 import com.example.devcrew.domain.feedback.entity.FeedbackTag;
@@ -45,6 +46,16 @@ public class AdviceFeedbackConverter {
                 .memberId(feedback.getMember().getId())
                 .createdAt(feedback.getCreatedAt())
                 .updatedAt(feedback.getUpdatedAt())
+                .build();
+    }
+
+    // 게시글 단일 조회 응답
+    public static ReadAdviceFeedbackResponseDTO toReadAdviceFeedbackResponseDTO(Feedback feedback) {
+        return ReadAdviceFeedbackResponseDTO.builder()
+                .id(feedback.getId())
+                .title(feedback.getTitle())
+                .content(feedback.getContent())
+                .memberName(feedback.getMember().getNickname())
                 .build();
     }
 }
