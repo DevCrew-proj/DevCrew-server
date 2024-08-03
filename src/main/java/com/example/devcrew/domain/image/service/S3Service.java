@@ -17,16 +17,18 @@ public class S3Service {
 
     private final AmazonS3 amazonS3;
 
+
+
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
-    public GetPresignedUrlResponse getPresignedUrl(String bucketFolder, Long currentId, String fileExtension) {
-        String key = createPath(bucketFolder, currentId,fileExtension);
+    public GetPresignedUrlResponse getPresignedUrl(String bucketFolder, String fileExtension) {
+        String realImageUrl = createPath(bucketFolder,fileExtension);
 
-        GeneratePresignedUrlRequest generatePresignedUrlRequest = getGeneratePresignedUrlRequest(bucket, key, fileExtension);
+        GeneratePresignedUrlRequest generatePresignedUrlRequest = getGeneratePresignedUrlRequest(bucket, realImageUrl, fileExtension);
         String url=amazonS3.generatePresignedUrl(generatePresignedUrlRequest).toString();
         System.out.println("생성된 url="+url);
-        return GetPresignedUrlResponse.from(url);
+        return GetPresignedUrlResponse.of(url,realImageUrl);
 
     }
 
@@ -51,9 +53,9 @@ public class S3Service {
         return expiration;
     }
 
-    private String createPath(String bucketFolder, Long currentId, String fileExtension) {
+    private String createPath(String bucketFolder,String fileExtension) {
         String fileId = createFileId();
-        return bucketFolder+"/"+currentId.toString()+"/"+fileId+"."+fileExtension;
+        return bucketFolder+"/"+fileId+"."+fileExtension;
     }
 
     private String createFileId() {

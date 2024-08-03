@@ -14,10 +14,13 @@ public class GetPresignedUrlResponse {
     @Schema(description = "presignedUrl 주소 : 해당 주소로 이미지 등록")
     private final String presignedUrl;
 
+    private final String imageUrl;
 
-    public static GetPresignedUrlResponse from(String presignedUrl){
+
+    public static GetPresignedUrlResponse of(String presignedUrl,String imageUrl){
         return GetPresignedUrlResponse.builder()
                 .presignedUrl(presignedUrl)
+                .imageUrl("https://devcrew.s3.ap-northeast-2.amazonaws.com/"+imageUrl)
                 .build();
     }
 }

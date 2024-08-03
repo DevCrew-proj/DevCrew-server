@@ -26,10 +26,7 @@ public class S3Controller {
     @Operation(summary = "자기소개 이미지 presignedURL 발급받기")
     @PostMapping("/image/member")
     public GetPresignedUrlResponse getMemberImagePresignedUrl(@RequestParam String fileExtension){
-        //memberId를 가져오는 코드
-        Member member=memberRepository.findById(1L)
-                .orElseThrow(MemberNotFoundException::new);
-        return s3Service.getPresignedUrl("member",member.getId(),fileExtension);
+        return s3Service.getPresignedUrl("member",fileExtension);
     }
 
 
@@ -37,61 +34,89 @@ public class S3Controller {
     @PostMapping("/images/member")
     public List<GetPresignedUrlResponse> getProjectImagesPresignedUrls(@RequestParam List<String> fileExtensions) {
 
-        //memberId를 가져오는 코드
-        Member member=memberRepository.findById(1L)
-                .orElseThrow(MemberNotFoundException::new);
+        List<GetPresignedUrlResponse> presignedUrls = new ArrayList<>();
+
+        for (String fileExtension : fileExtensions) {
+            presignedUrls.add(s3Service.getPresignedUrl("member", fileExtension));
+        }
+
+        return presignedUrls;
+    }
+
+    @Operation(summary = "기업 공모전 등록 프로젝트 이미지 presignedUrl 발급받기")
+    @PostMapping("/images/company")
+    public List<GetPresignedUrlResponse> getCompanyImagesPresignedUrls(@RequestParam List<String> fileExtensions) {
 
         List<GetPresignedUrlResponse> presignedUrls = new ArrayList<>();
 
         for (String fileExtension : fileExtensions) {
-            presignedUrls.add(s3Service.getPresignedUrl("member",member.getId(), fileExtension));
+            presignedUrls.add(s3Service.getPresignedUrl("company", fileExtension));
         }
         return presignedUrls;
     }
 
-//    @Operation(summary = "기업 공모전 등록 프로젝트 이미지 presignedUrl 발급받기")
-//    @PostMapping("/images/company")
-//    public List<GetPresignedUrlResponse> getCompanyImagesPresignedUrls(@RequestParam List<String> fileExtensions) {
-//
-//        //companyId를 가져오는 코드 추가
-//
-//
-//        List<GetPresignedUrlResponse> presignedUrls = new ArrayList<>();
-//
-//        for (String fileExtension : fileExtensions) {
-//            presignedUrls.add(s3Service.getPresignedUrl("company",company.getId(), fileExtension));
-//        }
-//        return presignedUrls;
-//    }
-//
-//    @Operation(summary = "팀매칭 서비스 기획안 이미지 presignedUrl 발급받기")
-//    @PostMapping("/images/team")
-//    public List<GetPresignedUrlResponse> getTeamMatchingImagesPresignedUrls(@RequestParam List<String> fileExtensions) {
-//
-//        //teamId를 가져오는 코드 추가
-//
-//        List<GetPresignedUrlResponse> presignedUrls = new ArrayList<>();
-//
-//        for (String fileExtension : fileExtensions) {
-//            presignedUrls.add(s3Service.getPresignedUrl("team",team.getId(), fileExtension));
-//        }
-//        return presignedUrls;
-//    }
-//
-//
-//    @Operation(summary = "팀매칭 서비스 기획안 이미지 presignedUrl 발급받기")
-//    @PostMapping("/images/feedback")
-//    public List<GetPresignedUrlResponse> getFeedbackImagesPresignedUrls(@RequestParam List<String> fileExtensions) {
-//
-//        //feedbackId를 가져오는 코드 추가
-//
-//        List<GetPresignedUrlResponse> presignedUrls = new ArrayList<>();
-//
-//        for (String fileExtension : fileExtensions) {
-//            presignedUrls.add(s3Service.getPresignedUrl("feedback",feedback.getId(), fileExtension));
-//        }
-//        return presignedUrls;
-//    }
+    @Operation(summary = "팀매칭 서비스 기획안 이미지 presignedUrl 발급받기")
+    @PostMapping("/images/team")
+    public List<GetPresignedUrlResponse> getTeamMatchingImagesPresignedUrls(@RequestParam List<String> fileExtensions) {
+
+        List<GetPresignedUrlResponse> presignedUrls = new ArrayList<>();
+
+        for (String fileExtension : fileExtensions) {
+            presignedUrls.add(s3Service.getPresignedUrl("team", fileExtension));
+        }
+        return presignedUrls;
+    }
+
+
+    @Operation(summary = "현직자 조언 등록 이미지 presignedUrl 발급받기")
+    @PostMapping("/images/advice")
+    public List<GetPresignedUrlResponse> getAdviceImagesPresignedUrls(@RequestParam List<String> fileExtensions) {
+
+        List<GetPresignedUrlResponse> presignedUrls = new ArrayList<>();
+
+        for (String fileExtension : fileExtensions) {
+            presignedUrls.add(s3Service.getPresignedUrl("advice", fileExtension));
+        }
+        return presignedUrls;
+    }
+
+    @Operation(summary = "기획 피드백 등록 이미지 presignedUrl 발급받기")
+    @PostMapping("/images/plan")
+    public List<GetPresignedUrlResponse> getPlanImagesPresignedUrls(@RequestParam List<String> fileExtensions) {
+
+        List<GetPresignedUrlResponse> presignedUrls = new ArrayList<>();
+
+        for (String fileExtension : fileExtensions) {
+            presignedUrls.add(s3Service.getPresignedUrl("plan", fileExtension));
+        }
+        return presignedUrls;
+    }
+
+    @Operation(summary = "디자인 피드백 등록 이미지 presignedUrl 발급받기")
+    @PostMapping("/images/design")
+    public List<GetPresignedUrlResponse> getDesignImagesPresignedUrls(@RequestParam List<String> fileExtensions) {
+
+        List<GetPresignedUrlResponse> presignedUrls = new ArrayList<>();
+
+        for (String fileExtension : fileExtensions) {
+            presignedUrls.add(s3Service.getPresignedUrl("design", fileExtension));
+        }
+        return presignedUrls;
+    }
+
+    @Operation(summary = "코드 리뷰 등록 이미지 presignedUrl 발급받기")
+    @PostMapping("/images/codeReview")
+    public List<GetPresignedUrlResponse> getCodeReviewImagesPresignedUrls(@RequestParam List<String> fileExtensions) {
+
+        List<GetPresignedUrlResponse> presignedUrls = new ArrayList<>();
+
+        for (String fileExtension : fileExtensions) {
+            presignedUrls.add(s3Service.getPresignedUrl("codeReview", fileExtension));
+        }
+        return presignedUrls;
+    }
+
+
 
 
 
