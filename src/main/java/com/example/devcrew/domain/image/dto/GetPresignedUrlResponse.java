@@ -9,14 +9,14 @@ import lombok.Getter;
 @Getter
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class CreateProfileImageResponse {
+public class GetPresignedUrlResponse {
 
     @Schema(description = "presignedUrl 주소 : 해당 주소로 이미지 등록")
     private final String presignedUrl;
 
 
-    public static CreateProfileImageResponse from(String presignedUrl){
-        return CreateProfileImageResponse.builder()
+    public static GetPresignedUrlResponse from(String presignedUrl){
+        return GetPresignedUrlResponse.builder()
                 .presignedUrl(presignedUrl)
                 .build();
     }

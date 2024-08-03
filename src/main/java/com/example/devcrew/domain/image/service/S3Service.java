@@ -2,11 +2,8 @@ package com.example.devcrew.domain.image.service;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.Headers;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
-import com.example.devcrew.domain.image.dto.CreateProfileImageResponse;
+import com.example.devcrew.domain.image.dto.GetPresignedUrlResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,13 +20,13 @@ public class S3Service {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
-    public CreateProfileImageResponse generatePresignedUrl(String bucketFolder,Long currentId,String fileExtension) {
+    public GetPresignedUrlResponse getPresignedUrl(String bucketFolder, Long currentId, String fileExtension) {
         String key = createPath(bucketFolder, currentId,fileExtension);
 
         GeneratePresignedUrlRequest generatePresignedUrlRequest = getGeneratePresignedUrlRequest(bucket, key, fileExtension);
         String url=amazonS3.generatePresignedUrl(generatePresignedUrlRequest).toString();
         System.out.println("생성된 url="+url);
-        return CreateProfileImageResponse.from(url);
+        return GetPresignedUrlResponse.from(url);
 
     }
 
