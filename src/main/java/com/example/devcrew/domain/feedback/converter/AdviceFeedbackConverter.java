@@ -22,17 +22,8 @@
         // 게시글 생성 요청
         public static Feedback toadviceFeedback(CreateAdviceFeedbackRequestDTO request, Member member){
 
-            FeedbackTag feedbackTag = switch (request.getFeedbackTag()) {
-                case 1 -> FeedbackTag.PLAN;
-                case 2 -> FeedbackTag.DESIGN;
-                case 3 -> FeedbackTag.FRONTEND;
-                case 4 -> FeedbackTag.BACKEND;
-                case 5 -> FeedbackTag.OTHER;
-                default -> throw new IllegalArgumentException("Unknown feedback tag: " + request.getFeedbackTag());
-            };
-
             AdviceFeedback adviceFeedback = AdviceFeedback.builder()
-                    .feedbackTag(feedbackTag)
+                    .feedbackTag(request.getFeedbackTag()) // 바로 request에서 FeedbackTag를 받아옴
                     .build();
 
             return Feedback.builder()

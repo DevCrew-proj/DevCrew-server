@@ -1,5 +1,6 @@
 package com.example.devcrew.domain.feedback.dto.request;
 
+import com.example.devcrew.domain.feedback.entity.Language;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 
@@ -12,7 +13,7 @@ public class CreateCodeFeedbackRequestDTO {
     @NotBlank
     private String content; // 코드 리뷰 게시글 내용
 
-    private Integer language;    // 태그를 번호로 받을 것
+    private Language language;    // 코드 태그
 
     private String fileUrl;  // 첨부 파일 리스트
 }

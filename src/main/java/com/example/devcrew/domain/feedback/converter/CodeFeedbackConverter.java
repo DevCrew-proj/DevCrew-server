@@ -2,6 +2,7 @@ package com.example.devcrew.domain.feedback.converter;
 
 import com.example.devcrew.domain.feedback.dto.request.CreateCodeFeedbackRequestDTO;
 import com.example.devcrew.domain.feedback.dto.response.*;
+import com.example.devcrew.domain.feedback.entity.AdviceFeedback;
 import com.example.devcrew.domain.feedback.entity.CodeFeedback;
 import com.example.devcrew.domain.feedback.entity.Feedback;
 import com.example.devcrew.domain.feedback.entity.Language;
@@ -20,19 +21,8 @@ public class CodeFeedbackConverter {
     // 코드 리뷰 게시글 생성 요청
     public static Feedback toCodeFeedback(CreateCodeFeedbackRequestDTO request, Member member){
 
-        Language language = switch (request.getLanguage()){
-            case 1 -> Language.JAVA;
-            case 2 -> Language.JAVASCRIPT;
-            case 3 -> Language.KOTLIN;
-            case 4 -> Language.PYTHON;
-            case 5 -> Language.SWIFT;
-            case 6 -> Language.C;
-            case 7 -> Language.OTHER;
-            default -> throw new IllegalArgumentException("Unknown language: " + request.getLanguage());
-        };
-
         CodeFeedback codeFeedback = CodeFeedback.builder()
-                .language(language)
+                .language(request.getLanguage())
                 .build();
 
         return Feedback.builder()
