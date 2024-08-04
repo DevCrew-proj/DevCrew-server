@@ -14,7 +14,7 @@ import java.util.List;
 public class CodeFeedback {
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "language", nullable = false, length = 20)
+    @Column(name = "language", nullable = true, length = 20)
     private Language language;      // 코드 리뷰 관련 태그(JAVA, JS, Kotlin, Python, Swift, C, 기타)
 
     @Builder

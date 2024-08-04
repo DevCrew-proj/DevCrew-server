@@ -1,9 +1,8 @@
 package com.example.devcrew.domain.feedback.converter;
 
-import com.example.devcrew.domain.feedback.dto.CreateCodeFeedbackRequestDTO;
-import com.example.devcrew.domain.feedback.dto.CreateCodeFeedbackResponseDTO;
-import com.example.devcrew.domain.feedback.dto.ReadAdviceFeedbackResponseDTO;
-import com.example.devcrew.domain.feedback.dto.ReadCodeFeedbackResponseDTO;
+import com.example.devcrew.domain.feedback.dto.request.CreateCodeFeedbackRequestDTO;
+import com.example.devcrew.domain.feedback.dto.response.CreateCodeFeedbackResponseDTO;
+import com.example.devcrew.domain.feedback.dto.response.ReadCodeFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.entity.CodeFeedback;
 import com.example.devcrew.domain.feedback.entity.Feedback;
 import com.example.devcrew.domain.feedback.entity.Language;

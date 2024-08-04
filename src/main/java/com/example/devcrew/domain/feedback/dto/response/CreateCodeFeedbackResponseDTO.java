@@ -1,21 +1,20 @@
-package com.example.devcrew.domain.feedback.dto;
+package com.example.devcrew.domain.feedback.dto.response;
 
-import com.example.devcrew.domain.feedback.entity.FeedbackImage;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateAdviceFeedbackResponseDTO {
+public class CreateCodeFeedbackResponseDTO {
     private Long id;
     private Long memberId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
 }

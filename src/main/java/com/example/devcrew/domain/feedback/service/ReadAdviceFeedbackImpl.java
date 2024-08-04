@@ -1,9 +1,8 @@
 package com.example.devcrew.domain.feedback.service;
 
 import com.example.devcrew.domain.feedback.converter.AdviceFeedbackConverter;
-import com.example.devcrew.domain.feedback.dto.ReadAdviceFeedbackResponseDTO;
+import com.example.devcrew.domain.feedback.dto.response.ReadAdviceFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.entity.Feedback;
-import com.example.devcrew.domain.feedback.entity.FeedbackTag;
 import com.example.devcrew.domain.feedback.repository.FeedbackRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

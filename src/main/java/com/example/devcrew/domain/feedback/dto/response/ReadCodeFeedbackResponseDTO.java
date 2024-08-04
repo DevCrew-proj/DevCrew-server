@@ -1,4 +1,4 @@
-package com.example.devcrew.domain.feedback.dto;
+package com.example.devcrew.domain.feedback.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

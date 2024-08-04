@@ -2,7 +2,7 @@ package com.example.devcrew.domain.feedback.service;
 
 import com.example.devcrew.domain.auth.service.AuthService;
 import com.example.devcrew.domain.feedback.converter.CodeFeedbackConverter;
-import com.example.devcrew.domain.feedback.dto.CreateCodeFeedbackRequestDTO;
+import com.example.devcrew.domain.feedback.dto.request.CreateCodeFeedbackRequestDTO;
 import com.example.devcrew.domain.feedback.entity.Feedback;
 import com.example.devcrew.domain.feedback.repository.FeedbackRepository;
 import com.example.devcrew.domain.member.entity.Member;

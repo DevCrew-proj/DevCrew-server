@@ -1,9 +1,7 @@
 package com.example.devcrew.domain.feedback.service;
 
-import com.example.devcrew.domain.feedback.converter.AdviceFeedbackConverter;
 import com.example.devcrew.domain.feedback.converter.CodeFeedbackConverter;
-import com.example.devcrew.domain.feedback.dto.ReadAdviceFeedbackResponseDTO;
-import com.example.devcrew.domain.feedback.dto.ReadCodeFeedbackResponseDTO;
+import com.example.devcrew.domain.feedback.dto.response.ReadCodeFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.entity.Feedback;
 import com.example.devcrew.domain.feedback.repository.FeedbackRepository;
 import lombok.RequiredArgsConstructor;

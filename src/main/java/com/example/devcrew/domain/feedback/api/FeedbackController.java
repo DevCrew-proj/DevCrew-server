@@ -1,9 +1,13 @@
 package com.example.devcrew.domain.feedback.api;
 import com.example.devcrew.domain.feedback.converter.AdviceFeedbackConverter;
 import com.example.devcrew.domain.feedback.converter.CodeFeedbackConverter;
-import com.example.devcrew.domain.feedback.dto.*;
 
-import com.example.devcrew.domain.feedback.entity.AdviceFeedback;
+import com.example.devcrew.domain.feedback.dto.request.CreateAdviceFeedbackRequestDTO;
+import com.example.devcrew.domain.feedback.dto.request.CreateCodeFeedbackRequestDTO;
+import com.example.devcrew.domain.feedback.dto.response.ReadAdviceFeedbackResponseDTO;
+import com.example.devcrew.domain.feedback.dto.response.CreateAdviceFeedbackResponseDTO;
+import com.example.devcrew.domain.feedback.dto.response.CreateCodeFeedbackResponseDTO;
+import com.example.devcrew.domain.feedback.dto.response.ReadCodeFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.entity.Feedback;
 import com.example.devcrew.domain.feedback.service.CreateAdviceFeedbackImpl;
 import com.example.devcrew.domain.feedback.service.CreateCodeFeedbackImpl;
@@ -11,7 +15,6 @@ import com.example.devcrew.domain.feedback.service.ReadAdviceFeedbackImpl;
 import com.example.devcrew.domain.feedback.service.ReadCodeFeedbackImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

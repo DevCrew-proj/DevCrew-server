@@ -2,20 +2,14 @@ package com.example.devcrew.domain.feedback.service;
 
 import com.example.devcrew.domain.auth.service.AuthService;
 import com.example.devcrew.domain.feedback.converter.AdviceFeedbackConverter;
-import com.example.devcrew.domain.feedback.dto.CreateAdviceFeedbackRequestDTO;
-import com.example.devcrew.domain.feedback.entity.AdviceFeedback;
+import com.example.devcrew.domain.feedback.dto.request.CreateAdviceFeedbackRequestDTO;
 import com.example.devcrew.domain.feedback.entity.Feedback;
-import com.example.devcrew.domain.feedback.entity.FeedbackImageUuid;
-import com.example.devcrew.domain.feedback.repository.FeedbackImageUuidRepository;
 import com.example.devcrew.domain.feedback.repository.FeedbackRepository;
 import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.UUID;
 
 
 @Service
