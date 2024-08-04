@@ -4,11 +4,10 @@ import com.example.devcrew.domain.feedback.converter.CodeFeedbackConverter;
 
 import com.example.devcrew.domain.feedback.dto.request.CreateAdviceFeedbackRequestDTO;
 import com.example.devcrew.domain.feedback.dto.request.CreateCodeFeedbackRequestDTO;
-import com.example.devcrew.domain.feedback.dto.response.ReadAdviceFeedbackResponseDTO;
-import com.example.devcrew.domain.feedback.dto.response.CreateAdviceFeedbackResponseDTO;
-import com.example.devcrew.domain.feedback.dto.response.CreateCodeFeedbackResponseDTO;
-import com.example.devcrew.domain.feedback.dto.response.ReadCodeFeedbackResponseDTO;
+import com.example.devcrew.domain.feedback.dto.response.*;
 import com.example.devcrew.domain.feedback.entity.Feedback;
+import com.example.devcrew.domain.feedback.entity.FeedbackTag;
+import com.example.devcrew.domain.feedback.entity.Language;
 import com.example.devcrew.domain.feedback.service.CreateAdviceFeedbackImpl;
 import com.example.devcrew.domain.feedback.service.CreateCodeFeedbackImpl;
 import com.example.devcrew.domain.feedback.service.ReadAdviceFeedbackImpl;
@@ -48,6 +47,17 @@ public class FeedbackController {
         return ResponseEntity.ok(responseDTO);
     }
 
+    // 현직자 조언 게시글 목록 조회 API (페이징)
+    @GetMapping("/advices")
+    @Operation(summary = "현직자 조언 게시글 목록 조회 API")
+    public ResponseEntity<ReadAdviceFeedbackListResponseDTO> readAdviceFeedbackList(
+            @RequestParam FeedbackTag feedbackTag,
+            @RequestParam int page) {
+
+        ReadAdviceFeedbackListResponseDTO responseDTO = readAdviceFeedbackImpl.readAdviceFeedbackList(feedbackTag, page);
+        return ResponseEntity.ok(responseDTO);
+    }
+
     // 코드 리뷰 게시글 생성 API
     @PostMapping("/code/create")
     @Operation(summary = "코드 리뷰 게시글 생성 API")
@@ -64,6 +74,17 @@ public class FeedbackController {
     @Operation(summary = "코드 리뷰 단일 게시글 조회 API")
     public ResponseEntity<ReadCodeFeedbackResponseDTO> readCodeFeedback(@PathVariable Long feedbackId){
         ReadCodeFeedbackResponseDTO responseDTO = readCodeFeedbackImpl.readCodeFeedback(feedbackId);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    // 코드 리뷰 게시글 목록 조회 API (페이징)
+    @GetMapping("/codes")
+    @Operation(summary = "코드 리뷰 게시글 목록 조회 API")
+    public ResponseEntity<ReadCodeFeedbackListResponseDTO> readCodeFeedbackList(
+            @RequestParam Language language,
+            @RequestParam int page) {
+
+        ReadCodeFeedbackListResponseDTO responseDTO = readCodeFeedbackImpl.readCodeFeedbackList(language, page);
         return ResponseEntity.ok(responseDTO);
     }
 

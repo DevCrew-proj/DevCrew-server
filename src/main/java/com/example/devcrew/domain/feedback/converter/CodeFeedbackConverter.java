@@ -1,13 +1,16 @@
 package com.example.devcrew.domain.feedback.converter;
 
 import com.example.devcrew.domain.feedback.dto.request.CreateCodeFeedbackRequestDTO;
-import com.example.devcrew.domain.feedback.dto.response.CreateCodeFeedbackResponseDTO;
-import com.example.devcrew.domain.feedback.dto.response.ReadCodeFeedbackResponseDTO;
+import com.example.devcrew.domain.feedback.dto.response.*;
 import com.example.devcrew.domain.feedback.entity.CodeFeedback;
 import com.example.devcrew.domain.feedback.entity.Feedback;
 import com.example.devcrew.domain.feedback.entity.Language;
 import com.example.devcrew.domain.member.entity.Member;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CodeFeedbackConverter {
@@ -58,6 +61,18 @@ public class CodeFeedbackConverter {
                 .title(feedback.getTitle())
                 .content(feedback.getContent())
                 .memberName(feedback.getMember().getNickname())
+                .build();
+    }
+
+    // 게시글 목록 조회 응답
+    public static ReadCodeFeedbackListResponseDTO toReadCodeFeedbackListResponseDTO(Page<Feedback> feedbackPage) {
+        List<ReadCodeFeedbackResponseDTO> feedbackList = feedbackPage.getContent().stream()
+                .map(CodeFeedbackConverter::toReadCodeFeedbackResponseDTO)
+                .collect(Collectors.toList());
+
+        return ReadCodeFeedbackListResponseDTO.builder()
+                .codeFeedbackList(feedbackList)
+                .totalPages(feedbackPage.getTotalPages())
                 .build();
     }
 }
