@@ -28,7 +28,6 @@ public class FeedbackController {
     private final ReadAdviceFeedbackImpl readAdviceFeedbackImpl;
     private final ReadCodeFeedbackImpl readCodeFeedbackImpl;
 
-    // 현직자 조언 게시글 생성 API
     @PostMapping("/advice/create")
     @Operation(summary = "현직자 조언 게시글 생성 API")
     public ResponseEntity<CreateAdviceFeedbackResponseDTO> createAdivceFeedback(
@@ -39,7 +38,7 @@ public class FeedbackController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    // 현직자 조언 단일 게시글 조회 API
+
     @GetMapping("/advices/{feedbackId}")
     @Operation(summary = "현직자 조언 단일 게시글 조회 API")
     public ResponseEntity<ReadAdviceFeedbackResponseDTO> readAdviceFeedback(@PathVariable Long feedbackId){
@@ -47,7 +46,7 @@ public class FeedbackController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    // 현직자 조언 게시글 목록 조회 API (페이징)
+
     @GetMapping("/advices")
     @Operation(summary = "현직자 조언 게시글 목록 조회 API")
     public ResponseEntity<ReadAdviceFeedbackListResponseDTO> readAdviceFeedbackList(
@@ -58,7 +57,7 @@ public class FeedbackController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    // 코드 리뷰 게시글 생성 API
+
     @PostMapping("/code/create")
     @Operation(summary = "코드 리뷰 게시글 생성 API")
     public ResponseEntity<CreateCodeFeedbackResponseDTO> createCodeFeedback(
@@ -69,7 +68,7 @@ public class FeedbackController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    // 코드 리뷰 단일 게시글 조회 API
+
     @GetMapping("/codes/{feedbackId}")
     @Operation(summary = "코드 리뷰 단일 게시글 조회 API")
     public ResponseEntity<ReadCodeFeedbackResponseDTO> readCodeFeedback(@PathVariable Long feedbackId){
@@ -77,7 +76,7 @@ public class FeedbackController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    // 코드 리뷰 게시글 목록 조회 API (페이징)
+
     @GetMapping("/codes")
     @Operation(summary = "코드 리뷰 게시글 목록 조회 API")
     public ResponseEntity<ReadCodeFeedbackListResponseDTO> readCodeFeedbackList(

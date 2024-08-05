@@ -17,13 +17,13 @@
     @Component
     public class AdviceFeedbackConverter {
 
-        // DTO to Entity(클라이언트에서 내부 엔티티로)
 
-        // 게시글 생성 요청
+
+
         public static Feedback toadviceFeedback(CreateAdviceFeedbackRequestDTO request, Member member){
 
             AdviceFeedback adviceFeedback = AdviceFeedback.builder()
-                    .feedbackTag(request.getFeedbackTag()) // 바로 request에서 FeedbackTag를 받아옴
+                    .feedbackTag(request.getFeedbackTag())
                     .build();
 
             return Feedback.builder()
@@ -35,7 +35,7 @@
                     .build();
         }
 
-        // 게시글 생성 응답
+
         public static CreateAdviceFeedbackResponseDTO toCreateAdviceFeedbackResponseDTO(Feedback feedback) {
             return CreateAdviceFeedbackResponseDTO.builder()
                     .id(feedback.getId())
@@ -45,7 +45,7 @@
                     .build();
         }
 
-        // 게시글 단일 조회 응답
+
         public static ReadAdviceFeedbackResponseDTO toReadAdviceFeedbackResponseDTO(Feedback feedback) {
             return ReadAdviceFeedbackResponseDTO.builder()
                     .id(feedback.getId())
@@ -55,7 +55,7 @@
                     .build();
         }
 
-        // 게시글 목록 조회 응답
+
         public static ReadAdviceFeedbackListResponseDTO toReadAdviceFeedbackListResponseDTO(Page<Feedback> feedbackPage) {
             List<ReadAdviceFeedbackResponseDTO> feedbackList = feedbackPage.getContent().stream()
                     .map(AdviceFeedbackConverter::toReadAdviceFeedbackResponseDTO)

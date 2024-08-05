@@ -28,11 +28,11 @@ public class Comment extends BaseTimeEntity {
     private String content;     // 댓글 내용
 
 
-    public void setMember(Member member) {
+    public void setMembertoComment(Member member) {
         this.member = member;
     }
 
-    public void setFeedback(Feedback feedback) {
+    public void setFeedbacktoComment(Feedback feedback) {
         this.feedback = feedback;
     }
 }

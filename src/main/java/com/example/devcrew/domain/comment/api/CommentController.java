@@ -21,7 +21,6 @@ public class CommentController {
     private final CreateCommentImpl createCommentImpl;
     private final ReadCommentImpl readCommentImpl;
 
-    // 댓글 생성 API 구현
     @PostMapping("/{feedbackID}/comments")
     public ResponseEntity<PostCommentResponseDTO> createComment(
             @PathVariable Long feedbackID,
@@ -34,7 +33,6 @@ public class CommentController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    // 댓글 조회 API 구현
     @GetMapping("/{feedbackId}/comments")
     public ResponseEntity<GetCommentResponseDTO> getComments(@PathVariable Long feedbackId) {
         List<Comment> comments = readCommentImpl.getComments(feedbackId);

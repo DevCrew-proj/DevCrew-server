@@ -27,7 +27,7 @@ public class CreateCodeFeedbackImpl implements CreateCodeFeedback {
         Member member = authService.getLoginUser();
 
         Feedback codeFeedback = CodeFeedbackConverter.toCodeFeedback(request, member);
-        codeFeedback.setMember(memberRepository.findById(member.getId()).get());
+        codeFeedback.setMembertoFeedback(memberRepository.findById(member.getId()).get());
 
         return feedbackRepository.save(codeFeedback);
     }

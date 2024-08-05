@@ -16,9 +16,7 @@ import java.util.stream.Collectors;
 @Component
 public class CodeFeedbackConverter {
 
-    // DTO to Entity
 
-    // 코드 리뷰 게시글 생성 요청
     public static Feedback toCodeFeedback(CreateCodeFeedbackRequestDTO request, Member member){
 
         CodeFeedback codeFeedback = CodeFeedback.builder()
@@ -33,8 +31,8 @@ public class CodeFeedbackConverter {
                 .member(member)
                 .build();
     }
-    
-    // 코드 리뷰 게시글 생성 응답
+
+
     public static CreateCodeFeedbackResponseDTO toCreateCodeFeedbackResponseDTO(Feedback feedback){
         return CreateCodeFeedbackResponseDTO.builder()
                 .id(feedback.getId())
@@ -44,7 +42,7 @@ public class CodeFeedbackConverter {
                 .build();
     }
 
-    // 게시글 단일 조회 응답
+
     public static ReadCodeFeedbackResponseDTO toReadCodeFeedbackResponseDTO(Feedback feedback) {
         return ReadCodeFeedbackResponseDTO.builder()
                 .id(feedback.getId())
@@ -54,7 +52,7 @@ public class CodeFeedbackConverter {
                 .build();
     }
 
-    // 게시글 목록 조회 응답
+
     public static ReadCodeFeedbackListResponseDTO toReadCodeFeedbackListResponseDTO(Page<Feedback> feedbackPage) {
         List<ReadCodeFeedbackResponseDTO> feedbackList = feedbackPage.getContent().stream()
                 .map(CodeFeedbackConverter::toReadCodeFeedbackResponseDTO)

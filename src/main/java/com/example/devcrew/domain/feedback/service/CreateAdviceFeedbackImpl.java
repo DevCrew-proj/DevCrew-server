@@ -30,7 +30,7 @@ public class CreateAdviceFeedbackImpl implements CreateAdviceFeedback {
 
         // Feedback 생성
         Feedback adviceFeedback = AdviceFeedbackConverter.toadviceFeedback(request, member);
-        adviceFeedback.setMember(memberRepository.findById(member.getId()).get());
+        adviceFeedback.setMembertoFeedback(memberRepository.findById(member.getId()).get());
 
         // Feedback 저장
         return feedbackRepository.save(adviceFeedback);

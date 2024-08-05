@@ -21,7 +21,4 @@ public class FeedbackImage extends BaseTimeEntity {
     @Column(nullable = true, length = 255)
     private String imageUrl;    // 이미지 URL
 
-    public void setFeedback(AdviceFeedback feedback) {
-        this.feedback = feedback;
-    }
 }

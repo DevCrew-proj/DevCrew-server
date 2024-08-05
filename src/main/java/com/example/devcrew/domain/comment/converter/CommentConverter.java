@@ -16,9 +16,6 @@ import java.util.stream.Collectors;
 @Component
 public class CommentConverter {
 
-    // DTO to Entity
-
-    // 댓글 생성 요청
     public static Comment toComment(PostCommentRequestDTO request) {
         return Comment.builder()
                 .content(request.getContent())
@@ -26,8 +23,6 @@ public class CommentConverter {
     }
 
 
-    // Entity To DTO
-    // 댓글 생성 응답
     public static PostCommentResponseDTO toPostCommentResponseDTO(Comment comment) {
         return PostCommentResponseDTO.builder()
                 .id(comment.getId())
@@ -39,7 +34,6 @@ public class CommentConverter {
                 .build();
     }
 
-    // 댓글 조회 응답
     public static GetCommentResponseDTO toGetCommentResponseDTO(List<Comment> comments) {
         List<SingleCommentResponseDTO> commentsDTO = comments.stream()
                 .map(comment -> SingleCommentResponseDTO.builder()

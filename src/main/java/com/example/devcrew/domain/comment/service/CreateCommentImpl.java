@@ -34,8 +34,8 @@ public class CreateCommentImpl implements CreateComment{
 
         Comment comment = CommentConverter.toComment(request);
 
-        comment.setMember(member);
-        comment.setFeedback(feedback);
+        comment.setMembertoComment(member);
+        comment.setFeedbacktoComment(feedback);
 
         return commentRepository.save(comment);
     }

@@ -46,7 +46,7 @@ public class Feedback extends BaseTimeEntity {
     @OneToMany(mappedBy = "feedback", fetch = FetchType.LAZY)
     private List<FeedbackImage> feedbackImageList = new ArrayList<>();
 
-    public void setMember(Member member) {
+    public void setMembertoFeedback(Member member) {
         this.member = member;
     }
 }

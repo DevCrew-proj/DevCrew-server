@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 public class PostCommentRequestDTO {
 
-    private String content;     // 댓글 내용
+    private String content;
 }

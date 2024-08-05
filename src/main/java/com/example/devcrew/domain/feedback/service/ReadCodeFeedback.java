@@ -5,7 +5,9 @@ import com.example.devcrew.domain.feedback.dto.response.ReadCodeFeedbackListResp
 import com.example.devcrew.domain.feedback.dto.response.ReadCodeFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.entity.FeedbackTag;
 import com.example.devcrew.domain.feedback.entity.Language;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface ReadCodeFeedback {
     ReadCodeFeedbackResponseDTO readCodeFeedback(Long feedbackId);
 
