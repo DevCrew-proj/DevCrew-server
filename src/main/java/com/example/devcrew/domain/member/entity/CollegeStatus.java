@@ -5,10 +5,11 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum SchoolStatus {
+public enum CollegeStatus {
+
     ENROLLMENT("재학"),
-    GRADUATION("졸업"),
-    ;
+    ON_LEAVE("휴학"),
+    GRADUATION("졸업");
 
     private final String status;
 }

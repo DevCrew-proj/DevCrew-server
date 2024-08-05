@@ -3,6 +3,7 @@ package com.example.devcrew.domain.member.entity;
 import com.example.devcrew.domain.comment.entity.Comment;
 import com.example.devcrew.domain.contest.entity.Contest;
 import com.example.devcrew.domain.feedback.entity.Feedback;
+import com.example.devcrew.domain.member.dto.request.PostMemberProfileRequest;
 import com.example.devcrew.domain.member.dto.request.UpdateCompanyMemberSignUpRequest;
 import com.example.devcrew.domain.project.entity.Project;
 import com.example.devcrew.domain.team.entity.Team;
@@ -72,5 +73,13 @@ public class Member extends BaseTimeEntity {
     public void updateCompanyMember(CompanyMember companyMember) {
         this.companyMember = companyMember;
     }
+
+    public void updateMemberProfile(PostMemberProfileRequest request){
+        this.name=request.getName();
+        this.normalMember=new NormalMember();
+        this.normalMember.updateNormalMemberProfile(request);
+
+    }
 }
+
 

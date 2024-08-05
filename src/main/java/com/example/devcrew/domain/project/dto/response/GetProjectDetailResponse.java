@@ -1,4 +1,4 @@
-package com.example.devcrew.domain.project.dto;
+package com.example.devcrew.domain.project.dto.response;
 
 import com.example.devcrew.domain.project.entity.Project;
 import lombok.AccessLevel;
@@ -10,13 +10,12 @@ import lombok.Getter;
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class GetProjectDetailResponse {
+
     private Long id;
 
     private String name;
 
     private String tag;
-
-    private String imageUrl;
 
     private String summary;
 
@@ -31,7 +30,6 @@ public class GetProjectDetailResponse {
                 .id(project.getId())
                 .name(project.getName())
                 .tag(project.getProjectTag().getTag())
-                .imageUrl(project.getImageUrl())
                 .summary(project.getSummary())
                 .teamName(project.getTeamName())
                 .role(project.getRole())
