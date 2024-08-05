@@ -11,5 +11,6 @@ public enum FeedbackTag {
     FRONTEND("Frond-end"),
     BACKEND("Back-end"),
     OTHER("기타");
+
     private final String feedbackTag;
 }
