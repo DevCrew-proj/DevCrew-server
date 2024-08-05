@@ -37,6 +37,10 @@ jobs:
         uses: gradle/gradle-build-action@v3.1.0
 
 
+      - name: create resources directory
+        run: mkdir -p ./src/main/resources
+        shell: bash
+
       - name: create application-prod.yml
         if: contains(github.ref, 'dev')
         run: |
