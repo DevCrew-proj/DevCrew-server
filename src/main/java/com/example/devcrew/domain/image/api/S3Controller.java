@@ -30,7 +30,7 @@ public class S3Controller {
 
 
     @Operation(summary = "일반회원 참여 프로젝트 이미지 presignedUrl 발급받기")
-    @PostMapping("/images/member")
+    @PostMapping("/images/project")
     public List<GetPresignedUrlResponse> getProjectImagesPresignedUrls(@RequestParam List<String> fileExtensions) {
 
         List<GetPresignedUrlResponse> presignedUrls = new ArrayList<>();
