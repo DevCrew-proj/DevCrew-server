@@ -1,4 +1,4 @@
-package com.example.devcrew.domain.image.config;
+package com.example.devcrew.global.config;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
