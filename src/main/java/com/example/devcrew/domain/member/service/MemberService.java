@@ -21,24 +21,24 @@ public class MemberService {
     @Transactional
     public void registerDetailCompanyMember(UpdateCompanyMemberSignUpRequest request) {
         final Member member = authService.getLoginUser();
+
         member.updateCompanyMember(request.getCompanyMemberEntity());
     }
 
     @Transactional
     public PostMemberProfileResponse postMemberProfile(PostMemberProfileRequest request){
 
-        Member member = memberRepository.findById(1L)
-                .orElseThrow(() -> new MemberNotFoundException());
-//        final Member member = authService.getLoginUser();
+        Member member = authService.getLoginUser();
+
         member.updateMemberProfile(request);
         return PostMemberProfileResponse.from(member);
 
     }
 
     public GetMemberProfileResponse getMemberProfile(){
-        Member member = memberRepository.findById(1L)
-                .orElseThrow(() -> new MemberNotFoundException());
-//        final Member member = authService.getLoginUser();
+
+        Member member = authService.getLoginUser();
+
         return GetMemberProfileResponse.from(member);
 
     }
