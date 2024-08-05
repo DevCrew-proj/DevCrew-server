@@ -12,6 +12,7 @@ on:
     branches: [ "dev" ]
   pull_request:
     branches: [ "dev" ]
+    types: [closed]
 
 
 permissions:
@@ -19,6 +20,7 @@ permissions:
 
 jobs:
   build:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -35,6 +37,14 @@ jobs:
         uses: gradle/gradle-build-action@v3.1.0
 
 
+      - name: create application-prod.yml
+        if: contains(github.ref, 'dev')
+        run: |
+          cd ./src/main/resources
+          touch ./application-prod.yml
+          echo "${{ secrets.PROD_YML }}" > ./application-prod.yml
+        shell: bash
+        
 
       - name: create application-prod.yml
         if: contains(github.ref, 'dev')
