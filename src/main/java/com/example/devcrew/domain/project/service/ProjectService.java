@@ -1,5 +1,6 @@
 package com.example.devcrew.domain.project.service;
 
+import com.example.devcrew.domain.auth.service.AuthService;
 import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.domain.member.exception.MemberNotFoundException;
 import com.example.devcrew.domain.member.repository.MemberRepository;
@@ -24,11 +25,12 @@ public class ProjectService {
 
     private final MemberRepository memberRepository;
     private final ProjectRepository projectRepository;
+    private final AuthService authService;
 
     @Transactional
     public PostProjectResponse postProject(PostProjectRequest request){
-        Member member = memberRepository.findById(1L)
-                .orElseThrow(() -> new MemberNotFoundException());
+
+        Member member = authService.getLoginUser();
 
         Project project=Project.of(member,request);
         projectRepository.save(project);
@@ -40,8 +42,8 @@ public class ProjectService {
 
     //모든 프로젝트 반환
     public GetProjectsListResponse getProjects(){
-        Member member = memberRepository.findById(1L)
-                .orElseThrow(() -> new MemberNotFoundException());
+
+        Member member = authService.getLoginUser();
 
         List<Project> projects=projectRepository.findByMember(member);
 
