@@ -21,7 +21,6 @@ import java.util.List;
 public class S3Controller {
 
     private final S3Service s3Service;
-    private final MemberRepository memberRepository;
 
     @Operation(summary = "자기소개 이미지 presignedURL 발급받기")
     @PostMapping("/image/member")
