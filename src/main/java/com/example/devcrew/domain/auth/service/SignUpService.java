@@ -1,6 +1,6 @@
 package com.example.devcrew.domain.auth.service;
 
-import com.example.devcrew.domain.member.dto.request.UpdateMemberSignUpRequest;
+import com.example.devcrew.domain.auth.api.dto.request.UpdateMemberRoleRequest;
 import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.domain.member.repository.MemberRepository;
 import com.example.devcrew.global.jwt.refresh.service.RefreshTokenService;
@@ -17,18 +17,13 @@ public class SignUpService {
     private final RefreshTokenService refreshTokenService;
     private final JwtService jwtService;
     private final HttpServletResponse response;
-    private final MemberRepository memberRepository;
 
     @Transactional
-    public boolean signUp(UpdateMemberSignUpRequest request) {
-        if (memberRepository.existsByNickname(request.getNickname())) {
-            return false;
-        }
+    public void signUp(UpdateMemberRoleRequest request) {
         Member member = authService.getLoginUser();
-        member.signUp(request);
+        member.updateRole(request.getRole());
         String refreshToken = jwtService.createRefreshToken();
         jwtService.setRefreshTokenHeader(response, refreshToken);
         refreshTokenService.updateToken(member.getEmail(), refreshToken);
-        return true;
     }
 }

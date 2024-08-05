@@ -3,6 +3,7 @@ package com.example.devcrew.global.config;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +21,8 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .servers(getServers())
                 .info(getInfo())
-                .components(getComponents());
+                .components(getComponents())
+                .addSecurityItem(new SecurityRequirement().addList("BearerAuth"));
     }
 
     private List<Server> getServers() {
@@ -38,7 +40,7 @@ public class SwaggerConfig {
     }
 
     private Components getComponents() {
-        return new Components().addSecuritySchemes("access_token", new SecurityScheme()
+        return new Components().addSecuritySchemes("BearerAuth", new SecurityScheme()
                 .name("Authorization")
                 .scheme(BEARER)
                 .bearerFormat(JWT)
@@ -47,4 +49,3 @@ public class SwaggerConfig {
         );
     }
 }
-

@@ -1,10 +1,11 @@
-package com.example.devcrew.domain.project.dto;
+package com.example.devcrew.domain.project.dto.request;
 
+import com.example.devcrew.domain.project.entity.ProjectTag;
 import lombok.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UpdateProjectRequest {
+public class PostProjectRequest {
 
     private String name;
 
@@ -14,9 +15,10 @@ public class UpdateProjectRequest {
 
     private String period;
 
-    private String projectTag;
+    private ProjectTag projectTag;
 
     private String summary;
 
     private String role;
+
 }
