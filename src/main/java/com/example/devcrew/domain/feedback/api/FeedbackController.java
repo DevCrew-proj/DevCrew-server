@@ -2,16 +2,15 @@ package com.example.devcrew.domain.feedback.api;
 import com.example.devcrew.domain.feedback.converter.AdviceFeedbackConverter;
 import com.example.devcrew.domain.feedback.converter.CodeFeedbackConverter;
 
+import com.example.devcrew.domain.feedback.converter.FeedbackConverter;
 import com.example.devcrew.domain.feedback.dto.request.CreateAdviceFeedbackRequestDTO;
 import com.example.devcrew.domain.feedback.dto.request.CreateCodeFeedbackRequestDTO;
+import com.example.devcrew.domain.feedback.dto.request.CreateFeedbackRequestDTO;
 import com.example.devcrew.domain.feedback.dto.response.*;
 import com.example.devcrew.domain.feedback.entity.Feedback;
 import com.example.devcrew.domain.feedback.entity.FeedbackTag;
 import com.example.devcrew.domain.feedback.entity.Language;
-import com.example.devcrew.domain.feedback.service.CreateAdviceFeedbackImpl;
-import com.example.devcrew.domain.feedback.service.CreateCodeFeedbackImpl;
-import com.example.devcrew.domain.feedback.service.ReadAdviceFeedbackImpl;
-import com.example.devcrew.domain.feedback.service.ReadCodeFeedbackImpl;
+import com.example.devcrew.domain.feedback.service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +24,12 @@ public class FeedbackController {
 
     private final CreateAdviceFeedbackImpl createAdviceFeedbackImpl;
     private final CreateCodeFeedbackImpl createCodeFeedbackImpl;
+    private final CreateFeedbackImpl createFeedbackImpl;
+
     private final ReadAdviceFeedbackImpl readAdviceFeedbackImpl;
     private final ReadCodeFeedbackImpl readCodeFeedbackImpl;
+    private final ReadFeedbackImpl readFeedbackImpl;
+
 
     @PostMapping("/advice/create")
     @Operation(summary = "현직자 조언 게시글 생성 API")
@@ -86,6 +89,52 @@ public class FeedbackController {
         ReadCodeFeedbackListResponseDTO responseDTO = readCodeFeedbackImpl.readCodeFeedbackList(language, page);
         return ResponseEntity.ok(responseDTO);
     }
+
+    @PostMapping("/plan/create")
+    @Operation(summary = "기획 피드백 게시글 생성 API")
+    public ResponseEntity<CreateFeedbackResponseDTO> createPlanFeedback(
+            @Valid @RequestBody CreateFeedbackRequestDTO request){
+
+        Feedback newPlanFeedback = createFeedbackImpl.createFeedback(request);
+        CreateFeedbackResponseDTO responseDTO = FeedbackConverter.toCreateFeedbackResponseDTO(newPlanFeedback);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @GetMapping("/plans/{feedbackId}")
+    @Operation(summary = "기획 피드백 단일 게시글 조회 API")
+    public ResponseEntity<ReadFeedbackResponseDTO> readPlanFeedback(@PathVariable Long feedbackId){
+        ReadFeedbackResponseDTO planResponseDTO = readFeedbackImpl.readFeedback(feedbackId);
+        return ResponseEntity.ok(planResponseDTO);
+    }
+
+    @GetMapping("/plans")
+    @Operation(summary = "기획 피드백 게시글 목록 조회 API")
+    public ResponseEntity<ReadFeedbackListResponseDTO> readPlanFeedbackList(
+            @RequestParam int page) {
+
+        ReadFeedbackListResponseDTO responseDTO = readFeedbackImpl.readFeedbackList(page);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+
+
+    @PostMapping("/design/create")
+    @Operation(summary = "디자인 피드백 게시글 생성 API")
+    public ResponseEntity<CreateFeedbackResponseDTO> createDesignFeedback(
+            @Valid @RequestBody CreateFeedbackRequestDTO request){
+
+        Feedback newDesignFeedback = createFeedbackImpl.createFeedback(request);
+        CreateFeedbackResponseDTO responseDTO = FeedbackConverter.toCreateFeedbackResponseDTO(newDesignFeedback);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @GetMapping("/designs/{feedbackId}")
+    @Operation(summary = "디자인 피드백 단일 게시글 조회 API")
+    public ResponseEntity<ReadFeedbackResponseDTO> readDesignFeedback(@PathVariable Long feedbackId){
+        ReadFeedbackResponseDTO designResponseDTO = readFeedbackImpl.readFeedback(feedbackId);
+        return ResponseEntity.ok(designResponseDTO);
+    }
+
 
 
 }
