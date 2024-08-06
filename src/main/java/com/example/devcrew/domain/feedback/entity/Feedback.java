@@ -3,7 +3,6 @@ package com.example.devcrew.domain.feedback.entity;
 
 import com.example.devcrew.domain.comment.entity.Comment;
 import com.example.devcrew.domain.member.entity.Member;
-import com.example.devcrew.domain.team.entity.TeamMatching;
 import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,9 +12,9 @@ import java.util.List;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Builder
 public class Feedback extends BaseTimeEntity {
 
     @Id
@@ -31,14 +30,11 @@ public class Feedback extends BaseTimeEntity {
     @Column(nullable = true, length = 255)
     private String fileUrl; // 첨부 파일 링크
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "feedback_tag", nullable = false, length = 20)
-    private FeedbackTag feedbackTag;    // 게시글 관련 태그(기획, 디자인, FE, BE, 코드리뷰, 기타)
+    @Embedded
+    private AdviceFeedback adviceFeedback;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "language", nullable = false, length = 20)
-    private Language language;      // 코드 리뷰 관련 태그(JAVA, JS, Kotlin, Python, Swift, C, 기타)
-
+    @Embedded
+    private CodeFeedback codeFeedback;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
@@ -50,4 +46,7 @@ public class Feedback extends BaseTimeEntity {
     @OneToMany(mappedBy = "feedback", fetch = FetchType.LAZY)
     private List<FeedbackImage> feedbackImageList = new ArrayList<>();
 
+    public void setMembertoFeedback(Member member) {
+        this.member = member;
+    }
 }

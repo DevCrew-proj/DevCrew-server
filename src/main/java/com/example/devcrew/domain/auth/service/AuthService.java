@@ -32,4 +32,8 @@ public class AuthService {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         return memberRepository.findByEmail(userDetails.getUsername()).orElseThrow(MemberNotFoundException::new);
     }
+
+    public Long getLoginUserId() {
+        return getLoginUser().getId();
+    }
 }

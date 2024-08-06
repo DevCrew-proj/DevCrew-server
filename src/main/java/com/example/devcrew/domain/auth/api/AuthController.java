@@ -1,7 +1,7 @@
 package com.example.devcrew.domain.auth.api;
 
+import com.example.devcrew.domain.auth.api.dto.request.UpdateMemberRoleRequest;
 import com.example.devcrew.domain.auth.service.SignUpService;
-import com.example.devcrew.domain.member.dto.request.UpdateMemberSignUpRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +13,8 @@ public class AuthController implements AuthApi {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/social-login")
-    public boolean signUp(@RequestBody UpdateMemberSignUpRequest request) {
-        return signUpService.signUp(request);
+    @Override
+    public void signUp(@RequestBody UpdateMemberRoleRequest request) {
+        signUpService.signUp(request);
     }
-
 }

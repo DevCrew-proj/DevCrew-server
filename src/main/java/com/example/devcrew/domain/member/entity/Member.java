@@ -3,7 +3,8 @@ package com.example.devcrew.domain.member.entity;
 import com.example.devcrew.domain.comment.entity.Comment;
 import com.example.devcrew.domain.contest.entity.Contest;
 import com.example.devcrew.domain.feedback.entity.Feedback;
-import com.example.devcrew.domain.member.dto.request.UpdateMemberSignUpRequest;
+import com.example.devcrew.domain.member.dto.request.PostMemberProfileRequest;
+import com.example.devcrew.domain.member.dto.request.UpdateCompanyMemberSignUpRequest;
 import com.example.devcrew.domain.project.entity.Project;
 import com.example.devcrew.domain.team.entity.Team;
 import com.example.devcrew.domain.team.entity.TeamMatching;
@@ -32,8 +33,6 @@ public class Member extends BaseTimeEntity {
     private String email;
     private String imageUrl;
 
-    private String phoneNumber;
-
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -48,11 +47,6 @@ public class Member extends BaseTimeEntity {
 
     @Embedded
     private NormalMember normalMember;
-
-    public void signUp(UpdateMemberSignUpRequest dto) {
-        this.nickname = dto.getNickname();
-        this.role = Role.USER;
-    }
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Contest> contestList = new ArrayList<>();
@@ -71,5 +65,21 @@ public class Member extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Comment> commentList = new ArrayList<>();
+
+    public void updateRole(Role role) {
+        this.role = role;
+    }
+
+    public void updateCompanyMember(CompanyMember companyMember) {
+        this.companyMember = companyMember;
+    }
+
+    public void updateMemberProfile(PostMemberProfileRequest request){
+        this.name=request.getName();
+        this.normalMember=new NormalMember();
+        this.normalMember.updateNormalMemberProfile(request);
+
+    }
 }
+
 

@@ -10,7 +10,6 @@ public enum FeedbackTag {
     DESIGN("디자인"),
     FRONTEND("Frond-end"),
     BACKEND("Back-end"),
-    CODE("코드 리뷰"),
     OTHER("기타");
 
     private final String feedbackTag;
