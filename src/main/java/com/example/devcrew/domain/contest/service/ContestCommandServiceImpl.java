@@ -1,7 +1,7 @@
 package com.example.devcrew.domain.contest.service;
 
 import com.example.devcrew.domain.contest.converter.ContestConverter;
-import com.example.devcrew.domain.contest.dto.CreateContestRequestDTO;
+import com.example.devcrew.domain.contest.dto.request.CreateContestRequestDTO;
 import com.example.devcrew.domain.contest.entity.Contest;
 import com.example.devcrew.domain.contest.repository.ContestRepository;
 import com.example.devcrew.domain.member.entity.Member;

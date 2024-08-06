@@ -1,4 +1,4 @@
-package com.example.devcrew.domain.contest.dto;
+package com.example.devcrew.domain.contest.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

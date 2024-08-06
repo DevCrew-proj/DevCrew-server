@@ -1,4 +1,4 @@
-package com.example.devcrew.domain.contest.dto;
+package com.example.devcrew.domain.contest.dto.request;
 
 import com.example.devcrew.domain.contest.validation.annotation.MemberExists;
 import jakarta.validation.constraints.NotNull;

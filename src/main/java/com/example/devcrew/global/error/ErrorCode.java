@@ -11,7 +11,10 @@ public enum ErrorCode {
     MEMBER_NOT_FOUND_ERROR(404, "회원 정보를 찾지 못했습니다." ),
 
     //PROJECT
-    PROJECT_NOT_FOUND_ERROR(404,"존재하지 않는 프로젝트입니다.")
+    PROJECT_NOT_FOUND_ERROR(404,"존재하지 않는 프로젝트입니다."),
+
+    //CONTEST
+    Contest_NOT_FOUND_ERROR(404,"공모전을 찾지못했습니다."),
 
     ;
 

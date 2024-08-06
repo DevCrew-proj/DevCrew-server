@@ -57,6 +57,6 @@ public class Contest extends BaseTimeEntity {
     @JoinColumn(name = "Member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "contest", cascade = CascadeType.ALL)
-    private List<Team> teamList = new ArrayList<>();
+//    @OneToMany(mappedBy = "contest", cascade = CascadeType.ALL)
+//    private List<Team> teamList = new ArrayList<>();
 }
