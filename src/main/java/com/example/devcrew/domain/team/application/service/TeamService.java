@@ -1,7 +1,6 @@
 package com.example.devcrew.domain.team.application.service;
 
 import com.example.devcrew.domain.contest.entity.Contest;
-import com.example.devcrew.domain.contest.repository.ContestRepository;
 import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.domain.member.exception.MemberNotFoundException;
 import com.example.devcrew.domain.member.repository.MemberRepository;
@@ -15,11 +14,8 @@ import com.example.devcrew.domain.team.repository.TeamMatchingRepository;
 import com.example.devcrew.domain.team.repository.TeamRepository;
 import com.example.devcrew.domain.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,10 +24,10 @@ public class TeamService {
     private final TeamRepository teamRepository;
     private final MemberRepository memberRepository;
     private final TeamMatchingRepository teamMatchingRepository;
-    private final ContestRepository contestRepository;
+    //private final ContestRepository contestRepository;
     private final AuthService authService;
 
-
+/*
     @Transactional
     public Team createTeamsByContestAndMember(CreateTeamRequestDTO request) {
         Contest contest = contestRepository.findById(request.getContestId())
@@ -63,7 +59,7 @@ public class TeamService {
 
         return teamRepository.save(team);
     }
-
+*/
 
 
     @Transactional
