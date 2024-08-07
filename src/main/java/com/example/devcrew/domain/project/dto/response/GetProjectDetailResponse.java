@@ -28,7 +28,7 @@ public class GetProjectDetailResponse {
     public static GetProjectDetailResponse from (Project project){
         return GetProjectDetailResponse.builder()
                 .id(project.getId())
-                .name(project.getName())
+                .name(project.getProjectName())
                 .tag(project.getProjectTag().getTag())
                 .summary(project.getSummary())
                 .teamName(project.getTeamName())

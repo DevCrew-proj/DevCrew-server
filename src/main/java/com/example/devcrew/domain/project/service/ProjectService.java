@@ -10,7 +10,9 @@ import com.example.devcrew.domain.project.dto.response.GetOneProjectResponse;
 import com.example.devcrew.domain.project.dto.response.GetProjectsListResponse;
 import com.example.devcrew.domain.project.dto.response.PostProjectResponse;
 import com.example.devcrew.domain.project.entity.Project;
+import com.example.devcrew.domain.project.entity.ProjectImage;
 import com.example.devcrew.domain.project.exception.ProjectNotFoundException;
+import com.example.devcrew.domain.project.repository.ProjectImageRepository;
 import com.example.devcrew.domain.project.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,8 +25,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProjectService {
 
-    private final MemberRepository memberRepository;
     private final ProjectRepository projectRepository;
+    private final ProjectImageRepository projectImageRepository;
     private final AuthService authService;
 
     @Transactional
@@ -35,8 +37,11 @@ public class ProjectService {
         Project project=Project.of(member,request);
         projectRepository.save(project);
 
-        return PostProjectResponse.from(project);
+        for (String imageUrl : request.getImages()) {
+            projectImageRepository.save(ProjectImage.of(imageUrl,project));
+        }
 
+        return PostProjectResponse.of(project,request.getImages());
     }
 
 
@@ -45,11 +50,16 @@ public class ProjectService {
 
         Member member = authService.getLoginUser();
 
-        List<Project> projects=projectRepository.findByMember(member);
-
+        List<Project> projects=projectRepository.findProjectsWithImagesByMember(member)
+                .orElseThrow(()-> new ProjectNotFoundException());
 
         List<GetOneProjectResponse> projectList= projects.stream()
-                .map(project -> GetOneProjectResponse.from(project))
+                .map(project -> {
+                    List<String>images=project.getProjectImages().stream()
+                            .map(ProjectImage::getImageUrl)
+                            .collect(Collectors.toList());
+                    return GetOneProjectResponse.of(project,images);
+                })
                 .collect(Collectors.toList());
 
         return GetProjectsListResponse.of(member,projectList);
@@ -59,9 +69,14 @@ public class ProjectService {
 
     //개별 프로젝트 반환
     public GetOneProjectResponse getOneProject(Long projectId){
-        Project project=projectRepository.findById(projectId)
+        Project project=projectRepository.findRecruitWithImagesById(projectId)
                 .orElseThrow(()-> new ProjectNotFoundException());
-        return GetOneProjectResponse.from(project);
+
+        List<String> images = project.getProjectImages().stream()
+                .map(ProjectImage::getImageUrl)
+                .collect(Collectors.toList());
+
+        return GetOneProjectResponse.of(project,images);
     }
 
 }

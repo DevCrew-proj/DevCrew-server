@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.List;
+
 
 @Getter
 @Builder(access = AccessLevel.PRIVATE)
@@ -14,17 +16,18 @@ import lombok.Getter;
 public class GetOneProjectResponse {
 
     private Long id;
-    private String name;
-    private String imageUrl;
+    private String projectName;
+    private List<String> images;
     private ProjectTag tag;
     private String summary;
     private String teamName;
     private String period;
 
-    public static GetOneProjectResponse from (Project project){
+    public static GetOneProjectResponse of(Project project,List<String> images){
         return GetOneProjectResponse.builder()
                 .id(project.getId())
-                .name(project.getName())
+                .projectName(project.getProjectName())
+                .images(images)
                 .tag(project.getProjectTag())
                 .summary(project.getSummary())
                 .teamName(project.getTeamName())
