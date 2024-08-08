@@ -24,13 +24,13 @@ public class MemberController {
     }
 
     @Operation(summary = "자기 소개 작성")
-    @PostMapping("/profile")
+    @PostMapping("/v1/profile")
     PostMemberProfileResponse postMemberProfile(@RequestBody @Valid PostMemberProfileRequest request){
         return memberService.postMemberProfile(request);
     }
 
     @Operation(summary = "자기 소개 조회")
-    @GetMapping("/profile")
+    @GetMapping("/v1/profile")
     GetMemberProfileResponse getMemberProfile(){
         return memberService.getMemberProfile();
     }

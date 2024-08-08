@@ -30,6 +30,7 @@ public class TeamMatching extends BaseTimeEntity {
         @Column(nullable = false)
         private Member? normalMemberId;
     */
+    @JoinColumn(name = "portfolio_url", nullable = false)
     private String portfolioUrl;
 
     @Enumerated(EnumType.STRING)

@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "Team")
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -53,8 +54,9 @@ public class Team extends BaseTimeEntity {
     @Column(length = 255)
     private String planUrl;
 
-    @Column(length = 30)
-    private String formDevelop;
+    //대상 기기 부분 삭제
+    //@Column(length = 30)
+   // private String formDevelop;
 
     @Column(length = 50)
     private String equipment;

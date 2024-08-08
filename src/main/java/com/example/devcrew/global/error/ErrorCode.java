@@ -10,6 +10,9 @@ public enum ErrorCode {
     // MEMBER
     MEMBER_NOT_FOUND_ERROR(404, "회원 정보를 찾지 못했습니다." ),
 
+    //TEAM
+    TEAM_NOT_FOUND_ERROR(404, "팀 정보를 찾지 못했습니다." ),
+
     //PROJECT
     PROJECT_NOT_FOUND_ERROR(404,"존재하지 않는 프로젝트입니다.")
 
