@@ -1,5 +1,6 @@
-package com.example.devcrew.global.config;
+package com.example.devcrew.global.response;
 
+import com.example.devcrew.global.response.SuccessResponse;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;

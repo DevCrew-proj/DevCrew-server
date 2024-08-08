@@ -1,4 +1,4 @@
-package com.example.devcrew.global.config;
+package com.example.devcrew.global.response;
 
 import lombok.Getter;
 
