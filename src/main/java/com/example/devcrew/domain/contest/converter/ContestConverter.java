@@ -84,19 +84,9 @@ public class ContestConverter {
         }
 
         CompanyMember companyMember = member.getCompanyMember();
-        String ceoName;
-        if (companyMember != null) {
-            ceoName = companyMember.getCeoName();
-        } else {
-            ceoName = "담당자 이름을 찾을 수 없습니다.";
-        }
+        String ceoName = getCeoName(companyMember);
+        String ceoPhoneNum = getContactNumber(companyMember);
 
-        String ceoPhoneNum;
-        if (companyMember != null) {
-            ceoPhoneNum = companyMember.getContactNumber();
-        } else {
-            ceoPhoneNum = "담당자 번호를 찾을 수 없습니다.";
-        }
 
         return GetContestDetailResponseDTO.builder()
                 .poster(contest.getPosterUrl())
@@ -115,5 +105,19 @@ public class ContestConverter {
                 .ceoPhoneNum(ceoPhoneNum)
                 .ceoEmail(member.getEmail())
                 .build();
+    }
+
+    private static String getCeoName(CompanyMember companyMember) {
+        if (companyMember != null) {
+            return companyMember.getCeoName();
+        }
+        return "담당자 이름을 찾을 수 없습니다.";
+    }
+
+    private static String getContactNumber(CompanyMember companyMember) {
+        if (companyMember != null) {
+            return companyMember.getContactNumber();
+        }
+        return "담당자 번호를 찾을 수 없습니다.";
     }
 }
