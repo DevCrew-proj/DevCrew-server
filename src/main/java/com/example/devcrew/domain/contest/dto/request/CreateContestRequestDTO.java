@@ -40,7 +40,4 @@ public class CreateContestRequestDTO {
     @NotNull(message = "description is required")
     private String description;
 
-    @NotNull(message = "Member ID is required")
-    private Long memberId;
-
 }

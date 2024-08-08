@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "[공모전]")
-@RequestMapping("/contests")
+@RequestMapping("/v1/contests")
 public class ContestRestController {
 
     private final ContestCommandService contestCommandService;
