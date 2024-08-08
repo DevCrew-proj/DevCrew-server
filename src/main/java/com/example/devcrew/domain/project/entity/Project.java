@@ -21,7 +21,7 @@ public class Project extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String projectName;
 
     private String teamName;
 
@@ -35,10 +35,8 @@ public class Project extends BaseTimeEntity {
 
     private String role;
 
-    private String imageUrl;
-
-//    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-//    private List<ProjectImage> projectImages=new ArrayList<>();
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<ProjectImage> projectImages;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -48,13 +46,12 @@ public class Project extends BaseTimeEntity {
 
     public static Project of(Member member, PostProjectRequest request){
         return Project.builder()
-                .name(request.getName())
+                .projectName(request.getProjectName())
                 .teamName(request.getTeamName())
                 .period(request.getPeriod())
                 .projectTag(request.getProjectTag())
                 .summary(request.getSummary())
                 .role(request.getRole())
-                .imageUrl(request.getImageUrl())
                 .member(member)
                 .build();
     }
