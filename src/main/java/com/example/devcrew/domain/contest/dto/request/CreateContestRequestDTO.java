@@ -1,5 +1,6 @@
 package com.example.devcrew.domain.contest.dto.request;
 
+import com.example.devcrew.domain.contest.entity.Sector;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +30,7 @@ public class CreateContestRequestDTO {
     private String acceptancePeriod;
 
     @NotNull(message = "sector is required")
-    private Integer sector;
+    private Sector sector;
 
     @NotNull(message = "benefits is required")
     private String benefits;

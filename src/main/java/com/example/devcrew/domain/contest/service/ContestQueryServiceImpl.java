@@ -54,7 +54,12 @@ public class ContestQueryServiceImpl implements ContestQueryService{
     // 페이징 및 최신순 정렬 처리
     @Override
     public GetContestListResponseDTO getContests(Sector sector, int page, int size, String sort, String order) {
-        Sort.Direction direction = order.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Sort.Direction direction;
+        if (order.equalsIgnoreCase("desc")) {
+            direction = Sort.Direction.DESC;
+        } else {
+            direction = Sort.Direction.ASC;
+        }
         Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sort));
 
         Page<GetContestOneResponseDTO> contestsPage;

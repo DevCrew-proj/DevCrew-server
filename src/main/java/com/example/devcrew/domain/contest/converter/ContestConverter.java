@@ -28,27 +28,27 @@ public class ContestConverter {
 
     public static Contest toContest(CreateContestRequestDTO requestDTO, Member member) {
 
-        Sector sector = null;
-        switch (requestDTO.getSector()) {
-            case 0:
-                sector = Sector.STARTUP;
-                break;
-            case 1:
-                sector = Sector.AI;
-                break;
-            case 2:
-                sector = Sector.PLATFORM;
-                break;
-            case 3:
-                sector = Sector.DATAALALYSIS;
-                break;
-            case 4:
-                sector = Sector.GAME;
-                break;
-            case 5:
-                sector = Sector.OTHER;
-                break;
-        }
+//        Sector sector = null;
+//        switch (requestDTO.getSector()) {
+//            case 0:
+//                sector = Sector.STARTUP;
+//                break;
+//            case 1:
+//                sector = Sector.AI;
+//                break;
+//            case 2:
+//                sector = Sector.PLATFORM;
+//                break;
+//            case 3:
+//                sector = Sector.DATAALALYSIS;
+//                break;
+//            case 4:
+//                sector = Sector.GAME;
+//                break;
+//            case 5:
+//                sector = Sector.OTHER;
+//                break;
+//        }
 
         return Contest.builder()
                 .posterUrl(requestDTO.getPoster())
@@ -58,7 +58,7 @@ public class ContestConverter {
                 .award(requestDTO.getAward())
                 .homepageUrl(requestDTO.getHomepageUrl())
                 .acceptancePeriod(requestDTO.getAcceptancePeriod())
-                .sector(sector)
+                .sector(requestDTO.getSector())
                 .benefits(requestDTO.getBenefits())
                 .plusBenefits(requestDTO.getPlusBenefits())
                 .description(requestDTO.getDescription())
@@ -96,12 +96,29 @@ public class ContestConverter {
         // 공모전 남은기간 계산
         LocalDate today = LocalDate.now();
         long daysRemaining = ChronoUnit.DAYS.between(today, endDate);
-        String remainingPeriod = daysRemaining >= 0 ? String.valueOf(daysRemaining) : "Expired";
+
+        String remainingPeriod;
+
+        if (daysRemaining >= 0) {
+            remainingPeriod = String.valueOf(daysRemaining);
+        } else {
+            remainingPeriod = "Expired";
+        }
 
         CompanyMember companyMember = member.getCompanyMember();
-        String ceoName = companyMember != null ? companyMember.getCeoName() : "담당자 이름을 찾을 수 없습니다.";
-        String ceoPhoneNum = companyMember != null ? companyMember.getContactNumber() : "담당자 번호를 찾을 수 없습니다.";
+        String ceoName;
+        if (companyMember != null) {
+            ceoName = companyMember.getCeoName();
+        } else {
+            ceoName = "담당자 이름을 찾을 수 없습니다.";
+        }
 
+        String ceoPhoneNum;
+        if (companyMember != null) {
+            ceoPhoneNum = companyMember.getContactNumber();
+        } else {
+            ceoPhoneNum = "담당자 번호를 찾을 수 없습니다.";
+        }
 
         return GetContestDetailResponseDTO.builder()
                 .poster(contest.getPosterUrl())
