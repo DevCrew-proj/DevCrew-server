@@ -7,6 +7,7 @@ import com.example.devcrew.domain.team.dto.response.GetMemberInfoResponseDTO;
 import com.example.devcrew.domain.team.entity.Team;
 import com.example.devcrew.domain.team.entity.TeamMatching;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class TeamController {
     @GetMapping("create/{memberId}")
     @Operation(summary = "팀 구성 기능에서 멤버 정보 조회", description = "팀 생성 시 해당 멤버의 이름과 전화번호 반환(자동완성기능).")
     public ResponseEntity<GetMemberInfoResponseDTO> getMemberInfoForCreate(@PathVariable Long memberId) {
-        GetMemberInfoResponseDTO response = teamService.GetMemberInfoById(memberId);
+        GetMemberInfoResponseDTO response = teamService.GetMemberInfoById();
         return ResponseEntity.ok(response);
     }
 
@@ -44,7 +45,7 @@ public class TeamController {
     @Operation(summary = "팀 신청 기능에서 멤버 정보 조회", description = "팀원 신청서 작성 시 해당 멤버의 이름과 전화번호를 반환합니다.(자동완성기능)")
     public ResponseEntity<GetMemberInfoResponseDTO> getMemberInfoById(@PathVariable Long memberId) {
         try {
-            GetMemberInfoResponseDTO response = teamService.GetMemberInfoById(memberId);
+            GetMemberInfoResponseDTO response = teamService.GetMemberInfoById();
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(500).body(null);
@@ -53,7 +54,7 @@ public class TeamController {
 
     @PostMapping("/apply")
     @Operation(summary = "팀 신청하기")
-    public ResponseEntity<TeamMatching> applyTeam(@RequestBody ApplyTeamRequestDTO applyTeamRequestDTO) {
+    public ResponseEntity<TeamMatching> applyTeam(@RequestBody @Valid ApplyTeamRequestDTO applyTeamRequestDTO) {
         try {
             TeamMatching teamMatching = teamService.applyToTeam(applyTeamRequestDTO);
             return ResponseEntity.ok(teamMatching);
