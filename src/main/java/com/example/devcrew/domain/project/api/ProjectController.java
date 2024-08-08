@@ -18,26 +18,27 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "[포트폴리오]")
+@RequestMapping("/v1/projects")
+@Tag(name = "project-controller")
 public class ProjectController {
 
     private final ProjectService projectService;
 
     @Operation(summary = "참여 프로젝트 업로드")
-    @PostMapping("/projects")
+    @PostMapping()
     PostProjectResponse postProject(@RequestBody @Valid PostProjectRequest request){
         return projectService.postProject(request);
     }
 
     @Operation(summary = "참여 프로젝트들 조회")
-    @GetMapping("/projects")
+    @GetMapping()
     GetProjectsListResponse getProjects(){
         return projectService.getProjects();
     }
 
 
     @Operation(summary = "개별 프로젝트 조회")
-    @GetMapping("/project/{projectId}")
+    @GetMapping("/{projectId}")
     GetOneProjectResponse getOneProject(@PathVariable("projectId")Long projectId){
         return projectService.getOneProject(projectId);
     }
