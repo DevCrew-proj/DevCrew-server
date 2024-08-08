@@ -37,7 +37,7 @@ public class ContestRestController {
     private final ContestQueryService contestQueryService;
 
     @PostMapping("/")
-    @Operation(summary = "기업 멤버의 공모전 등록", description = "곰모분야 창업부터 기타까지 0~5 순서대로 입니다. poster는 공모전 포스터 이미지파일 S3주소 입니다.")
+    @Operation(summary = "기업 멤버의 공모전 등록", description = "공모분야는 STARTUP(창업), AI(생성형 AI), PLATFORM(플랫폼), DATAALALYSIS(데이터분석), GAME(게임), OTHER(기타)입니다. poster는 공모전 포스터 이미지파일 S3주소 입니다.")
     public ResponseEntity<CreateContestResponseDTO> createContest(@RequestBody @Valid CreateContestRequestDTO request) {
         Contest contest = contestCommandService.createContestsByMember(request);
         CreateContestResponseDTO response = ContestConverter.toCreateContestResponseDTO(contest);
