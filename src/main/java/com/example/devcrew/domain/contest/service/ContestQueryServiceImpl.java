@@ -1,14 +1,15 @@
 package com.example.devcrew.domain.contest.service;
 
 import com.example.devcrew.domain.contest.converter.ContestConverter;
-import com.example.devcrew.domain.contest.dto.response.GetContestDetailResponseDTO;
-import com.example.devcrew.domain.contest.dto.response.GetContestListResponseDTO;
-import com.example.devcrew.domain.contest.dto.response.GetContestOneResponseDTO;
+import com.example.devcrew.domain.contest.dto.response.*;
 import com.example.devcrew.domain.contest.entity.Contest;
 import com.example.devcrew.domain.contest.entity.Sector;
 import com.example.devcrew.domain.contest.repository.ContestRepository;
 import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.domain.member.exception.MemberNotFoundException;
+import com.example.devcrew.domain.team.entity.Team;
+import com.example.devcrew.domain.team.exception.TeamNotFoundException;
+import com.example.devcrew.domain.team.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +29,7 @@ import java.util.stream.Collectors;
 public class ContestQueryServiceImpl implements ContestQueryService{
 
     private final ContestRepository contestRepository;
+    private final TeamRepository teamRepository;
 
     // 공모전 전체 조회
     @Override
@@ -91,4 +93,25 @@ public class ContestQueryServiceImpl implements ContestQueryService{
         System.out.println(name);
         return ContestConverter.toGetContestDetailResponseDTO(contest, member);
     }
+
+
+    // 공모전 안에 매칭중인 팀 조회
+    @Override
+    public GetTeamInfoListResponseDTO findTeamsInContest(Long contestId){
+        Contest contest = contestRepository.findById(contestId)
+                .orElseThrow(ContestNotFoundException::new);
+
+        List<Team> teams = teamRepository.findByContest(contest);
+        if (teams.isEmpty()) {
+            throw new TeamNotFoundException();
+        }
+
+        List<GetTeamInfoOneResponseDTO> teamInfoList = ContestConverter.toGetTeamInfoOneResponseDTOList(teams);
+
+        return GetTeamInfoListResponseDTO.builder()
+                .contestId(contest.getId())
+                .teamInfoList(teamInfoList)
+                .build();
+    }
+
 }

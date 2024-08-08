@@ -2,10 +2,7 @@ package com.example.devcrew.domain.contest.api;
 
 import com.example.devcrew.domain.contest.converter.ContestConverter;
 import com.example.devcrew.domain.contest.dto.request.CreateContestRequestDTO;
-import com.example.devcrew.domain.contest.dto.response.CreateContestResponseDTO;
-import com.example.devcrew.domain.contest.dto.response.GetContestDetailResponseDTO;
-import com.example.devcrew.domain.contest.dto.response.GetContestListResponseDTO;
-import com.example.devcrew.domain.contest.dto.response.GetContestOneResponseDTO;
+import com.example.devcrew.domain.contest.dto.response.*;
 import com.example.devcrew.domain.contest.entity.Contest;
 import com.example.devcrew.domain.contest.entity.Sector;
 import com.example.devcrew.domain.contest.service.ContestCommandService;
@@ -71,6 +68,17 @@ public class ContestRestController {
     public ResponseEntity<GetContestDetailResponseDTO> getContestDetail(@PathVariable Long contestId) {
         GetContestDetailResponseDTO contestDetail = contestQueryService.findContestDetailById(contestId);
         return new ResponseEntity<>(contestDetail, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/{contestId}/teams")
+    @Operation(summary = "공모전 매칭 팀 정보 조회", description = "한 공모전에서 매칭 중인 팀 정보를 조회할 수 있습니다.")
+    @Parameters({
+            @Parameter(name = "contestId", description = "공모전의 아이디, PathVariable 입니다."),
+    })
+    public ResponseEntity<GetTeamInfoListResponseDTO> getTeamsInContest(@PathVariable Long contestId) {
+        GetTeamInfoListResponseDTO teamInfoList = contestQueryService.findTeamsInContest(contestId);
+        return new ResponseEntity<>(teamInfoList, HttpStatus.OK);
     }
 
 }
