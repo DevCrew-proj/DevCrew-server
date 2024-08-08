@@ -19,31 +19,19 @@ import com.example.devcrew.domain.auth.service.AuthService;
 @Transactional(readOnly = true)
 public class ContestCommandServiceImpl implements ContestCommandService {
     private final ContestRepository contestRepository;
-    private final MemberRepository memberRepository;
-    private final AuthService authService; // AuthService 주입
+    private final AuthService authService;
 
 
-//    @Override
-//    @Transactional
-//    public Contest createContestsByMember(CreateContestRequestDTO request) {
-//        Member member = memberRepository.findById(request.getMemberId())
-//                .orElseThrow(() -> new BusinessException(ErrorCode.MEMBER_NOT_FOUND_ERROR));
-//
-//        Contest newContest = ContestConverter.toContest(request, member);
-//        return contestRepository.save(newContest);
-//    }
     @Override
     @Transactional
     public Contest createContestsByMember(CreateContestRequestDTO request) {
-        Member member = authService.getLoginUser(); // 현재 로그인한 사용자 정보를 가져옴
+        Member member = authService.getLoginUser();
 
         if (member == null) {
-            throw new BusinessException(ErrorCode.MEMBER_NOT_FOUND_ERROR); // 로그인한 사용자가 없을 경우 예외 처리
+            throw new BusinessException(ErrorCode.MEMBER_NOT_FOUND_ERROR);
         }
 
         Contest newContest = ContestConverter.toContest(request, member);
         return contestRepository.save(newContest);
     }
 }
-
-// http://localhost:8080/social-login?exist=false&Authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyMzQ0NzQ2NSwiZW1haWwiOiJ0bWRybDc3NzdAZ21haWwuY29tIn0.rHxy09g_ELs3tmcrHlMk-byQqa9-UmS-xZ186U6r1IssSLZ69OyuOXddIrSmhtXOKKaX90mZVCWoEs6wesTR-w

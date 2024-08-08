@@ -29,7 +29,6 @@ public class ContestConverter {
     public static Contest toContest(CreateContestRequestDTO requestDTO, Member member) {
 
         Sector sector = null;
-        //int result = Integer.parseInt(requestDTO.getSector());
         switch (requestDTO.getSector()) {
             case 0:
                 sector = Sector.STARTUP;

@@ -1,6 +1,5 @@
 package com.example.devcrew.domain.contest.dto.request;
 
-import com.example.devcrew.domain.contest.validation.annotation.MemberExists;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,7 +40,6 @@ public class CreateContestRequestDTO {
     private String description;
 
     @NotNull(message = "Member ID is required")
-    @MemberExists
     private Long memberId;
 
 }

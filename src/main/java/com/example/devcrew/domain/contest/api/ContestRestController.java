@@ -36,7 +36,6 @@ public class ContestRestController {
     private final ContestCommandService contestCommandService;
     private final ContestQueryService contestQueryService;
 
-    // 공모전 등록
     @PostMapping("/")
     @Operation(summary = "기업 멤버의 공모전 등록", description = "곰모분야 창업부터 기타까지 0~5 순서대로 입니다. poster는 공모전 포스터 이미지파일 S3주소 입니다.")
     public ResponseEntity<CreateContestResponseDTO> createContest(@RequestBody @Valid CreateContestRequestDTO request) {
@@ -46,8 +45,7 @@ public class ContestRestController {
     }
 
 
-    // 공모전 전체 및 섹터별 조회
-    @GetMapping
+    @GetMapping("/contests")
     @Operation(summary = "공모전 전체 및 섹터별 조회", description = "공모전을 페이지별로 조회합니다. 섹터를 지정하면 해당 섹터의 공모전만 조회합니다. 페이지는 0부터 시작합니다.")
     @Parameters({
             @Parameter(name = "order", description = "기본적으로 desc(내림차순) 상태이며 desc로 입력되지 않으면 Asc(오름차순) 상태가 됩니다."),
@@ -60,27 +58,11 @@ public class ContestRestController {
             @RequestParam(value = "sort", defaultValue = "createdAt") String sort,
             @RequestParam(value = "order", defaultValue = "desc") String order) {
 
-        Sort.Direction direction = order.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
-        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sort));
-        Page<GetContestOneResponseDTO> contestsPage;
-
-        if (sector != null) {
-            contestsPage = contestQueryService.findContestsBySector(sector, pageable);
-        } else {
-            contestsPage = contestQueryService.findAllContests(pageable);
-        }
-
-        List<GetContestOneResponseDTO> contests = contestsPage.stream().collect(Collectors.toList());
-        GetContestListResponseDTO response = GetContestListResponseDTO.builder()
-                .totalResult((int) contestsPage.getTotalElements())
-                .contests(contests)
-                .build();
-
+        GetContestListResponseDTO response = contestQueryService.getContests(sector, page, size, sort, order);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
-    // 공모전 상세조회
     @GetMapping("/{contestId}")
     @Operation(summary = "공모전 상세 조회", description = "공모전 상세 정보를 조회합니다.")
     @Parameters({
