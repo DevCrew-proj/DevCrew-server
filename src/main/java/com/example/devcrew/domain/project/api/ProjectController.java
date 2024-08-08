@@ -26,20 +26,20 @@ public class ProjectController {
 
     @Operation(summary = "참여 프로젝트 업로드")
     @PostMapping()
-    PostProjectResponse postProject(@RequestBody @Valid PostProjectRequest request){
+    public PostProjectResponse postProject(@RequestBody @Valid PostProjectRequest request){
         return projectService.postProject(request);
     }
 
     @Operation(summary = "참여 프로젝트들 조회")
     @GetMapping()
-    GetProjectsListResponse getProjects(){
+    public GetProjectsListResponse getProjects(){
         return projectService.getProjects();
     }
 
 
     @Operation(summary = "개별 프로젝트 조회")
     @GetMapping("/{projectId}")
-    GetOneProjectResponse getOneProject(@PathVariable("projectId")Long projectId){
+    public GetOneProjectResponse getOneProject(@PathVariable("projectId")Long projectId){
         return projectService.getOneProject(projectId);
     }
 
