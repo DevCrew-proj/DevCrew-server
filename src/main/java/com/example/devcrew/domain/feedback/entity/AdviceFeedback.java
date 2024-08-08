@@ -1,13 +1,9 @@
 package com.example.devcrew.domain.feedback.entity;
 
-import com.example.devcrew.domain.comment.entity.Comment;
 import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -37,14 +33,6 @@ public class AdviceFeedback extends BaseTimeEntity {
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @OneToMany(mappedBy = "feedback", fetch = FetchType.LAZY)
-    private List<Comment> commentList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "feedback", fetch = FetchType.LAZY)
-    private List<FeedbackImage> feedbackImageList = new ArrayList<>();
-
-    public void setMembertoFeedback(Member member) {
-        this.member = member;
-    }
 
 }

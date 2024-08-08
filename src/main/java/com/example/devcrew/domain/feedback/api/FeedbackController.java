@@ -12,6 +12,7 @@ import com.example.devcrew.domain.feedback.dto.response.codefeedback.CreateCodeF
 import com.example.devcrew.domain.feedback.dto.response.codefeedback.ReadCodeFeedbackListResponseDTO;
 import com.example.devcrew.domain.feedback.dto.response.codefeedback.ReadCodeFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.dto.response.designfeedback.CreateDesignFeedbackResponseDTO;
+import com.example.devcrew.domain.feedback.dto.response.designfeedback.ReadDesignFeedbackListResponseDTO;
 import com.example.devcrew.domain.feedback.dto.response.designfeedback.ReadDesignFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.dto.response.planfeedback.CreatePlanFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.dto.response.planfeedback.ReadPlanFeedbackListResponseDTO;
@@ -142,6 +143,15 @@ public class FeedbackController {
     public ResponseEntity<ReadDesignFeedbackResponseDTO> readDesignFeedback(@PathVariable Long feedbackId){
         ReadDesignFeedbackResponseDTO designResponseDTO = readDesignFeedbackImpl.readDesignFeedback(feedbackId);
         return ResponseEntity.ok(designResponseDTO);
+    }
+
+    @GetMapping("/designs")
+    @Operation(summary = "디자인 피드백 게시글 목록 조회 API")
+    public ResponseEntity<ReadDesignFeedbackListResponseDTO> readDesignFeedbackList(
+            @RequestParam int page) {
+
+        ReadDesignFeedbackListResponseDTO responseDTO = readDesignFeedbackImpl.readDesignFeedbackList(page);
+        return ResponseEntity.ok(responseDTO);
     }
 
 

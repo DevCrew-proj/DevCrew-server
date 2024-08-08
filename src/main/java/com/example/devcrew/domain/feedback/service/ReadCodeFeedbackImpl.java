@@ -33,7 +33,7 @@ public class ReadCodeFeedbackImpl {
     public ReadCodeFeedbackListResponseDTO readCodeFeedbackList(Language language, int page) {
         PageRequest pageRequest = PageRequest.of(page, 4);  // 한 페이지에 4개의 게시글
 
-        Page<CodeFeedback> feedbackPage = codeFeedbackRepository.findByCodeFeedback_Language(language, pageRequest);
+        Page<CodeFeedback> feedbackPage = codeFeedbackRepository.findByLanguage(language, pageRequest);
 
         List<ReadCodeFeedbackResponseDTO> feedbackList = feedbackPage.getContent().stream()
                 .map(CodeFeedbackConverter::toReadCodeFeedbackResponseDTO)

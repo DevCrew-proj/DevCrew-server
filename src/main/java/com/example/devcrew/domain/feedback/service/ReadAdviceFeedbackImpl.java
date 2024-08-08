@@ -34,7 +34,7 @@ public class ReadAdviceFeedbackImpl {
     public ReadAdviceFeedbackListResponseDTO readAdviceFeedbackList(FeedbackTag feedbackTag, int page) {
         PageRequest pageRequest = PageRequest.of(page, 4);  // 한 페이지에 4개의 게시글
 
-        Page<AdviceFeedback> feedbackPage = adviceFeedbackRepository.findByAdviceFeedback_FeedbackTag(feedbackTag, pageRequest);
+        Page<AdviceFeedback> feedbackPage = adviceFeedbackRepository.findByFeedbackTag(feedbackTag, pageRequest);
 
         List<ReadAdviceFeedbackResponseDTO> feedbackList = feedbackPage.getContent().stream()
                 .map(AdviceFeedbackConverter::toReadAdviceFeedbackResponseDTO)

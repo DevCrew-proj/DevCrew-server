@@ -1,8 +1,7 @@
 package com.example.devcrew.domain.member.entity;
 
-import com.example.devcrew.domain.comment.entity.Comment;
+import com.example.devcrew.domain.comment.entity.CodeComment;
 import com.example.devcrew.domain.contest.entity.Contest;
-import com.example.devcrew.domain.feedback.entity.Feedback;
 import com.example.devcrew.domain.member.dto.request.PostMemberProfileRequest;
 import com.example.devcrew.domain.project.entity.Project;
 import com.example.devcrew.domain.team.entity.Team;
@@ -59,11 +58,11 @@ public class Member extends BaseTimeEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Project> projectList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Feedback> feedbackList = new ArrayList<>();
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+//    private List<Feedback> feedbackList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Comment> commentList = new ArrayList<>();
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+//    private List<CodeComment> commentList = new ArrayList<>();
 
     public void updateRole(Role role) {
         this.role = role;
