@@ -27,7 +27,7 @@ public class Contest extends BaseTimeEntity {
     @Column(nullable = false, length = 50)
     private String title;
 
-    @Column(length = 10)
+    @Column(length = 50)
     private String organization;
 
     @Column(length = 20)
@@ -38,9 +38,8 @@ public class Contest extends BaseTimeEntity {
 
     private String homepageUrl;
 
-    private LocalDateTime startDate;
-
-    private LocalDateTime endDate;
+    @Column(length = 40)
+    private String acceptancePeriod;
 
     @Enumerated(EnumType.STRING)
     private Sector sector;
@@ -58,6 +57,6 @@ public class Contest extends BaseTimeEntity {
     @JoinColumn(name = "Member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "contest", cascade = CascadeType.ALL)
-    private List<Team> teamList = new ArrayList<>();
+//    @OneToMany(mappedBy = "contest", cascade = CascadeType.ALL)
+//    private List<Team> teamList = new ArrayList<>();
 }
