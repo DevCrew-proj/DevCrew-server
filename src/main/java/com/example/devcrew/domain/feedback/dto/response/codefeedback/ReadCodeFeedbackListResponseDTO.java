@@ -1,4 +1,4 @@
-package com.example.devcrew.domain.feedback.dto.response;
+package com.example.devcrew.domain.feedback.dto.response.codefeedback;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReadFeedbackListResponseDTO {
-    private List<ReadFeedbackResponseDTO> feedbackList;
+public class ReadCodeFeedbackListResponseDTO {
+    private List<ReadCodeFeedbackResponseDTO> codeFeedbackList;
     private int totalPages;
 }

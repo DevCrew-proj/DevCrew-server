@@ -1,6 +1,5 @@
 package com.example.devcrew.domain.feedback.entity;
 
-
 import com.example.devcrew.domain.comment.entity.Comment;
 import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.global.common.BaseTimeEntity;
@@ -15,11 +14,11 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class Feedback extends BaseTimeEntity {
+public class PlanFeedback extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;    // 대표 키
+    private Long id;
 
     @Column(nullable = false, length = 50)
     private String title;   // 게시글 제목
@@ -29,7 +28,6 @@ public class Feedback extends BaseTimeEntity {
 
     @Column(nullable = true, length = 255)
     private String fileUrl; // 첨부 파일 링크
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)

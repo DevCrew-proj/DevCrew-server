@@ -5,11 +5,8 @@ import com.example.devcrew.domain.comment.dto.response.GetCommentResponseDTO;
 import com.example.devcrew.domain.comment.dto.response.PostCommentResponseDTO;
 import com.example.devcrew.domain.comment.dto.response.SingleCommentResponseDTO;
 import com.example.devcrew.domain.comment.entity.Comment;
-import com.example.devcrew.domain.feedback.entity.Feedback;
-import com.example.devcrew.domain.member.entity.Member;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +24,7 @@ public class CommentConverter {
         return PostCommentResponseDTO.builder()
                 .id(comment.getId())
                 .memberId(comment.getMember().getId())
-                .feedbackId(comment.getFeedback().getId())
+                .feedbackId(comment.getCodeFeedback().getId())
                 .content(comment.getContent())
                 .createdAt(comment.getCreatedAt())
                 .updatedAt(comment.getUpdatedAt())

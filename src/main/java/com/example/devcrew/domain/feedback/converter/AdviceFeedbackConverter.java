@@ -1,12 +1,10 @@
     package com.example.devcrew.domain.feedback.converter;
 
     import com.example.devcrew.domain.feedback.dto.request.CreateAdviceFeedbackRequestDTO;
-    import com.example.devcrew.domain.feedback.dto.response.CreateAdviceFeedbackResponseDTO;
-    import com.example.devcrew.domain.feedback.dto.response.ReadAdviceFeedbackListResponseDTO;
-    import com.example.devcrew.domain.feedback.dto.response.ReadAdviceFeedbackResponseDTO;
+    import com.example.devcrew.domain.feedback.dto.response.advicefeedback.CreateAdviceFeedbackResponseDTO;
+    import com.example.devcrew.domain.feedback.dto.response.advicefeedback.ReadAdviceFeedbackListResponseDTO;
+    import com.example.devcrew.domain.feedback.dto.response.advicefeedback.ReadAdviceFeedbackResponseDTO;
     import com.example.devcrew.domain.feedback.entity.AdviceFeedback;
-    import com.example.devcrew.domain.feedback.entity.Feedback;
-    import com.example.devcrew.domain.feedback.entity.FeedbackTag;
     import com.example.devcrew.domain.member.entity.Member;
     import org.springframework.data.domain.Page;
     import org.springframework.stereotype.Component;
@@ -17,53 +15,46 @@
     @Component
     public class AdviceFeedbackConverter {
 
+        public static AdviceFeedback toAdviceFeedback(CreateAdviceFeedbackRequestDTO request, Member member){
 
-
-
-        public static Feedback toadviceFeedback(CreateAdviceFeedbackRequestDTO request, Member member){
-
-            AdviceFeedback adviceFeedback = AdviceFeedback.builder()
-                    .feedbackTag(request.getFeedbackTag())
-                    .build();
-
-            return Feedback.builder()
+            return AdviceFeedback.builder()
                     .title(request.getTitle())
                     .content(request.getContent())
                     .fileUrl(request.getFileUrl())
-                    .adviceFeedback(adviceFeedback)
+                    .feedbackTag(request.getFeedbackTag())
                     .member(member)
                     .build();
         }
 
 
-        public static CreateAdviceFeedbackResponseDTO toCreateAdviceFeedbackResponseDTO(Feedback feedback) {
+        public static CreateAdviceFeedbackResponseDTO toCreateAdviceFeedbackResponseDTO(AdviceFeedback adviceFeedback) {
             return CreateAdviceFeedbackResponseDTO.builder()
-                    .id(feedback.getId())
-                    .memberId(feedback.getMember().getId())
-                    .createdAt(feedback.getCreatedAt())
-                    .updatedAt(feedback.getUpdatedAt())
+                    .id(adviceFeedback.getId())
+                    .memberId(adviceFeedback.getMember().getId())
+                    .createdAt(adviceFeedback.getCreatedAt())
+                    .updatedAt(adviceFeedback.getUpdatedAt())
                     .build();
         }
 
 
-        public static ReadAdviceFeedbackResponseDTO toReadAdviceFeedbackResponseDTO(Feedback feedback) {
+        public static ReadAdviceFeedbackResponseDTO toReadAdviceFeedbackResponseDTO(AdviceFeedback adviceFeedback) {
             return ReadAdviceFeedbackResponseDTO.builder()
-                    .id(feedback.getId())
-                    .title(feedback.getTitle())
-                    .content(feedback.getContent())
-                    .memberName(feedback.getMember().getNickname())
+                    .id(adviceFeedback.getId())
+                    .title(adviceFeedback.getTitle())
+                    .content(adviceFeedback.getContent())
+                    .memberName(adviceFeedback.getMember().getNickname())
                     .build();
         }
 
 
-        public static ReadAdviceFeedbackListResponseDTO toReadAdviceFeedbackListResponseDTO(Page<Feedback> feedbackPage) {
-            List<ReadAdviceFeedbackResponseDTO> feedbackList = feedbackPage.getContent().stream()
+        public static ReadAdviceFeedbackListResponseDTO toReadAdviceFeedbackListResponseDTO(Page<AdviceFeedback> adviceFeedbackPage) {
+            List<ReadAdviceFeedbackResponseDTO> adviceFeedbackList = adviceFeedbackPage.getContent().stream()
                     .map(AdviceFeedbackConverter::toReadAdviceFeedbackResponseDTO)
                     .collect(Collectors.toList());
 
             return ReadAdviceFeedbackListResponseDTO.builder()
-                    .adviceFeedbackList(feedbackList)
-                    .totalPages(feedbackPage.getTotalPages())
+                    .adviceFeedbackList(adviceFeedbackList)
+                    .totalPages(adviceFeedbackPage.getTotalPages())
                     .build();
         }
     }

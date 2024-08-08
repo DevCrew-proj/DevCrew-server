@@ -4,7 +4,6 @@ import com.example.devcrew.domain.comment.entity.Comment;
 import com.example.devcrew.domain.contest.entity.Contest;
 import com.example.devcrew.domain.feedback.entity.Feedback;
 import com.example.devcrew.domain.member.dto.request.PostMemberProfileRequest;
-import com.example.devcrew.domain.member.dto.request.UpdateCompanyMemberSignUpRequest;
 import com.example.devcrew.domain.project.entity.Project;
 import com.example.devcrew.domain.team.entity.Team;
 import com.example.devcrew.domain.team.entity.TeamMatching;

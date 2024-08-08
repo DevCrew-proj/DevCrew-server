@@ -1,6 +1,6 @@
 package com.example.devcrew.domain.comment.entity;
 
-import com.example.devcrew.domain.feedback.entity.Feedback;
+import com.example.devcrew.domain.feedback.entity.CodeFeedback;
 import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
@@ -21,8 +21,8 @@ public class Comment extends BaseTimeEntity {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "feedback_id", nullable = false)
-    private Feedback feedback;      // 피드백 게시글 외래 키
+    @JoinColumn(name = "codeFeedback_id", nullable = false)
+    private CodeFeedback codeFeedback;      // 피드백 게시글 외래 키
 
     @Column(nullable = false, length = 100)
     private String content;     // 댓글 내용
@@ -32,7 +32,7 @@ public class Comment extends BaseTimeEntity {
         this.member = member;
     }
 
-    public void setFeedbacktoComment(Feedback feedback) {
-        this.feedback = feedback;
+    public void setFeedbacktoComment(CodeFeedback codeFeedback) {
+        this.codeFeedback = codeFeedback;
     }
 }

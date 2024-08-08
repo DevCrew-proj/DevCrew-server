@@ -1,4 +1,4 @@
-package com.example.devcrew.domain.feedback.dto.response;
+package com.example.devcrew.domain.feedback.dto.response.planfeedback;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateAdviceFeedbackResponseDTO {
+public class CreatePlanFeedbackResponseDTO {
     private Long id;
     private Long memberId;
     private LocalDateTime createdAt;
