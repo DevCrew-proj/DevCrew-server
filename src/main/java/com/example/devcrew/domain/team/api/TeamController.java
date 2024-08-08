@@ -26,7 +26,7 @@ public class TeamController {
         return ResponseEntity.ok(response);
     }
 
-
+/*
     @PostMapping("/create")
     @Operation(summary = "Create a new team")
     public ResponseEntity<Team> createTeamsByContestAndMember(@RequestBody CreateTeamRequestDTO createTeamRequestDTO) {
@@ -38,7 +38,7 @@ public class TeamController {
         }
     }
 
-
+*/
 
     @GetMapping("apply/{memberId}")
     @Operation(summary = "팀 신청 기능에서 멤버 정보 조회", description = "팀원 신청서 작성 시 해당 멤버의 이름과 전화번호를 반환합니다.(자동완성기능)")

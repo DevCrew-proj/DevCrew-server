@@ -41,12 +41,12 @@ jobs:
         run: mkdir -p ./src/main/resources
         shell: bash
 
-      - name: create application-prod.yml
+      - name: create application.yml
         if: contains(github.ref, 'dev')
         run: |
           cd ./src/main/resources
-          touch ./application-prod.yml
-          echo "${{ secrets.PROD_YML }}" > ./application-prod.yml
+          touch ./application.yml
+          echo "${{ secrets.APPLICATION_YML }}" > ./application.yml
         shell: bash
         
 

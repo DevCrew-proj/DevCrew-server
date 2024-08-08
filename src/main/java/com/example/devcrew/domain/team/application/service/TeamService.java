@@ -38,9 +38,9 @@ public class TeamService {
                   //Optional<Contest> contestOptional = contestRepository.findById(request.getContestId());
                   //Contest contest = contestOptional.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 공모전입니다."));
 
-        Member member = memberRepository.findById(request.getMemberId())
-                .orElseThrow(MemberNotFoundException::new);
-       // Member member = authService.getLoginUser();
+        //Member member = memberRepository.findById(request.getMemberId())
+         //       .orElseThrow(MemberNotFoundException::new);
+        Member member = authService.getLoginUser();
 
         Team team = Team.builder()
                 .contest(contest)
@@ -59,24 +59,22 @@ public class TeamService {
 
         return teamRepository.save(team);
     }
-*/
 
+*/
 
     @Transactional
     public GetMemberInfoResponseDTO GetMemberInfoById(Long memberId) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(MemberNotFoundException::new);
-      //  Member member = authService.getLoginUser();
-        return new GetMemberInfoResponseDTO(member.getName(), member.getPhoneNumber());
+        Member member = authService.getLoginUser();
+        return new GetMemberInfoResponseDTO(member.getName(), member.getNormalMember().getPhoneNumber());
     }
 
 @Transactional
 public TeamMatching applyToTeam(ApplyTeamRequestDTO requestDTO) {
     Team team = teamRepository.findByIdAndPassword(requestDTO.getTeamId(),  requestDTO.getTeamPassword())
             .orElseThrow(TeamNotFoundException::new);
-     Member member = memberRepository.findById(requestDTO.getMemberId())
-            .orElseThrow(MemberNotFoundException::new);
-    //Member member = authService.getLoginUser();
+     //Member member = memberRepository.findById(requestDTO.getMemberId())
+      //      .orElseThrow(MemberNotFoundException::new);
+    Member member = authService.getLoginUser();
 
     TeamMatching teamMatching = TeamMatching.builder()
             .team(team)
