@@ -28,28 +28,6 @@ public class ContestConverter {
 
     public static Contest toContest(CreateContestRequestDTO requestDTO, Member member) {
 
-//        Sector sector = null;
-//        switch (requestDTO.getSector()) {
-//            case 0:
-//                sector = Sector.STARTUP;
-//                break;
-//            case 1:
-//                sector = Sector.AI;
-//                break;
-//            case 2:
-//                sector = Sector.PLATFORM;
-//                break;
-//            case 3:
-//                sector = Sector.DATAALALYSIS;
-//                break;
-//            case 4:
-//                sector = Sector.GAME;
-//                break;
-//            case 5:
-//                sector = Sector.OTHER;
-//                break;
-//        }
-
         return Contest.builder()
                 .posterUrl(requestDTO.getPoster())
                 .title(requestDTO.getTitle())
