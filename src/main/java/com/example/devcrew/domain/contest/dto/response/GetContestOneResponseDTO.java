@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GetContestOneResponseDTO {
+    private Long id;
 
     private String posterUrl;
 
