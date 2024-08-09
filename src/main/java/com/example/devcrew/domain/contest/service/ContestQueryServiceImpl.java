@@ -89,8 +89,7 @@ public class ContestQueryServiceImpl implements ContestQueryService{
         if (member == null) {
             throw new MemberNotFoundException();
         }
-        String name = member.getCompanyMember().getCeoName();
-        System.out.println(name);
+
         return ContestConverter.toGetContestDetailResponseDTO(contest, member);
     }
 
