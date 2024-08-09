@@ -1,8 +1,12 @@
 package com.example.devcrew.domain.team.service;
 
+import com.example.devcrew.domain.contest.entity.Contest;
+import com.example.devcrew.domain.contest.exception.ContestNotFoundException;
+import com.example.devcrew.domain.contest.repository.ContestRepository;
 import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.domain.member.repository.MemberRepository;
 import com.example.devcrew.domain.team.dto.request.ApplyTeamRequestDTO;
+import com.example.devcrew.domain.team.dto.request.CreateTeamRequestDTO;
 import com.example.devcrew.domain.team.dto.response.GetMemberInfoResponseDTO;
 import com.example.devcrew.domain.team.entity.Team;
 import com.example.devcrew.domain.team.entity.TeamMatching;
@@ -22,16 +26,16 @@ public class TeamService {
     private final TeamRepository teamRepository;
     private final MemberRepository memberRepository;
     private final TeamMatchingRepository teamMatchingRepository;
-    //private final ContestRepository contestRepository;
+    private final ContestRepository contestRepository;
     private final AuthService authService;
 
-/*
+
     @Transactional
     public Team createTeamsByContestAndMember(CreateTeamRequestDTO request) {
 
         Contest contest = contestRepository.findById(request.getContestId())
                 //예외처리 추가된거로 수정하기
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 공모전입니다."));
+                .orElseThrow(ContestNotFoundException::new);
 
         Member member = authService.getLoginUser();
 
@@ -53,7 +57,7 @@ public class TeamService {
         return teamRepository.save(team);
     }
 
-*/
+
 
     @Transactional
     public GetMemberInfoResponseDTO GetMemberInfo() {
