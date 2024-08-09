@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -26,21 +27,21 @@ public class ProjectController {
 
     @Operation(summary = "참여 프로젝트 업로드")
     @PostMapping()
-    public PostProjectResponse postProject(@RequestBody @Valid PostProjectRequest request){
-        return projectService.postProject(request);
+    public ResponseEntity<PostProjectResponse> postProject(@RequestBody @Valid PostProjectRequest request){
+        return ResponseEntity.status(HttpStatus.CREATED).body(projectService.postProject(request));
     }
 
     @Operation(summary = "참여 프로젝트들 조회")
     @GetMapping()
-    public GetProjectsListResponse getProjects(){
-        return projectService.getProjects();
+    public ResponseEntity<GetProjectsListResponse> getProjects(){
+        return ResponseEntity.ok(projectService.getProjects());
     }
 
 
     @Operation(summary = "개별 프로젝트 조회")
     @GetMapping("/{projectId}")
-    public GetOneProjectResponse getOneProject(@PathVariable("projectId")Long projectId){
-        return projectService.getOneProject(projectId);
+    public ResponseEntity<GetOneProjectResponse> getOneProject(@PathVariable("projectId")Long projectId){
+        return ResponseEntity.ok(projectService.getOneProject(projectId));
     }
 
 }
