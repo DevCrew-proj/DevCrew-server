@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,14 +25,14 @@ public class MemberController {
     }
 
     @Operation(summary = "자기 소개 작성")
-    @PostMapping("/profile")
-    PostMemberProfileResponse postMemberProfile(@RequestBody @Valid PostMemberProfileRequest request){
+    @PostMapping("/v1/profile")
+    public PostMemberProfileResponse postMemberProfile(@RequestBody @Valid PostMemberProfileRequest request){
         return memberService.postMemberProfile(request);
     }
 
     @Operation(summary = "자기 소개 조회")
-    @GetMapping("/profile")
-    GetMemberProfileResponse getMemberProfile(){
+    @GetMapping("/v1/profile")
+    public GetMemberProfileResponse getMemberProfile(){
         return memberService.getMemberProfile();
     }
 

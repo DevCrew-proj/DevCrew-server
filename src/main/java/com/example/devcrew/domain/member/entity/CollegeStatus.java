@@ -13,3 +13,4 @@ public enum CollegeStatus {
 
     private final String status;
 }
+

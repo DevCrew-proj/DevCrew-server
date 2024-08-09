@@ -30,9 +30,36 @@ public class TeamMatching extends BaseTimeEntity {
         @Column(nullable = false)
         private Member? normalMemberId;
     */
+    @JoinColumn(name = "portfolio_url", nullable = false)
     private String portfolioUrl;
 
     @Enumerated(EnumType.STRING)
     private Objective objective;
 
 }
+
+/*
+@JsonIgnore 을 사용하여 순환 참조 문제 해결
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id", nullable = false)
+    @JsonIgnore
+    private Team team;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable = false)
+    @JsonIgnore
+    private Member member;
+
+    @Column(name = "portfolio_url", nullable = false)
+    private String portfolioUrl;
+
+    @Enumerated(EnumType.STRING)
+    private Objective objective;
+}
+
+ */

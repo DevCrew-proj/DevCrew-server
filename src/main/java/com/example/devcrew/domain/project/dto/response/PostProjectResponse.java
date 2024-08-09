@@ -19,7 +19,9 @@ import java.util.List;
 public class PostProjectResponse {
     private Long id;
 
-    private String name;
+    private String projectName;
+
+    private List<String> images;
 
     private String teamName;
 
@@ -31,10 +33,11 @@ public class PostProjectResponse {
 
     private String role;
 
-    public static PostProjectResponse from(Project project){
+    public static PostProjectResponse of(Project project,List<String> images){
         return PostProjectResponse.builder()
                 .id(project.getId())
-                .name(project.getName())
+                .projectName(project.getProjectName())
+                .images(images)
                 .teamName(project.getTeamName())
                 .period(project.getPeriod())
                 .projectTag(project.getProjectTag())
