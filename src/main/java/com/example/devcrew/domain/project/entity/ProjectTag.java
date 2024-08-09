@@ -8,10 +8,11 @@ import lombok.Getter;
 @Getter
 public enum ProjectTag {
 
+    STARTUP("창업"),
     GENERATIVE_AI("생산형 AI"),
-    E_COMMERCE("이커머스"),
-    COMMUNITY("커뮤니티"),
     PLATFORM("플랫폼"),
+    DATA_ANALYSIS("데이터 분석"),
+    GAME("게임"),
     OTHERS("기타");
 
     private final String tag;
