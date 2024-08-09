@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @Builder
 @NoArgsConstructor
@@ -14,5 +16,8 @@ public class ReadPlanFeedbackResponseDTO {
     private String title;
     private String content;
     private String memberName;
+
+    private List<String> imageUrls;
+    private List<String> fileUrls;
 
 }

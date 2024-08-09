@@ -43,6 +43,12 @@ public class CodeFeedbackConverter {
                 .title(codeFeedback.getTitle())
                 .content(codeFeedback.getContent())
                 .memberName(codeFeedback.getMember().getNickname())
+                .imageUrls(codeFeedback.getImages().stream()
+                        .map(image -> image.getImageUrl())
+                        .collect(Collectors.toList()))
+                .fileUrls(codeFeedback.getFiles().stream()
+                        .map(file -> file.getFileUrl())
+                        .collect(Collectors.toList()))
                 .build();
     }
 

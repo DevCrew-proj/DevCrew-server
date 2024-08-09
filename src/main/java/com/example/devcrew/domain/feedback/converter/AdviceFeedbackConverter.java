@@ -42,6 +42,12 @@
                     .title(adviceFeedback.getTitle())
                     .content(adviceFeedback.getContent())
                     .memberName(adviceFeedback.getMember().getNickname())
+                    .imageUrls(adviceFeedback.getImages().stream()
+                            .map(image -> image.getImageUrl())
+                            .collect(Collectors.toList()))
+                    .fileUrls(adviceFeedback.getFiles().stream()
+                            .map(file -> file.getFileUrl())
+                            .collect(Collectors.toList()))
                     .build();
         }
 

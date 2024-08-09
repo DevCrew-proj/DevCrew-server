@@ -38,6 +38,12 @@ public class DesignFeedbackConverter {
                 .title(designFeedback.getTitle())
                 .content(designFeedback.getContent())
                 .memberName(designFeedback.getMember().getNickname())
+                .imageUrls(designFeedback.getImages().stream()
+                        .map(image -> image.getImageUrl())
+                        .collect(Collectors.toList()))
+                .fileUrls(designFeedback.getFiles().stream()
+                        .map(file -> file.getFileUrl())
+                        .collect(Collectors.toList()))
                 .build();
     }
 

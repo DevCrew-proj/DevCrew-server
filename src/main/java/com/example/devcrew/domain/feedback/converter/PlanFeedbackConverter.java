@@ -42,6 +42,12 @@ public class PlanFeedbackConverter {
                 .title(planFeedback.getTitle())
                 .content(planFeedback.getContent())
                 .memberName(planFeedback.getMember().getNickname())
+                .imageUrls(planFeedback.getImages().stream()
+                        .map(image -> image.getImageUrl())
+                        .collect(Collectors.toList()))
+                .fileUrls(planFeedback.getFiles().stream()
+                        .map(file -> file.getFileUrl())
+                        .collect(Collectors.toList()))
                 .build();
     }
 
