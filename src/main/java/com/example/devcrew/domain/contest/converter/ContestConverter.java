@@ -4,15 +4,19 @@ import com.example.devcrew.domain.contest.dto.request.CreateContestRequestDTO;
 import com.example.devcrew.domain.contest.dto.response.CreateContestResponseDTO;
 import com.example.devcrew.domain.contest.dto.response.GetContestDetailResponseDTO;
 import com.example.devcrew.domain.contest.dto.response.GetContestOneResponseDTO;
+import com.example.devcrew.domain.contest.dto.response.GetTeamInfoOneResponseDTO;
 import com.example.devcrew.domain.contest.entity.Contest;
 import com.example.devcrew.domain.contest.entity.Sector;
 import com.example.devcrew.domain.member.entity.CompanyMember;
 import com.example.devcrew.domain.member.entity.Member;
+import com.example.devcrew.domain.team.entity.Team;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ContestConverter {
 
@@ -49,6 +53,7 @@ public class ContestConverter {
         String endDate = extractEndDate(contest.getAcceptancePeriod());
 
         return GetContestOneResponseDTO.builder()
+                .id(contest.getId())
                 .posterUrl(contest.getPosterUrl())
                 .title(contest.getTitle())
                 .sector(contest.getSector().getSector())
@@ -89,6 +94,7 @@ public class ContestConverter {
 
 
         return GetContestDetailResponseDTO.builder()
+                .id(contest.getId())
                 .poster(contest.getPosterUrl())
                 .title(contest.getTitle())
                 .organization(contest.getOrganization())
@@ -120,4 +126,23 @@ public class ContestConverter {
         }
         return "담당자 번호를 찾을 수 없습니다.";
     }
+
+
+
+    public static List<GetTeamInfoOneResponseDTO> toGetTeamInfoOneResponseDTOList(List<Team> teams) {
+        return teams.stream()
+                .map(ContestConverter::toGetTeamInfoOneResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+
+    public static GetTeamInfoOneResponseDTO toGetTeamInfoOneResponseDTO(Team team) {
+        return GetTeamInfoOneResponseDTO.builder()
+                .teamId(team.getId())
+                .teamName(team.getName())
+                .planUrl(team.getPlanUrl())
+                .teamEmail(team.getMember().getEmail())
+                .build();
+    }
+
 }
