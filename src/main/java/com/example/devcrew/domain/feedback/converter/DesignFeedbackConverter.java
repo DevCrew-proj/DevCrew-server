@@ -19,7 +19,6 @@ public class DesignFeedbackConverter {
         return DesignFeedback.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
-                .fileUrl(request.getFileUrl())
                 .member(member)
                 .build();
     }

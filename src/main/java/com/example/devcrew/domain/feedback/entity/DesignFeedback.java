@@ -5,6 +5,8 @@ import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -28,6 +30,12 @@ public class DesignFeedback extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
+
+    @OneToMany(mappedBy = "designFeedback", cascade = CascadeType.ALL)
+    private List<DesignFeedbackFile> files;  // 파일 URL 리스트
+
+    @OneToMany(mappedBy = "designFeedback", cascade = CascadeType.ALL)
+    private List<DesignFeedbackImage> images; // 이미지 URL 리스트
 
 
 }

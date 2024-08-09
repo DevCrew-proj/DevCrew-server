@@ -5,6 +5,8 @@ import com.example.devcrew.global.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -33,6 +35,12 @@ public class CodeFeedback extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
+
+    @OneToMany(mappedBy = "codeFeedback", cascade = CascadeType.ALL)
+    private List<CodeFeedbackFile> files;  // 파일 URL 리스트
+
+    @OneToMany(mappedBy = "codeFeedback", cascade = CascadeType.ALL)
+    private List<CodeFeedbackImage> images; // 이미지 URL 리스트
 
 
 }

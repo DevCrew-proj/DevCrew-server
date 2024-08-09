@@ -20,7 +20,6 @@
             return AdviceFeedback.builder()
                     .title(request.getTitle())
                     .content(request.getContent())
-                    .fileUrl(request.getFileUrl())
                     .feedbackTag(request.getFeedbackTag())
                     .member(member)
                     .build();

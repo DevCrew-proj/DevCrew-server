@@ -4,6 +4,8 @@ import com.example.devcrew.domain.feedback.entity.FeedbackTag;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 public class CreateAdviceFeedbackRequestDTO {
 
@@ -15,8 +17,8 @@ public class CreateAdviceFeedbackRequestDTO {
 
     private FeedbackTag feedbackTag;    // 현직자 조언 태그
 
-    private String fileUrl;  // 첨부 파일 리스트
+    private List<String> fileUrls;  // 첨부 파일 리스트
 
-//    MultipartFile feedbackImage;
+    private List<String> imageUrls; // 첨부 이미지 리스트
 
 }

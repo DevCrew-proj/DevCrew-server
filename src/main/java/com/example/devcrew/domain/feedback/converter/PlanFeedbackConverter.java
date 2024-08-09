@@ -23,7 +23,6 @@ public class PlanFeedbackConverter {
         return PlanFeedback.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
-                .fileUrl(request.getFileUrl())
                 .member(member)
                 .build();
     }

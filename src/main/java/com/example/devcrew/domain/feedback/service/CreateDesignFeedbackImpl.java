@@ -3,7 +3,9 @@ package com.example.devcrew.domain.feedback.service;
 import com.example.devcrew.domain.auth.service.AuthService;
 import com.example.devcrew.domain.feedback.converter.DesignFeedbackConverter;
 import com.example.devcrew.domain.feedback.dto.request.CreateDesignFeedbackRequestDTO;
-import com.example.devcrew.domain.feedback.entity.DesignFeedback;
+import com.example.devcrew.domain.feedback.entity.*;
+import com.example.devcrew.domain.feedback.repository.DesignFeedbackFileRepository;
+import com.example.devcrew.domain.feedback.repository.DesignFeedbackImageRepository;
 import com.example.devcrew.domain.feedback.repository.DesignFeedbackRepository;
 import com.example.devcrew.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class CreateDesignFeedbackImpl {
     private final DesignFeedbackRepository designFeedbackRepository;
+    private final DesignFeedbackFileRepository designFeedbackFileRepository;
+    private final DesignFeedbackImageRepository designFeedbackImageRepository;
     private final AuthService authService;
 
     @Transactional
@@ -24,6 +28,26 @@ public class CreateDesignFeedbackImpl {
 
         DesignFeedback designFeedback = DesignFeedbackConverter.toDesignFeedback(request, member);
 
-        return designFeedbackRepository.save(designFeedback);
+        designFeedbackRepository.save(designFeedback);
+
+        // 파일 저장
+        request.getFileUrls().forEach(fileUrl -> {
+            DesignFeedbackFile file = DesignFeedbackFile.builder()
+                    .designFeedback(designFeedback)
+                    .fileUrl(fileUrl)
+                    .build();
+            designFeedbackFileRepository.save(file);
+        });
+
+        // 이미지 저장
+        request.getImageUrls().forEach(imageUrl -> {
+            DesignFeedbackImage image = DesignFeedbackImage.builder()
+                    .designFeedback(designFeedback)
+                    .imageUrl(imageUrl)
+                    .build();
+            designFeedbackImageRepository.save(image);
+        });
+
+        return designFeedback;
     }
 }

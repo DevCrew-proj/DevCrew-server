@@ -21,7 +21,6 @@ public class CodeFeedbackConverter {
         return CodeFeedback.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
-                .fileUrl(request.getFileUrl())
                 .language(request.getLanguage())
                 .member(member)
                 .build();
