@@ -1,4 +1,4 @@
-package com.example.devcrew.domain.team.application.service;
+package com.example.devcrew.domain.team.service;
 
 import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.domain.member.repository.MemberRepository;

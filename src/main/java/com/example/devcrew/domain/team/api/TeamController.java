@@ -1,10 +1,8 @@
 package com.example.devcrew.domain.team.api;
 
-import com.example.devcrew.domain.team.application.service.TeamService;
+import com.example.devcrew.domain.team.service.TeamService;
 import com.example.devcrew.domain.team.dto.request.ApplyTeamRequestDTO;
-import com.example.devcrew.domain.team.dto.request.CreateTeamRequestDTO;
 import com.example.devcrew.domain.team.dto.response.GetMemberInfoResponseDTO;
-import com.example.devcrew.domain.team.entity.Team;
 import com.example.devcrew.domain.team.entity.TeamMatching;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
