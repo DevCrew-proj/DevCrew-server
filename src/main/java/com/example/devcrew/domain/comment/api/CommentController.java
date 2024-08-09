@@ -10,6 +10,7 @@ import com.example.devcrew.domain.comment.entity.DesignComment;
 import com.example.devcrew.domain.comment.entity.PlanComment;
 import com.example.devcrew.domain.comment.service.CreateCommentImpl;
 import com.example.devcrew.domain.comment.service.ReadCommentImpl;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ public class CommentController {
     private final ReadCommentImpl readCommentImpl;
 
     @PostMapping("/advices/{feedbackID}/comments")
+    @Operation(summary = "현직자 조언 게시글 댓글 생성 API")
     public ResponseEntity<PostCommentResponseDTO> createAdviceComment(
             @PathVariable Long feedbackID,
             @RequestBody PostCommentRequestDTO request,
@@ -37,6 +39,7 @@ public class CommentController {
     }
 
     @GetMapping("/advices/{feedbackId}/comments")
+    @Operation(summary = "현직자 조언 게시글 댓글 조회 API")
     public ResponseEntity<GetCommentResponseDTO> getAdviceComments(@PathVariable Long feedbackId) {
         List<AdviceComment> comments = readCommentImpl.getAdviceComments(feedbackId);
         GetCommentResponseDTO responseDTO = CommentConverter.toGetAdviceCommentResponseDTO(comments);
@@ -45,6 +48,7 @@ public class CommentController {
     }
 
     @PostMapping("/codes/{feedbackID}/comments")
+    @Operation(summary = "코드 리뷰 게시글 댓글 생성 API")
     public ResponseEntity<PostCommentResponseDTO> createCodeComment(
             @PathVariable Long feedbackID,
             @RequestBody PostCommentRequestDTO request,
@@ -57,6 +61,7 @@ public class CommentController {
     }
 
     @GetMapping("/codes/{feedbackId}/comments")
+    @Operation(summary = "코드 리뷰 게시글 댓글 조회 API")
     public ResponseEntity<GetCommentResponseDTO> getCodeComments(@PathVariable Long feedbackId) {
         List<CodeComment> comments = readCommentImpl.getCodeComments(feedbackId);
         GetCommentResponseDTO responseDTO = CommentConverter.toGetCodeCommentResponseDTO(comments);
@@ -66,6 +71,7 @@ public class CommentController {
 
 
     @PostMapping("/designs/{feedbackID}/comments")
+    @Operation(summary = "디자인 피드백 게시글 댓글 생성 API")
     public ResponseEntity<PostCommentResponseDTO> createDesignComment(
             @PathVariable Long feedbackID,
             @RequestBody PostCommentRequestDTO request,
@@ -78,6 +84,7 @@ public class CommentController {
     }
 
     @GetMapping("/designs/{feedbackId}/comments")
+    @Operation(summary = "디자인 피드백 게시글 댓글 조회 API")
     public ResponseEntity<GetCommentResponseDTO> getDesignComments(@PathVariable Long feedbackId) {
         List<DesignComment> comments = readCommentImpl.getDesignComments(feedbackId);
         GetCommentResponseDTO responseDTO = CommentConverter.toGetDesignCommentResponseDTO(comments);
@@ -86,6 +93,7 @@ public class CommentController {
     }
 
     @PostMapping("/plans/{feedbackID}/comments")
+    @Operation(summary = "기획 피드백 게시글 댓글 생성 API")
     public ResponseEntity<PostCommentResponseDTO> createPlanComment(
             @PathVariable Long feedbackID,
             @RequestBody PostCommentRequestDTO request,
@@ -98,6 +106,7 @@ public class CommentController {
     }
 
     @GetMapping("/plans/{feedbackId}/comments")
+    @Operation(summary = "기획 피드백 게시글 댓글 조회 API")
     public ResponseEntity<GetCommentResponseDTO> getPlanComments(@PathVariable Long feedbackId) {
         List<PlanComment> comments = readCommentImpl.getPlanComments(feedbackId);
         GetCommentResponseDTO responseDTO = CommentConverter.toGetPlanCommentResponseDTO(comments);
