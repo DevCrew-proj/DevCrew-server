@@ -1,11 +1,10 @@
 package com.example.devcrew.domain.feedback.converter;
 
 import com.example.devcrew.domain.feedback.dto.request.CreateCodeFeedbackRequestDTO;
-import com.example.devcrew.domain.feedback.dto.response.*;
-import com.example.devcrew.domain.feedback.entity.AdviceFeedback;
+import com.example.devcrew.domain.feedback.dto.response.codefeedback.CreateCodeFeedbackResponseDTO;
+import com.example.devcrew.domain.feedback.dto.response.codefeedback.ReadCodeFeedbackListResponseDTO;
+import com.example.devcrew.domain.feedback.dto.response.codefeedback.ReadCodeFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.entity.CodeFeedback;
-import com.example.devcrew.domain.feedback.entity.Feedback;
-import com.example.devcrew.domain.feedback.entity.Language;
 import com.example.devcrew.domain.member.entity.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -17,49 +16,50 @@ import java.util.stream.Collectors;
 public class CodeFeedbackConverter {
 
 
-    public static Feedback toCodeFeedback(CreateCodeFeedbackRequestDTO request, Member member){
+    public static CodeFeedback toCodeFeedback(CreateCodeFeedbackRequestDTO request, Member member){
 
-        CodeFeedback codeFeedback = CodeFeedback.builder()
-                .language(request.getLanguage())
-                .build();
-
-        return Feedback.builder()
+        return CodeFeedback.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
-                .fileUrl(request.getFileUrl())
-                .codeFeedback(codeFeedback)
+                .language(request.getLanguage())
                 .member(member)
                 .build();
     }
 
 
-    public static CreateCodeFeedbackResponseDTO toCreateCodeFeedbackResponseDTO(Feedback feedback){
+    public static CreateCodeFeedbackResponseDTO toCreateCodeFeedbackResponseDTO(CodeFeedback codeFeedback){
         return CreateCodeFeedbackResponseDTO.builder()
-                .id(feedback.getId())
-                .memberId(feedback.getMember().getId())
-                .createdAt(feedback.getCreatedAt())
-                .updatedAt(feedback.getUpdatedAt())
+                .id(codeFeedback.getId())
+                .memberId(codeFeedback.getMember().getId())
+                .createdAt(codeFeedback.getCreatedAt())
+                .updatedAt(codeFeedback.getUpdatedAt())
                 .build();
     }
 
 
-    public static ReadCodeFeedbackResponseDTO toReadCodeFeedbackResponseDTO(Feedback feedback) {
+    public static ReadCodeFeedbackResponseDTO toReadCodeFeedbackResponseDTO(CodeFeedback codeFeedback) {
         return ReadCodeFeedbackResponseDTO.builder()
-                .id(feedback.getId())
-                .title(feedback.getTitle())
-                .content(feedback.getContent())
-                .memberName(feedback.getMember().getNickname())
+                .id(codeFeedback.getId())
+                .title(codeFeedback.getTitle())
+                .content(codeFeedback.getContent())
+                .memberName(codeFeedback.getMember().getNickname())
+                .imageUrls(codeFeedback.getImages().stream()
+                        .map(image -> image.getImageUrl())
+                        .collect(Collectors.toList()))
+                .fileUrls(codeFeedback.getFiles().stream()
+                        .map(file -> file.getFileUrl())
+                        .collect(Collectors.toList()))
                 .build();
     }
 
 
-    public static ReadCodeFeedbackListResponseDTO toReadCodeFeedbackListResponseDTO(Page<Feedback> feedbackPage) {
-        List<ReadCodeFeedbackResponseDTO> feedbackList = feedbackPage.getContent().stream()
+    public static ReadCodeFeedbackListResponseDTO toReadCodeFeedbackListResponseDTO(Page<CodeFeedback> feedbackPage) {
+        List<ReadCodeFeedbackResponseDTO> codeFeedbackList = feedbackPage.getContent().stream()
                 .map(CodeFeedbackConverter::toReadCodeFeedbackResponseDTO)
                 .collect(Collectors.toList());
 
         return ReadCodeFeedbackListResponseDTO.builder()
-                .codeFeedbackList(feedbackList)
+                .codeFeedbackList(codeFeedbackList)
                 .totalPages(feedbackPage.getTotalPages())
                 .build();
     }

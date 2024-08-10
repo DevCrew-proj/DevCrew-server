@@ -7,17 +7,16 @@ import lombok.*;
 
 import java.util.List;
 
-
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class CodeFeedback extends BaseTimeEntity {
+public class PlanFeedback extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;    // 대표 키
+    private Long id;
 
     @Column(nullable = false, length = 50)
     private String title;   // 게시글 제목
@@ -28,20 +27,15 @@ public class CodeFeedback extends BaseTimeEntity {
     @Column(nullable = true, length = 255)
     private String fileUrl; // 첨부 파일 링크
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "language", nullable = true, length = 20)
-    private Language language;      // 코드 리뷰 관련 태그(JAVA, JS, Kotlin, Python, Swift, C, 기타)
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @OneToMany(mappedBy = "codeFeedback", cascade = CascadeType.ALL)
-    private List<CodeFeedbackFile> files;  // 파일 URL 리스트
+    @OneToMany(mappedBy = "planFeedback", cascade = CascadeType.ALL)
+    private List<PlanFeedbackFile> files;  // 파일 URL 리스트
 
-    @OneToMany(mappedBy = "codeFeedback", cascade = CascadeType.ALL)
-    private List<CodeFeedbackImage> images; // 이미지 URL 리스트
+    @OneToMany(mappedBy = "planFeedback", cascade = CascadeType.ALL)
+    private List<PlanFeedbackImage> images; // 이미지 URL 리스트
 
 
 }
-

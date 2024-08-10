@@ -4,6 +4,8 @@ import com.example.devcrew.domain.feedback.entity.Language;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 public class CreateCodeFeedbackRequestDTO {
 
@@ -15,5 +17,7 @@ public class CreateCodeFeedbackRequestDTO {
 
     private Language language;    // 코드 태그
 
-    private String fileUrl;  // 첨부 파일 리스트
+    private List<String> fileUrls;  // 첨부 파일 리스트
+
+    private List<String> imageUrls; // 첨부 이미지 리스트
 }

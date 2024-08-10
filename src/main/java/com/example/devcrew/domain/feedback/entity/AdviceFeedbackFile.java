@@ -6,19 +6,18 @@ import lombok.*;
 
 @Entity
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class FeedbackImage extends BaseTimeEntity {
+@AllArgsConstructor
+@Builder
+public class AdviceFeedbackFile extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;    // 대표 키
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "feedback_id", nullable = false)
-    private Feedback feedback;  // 피드백(게시글) 외래 키
+    @JoinColumn(name = "advice_feedback_id", nullable = false)
+    private AdviceFeedback adviceFeedback;  // 피드백(게시글) 외래 키
 
     @Column(nullable = true, length = 255)
-    private String imageUrl;    // 이미지 URL
-
+    private String fileUrl;    // 파일 URL
 }
