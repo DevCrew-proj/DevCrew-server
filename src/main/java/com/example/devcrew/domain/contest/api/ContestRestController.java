@@ -43,7 +43,7 @@ public class ContestRestController {
     }
 
 
-    @GetMapping("/contests")
+    @GetMapping("/")
     @Operation(summary = "공모전 전체 및 섹터별 조회", description = "공모전을 페이지별로 조회합니다. 섹터를 지정하면 해당 섹터의 공모전만 조회합니다. 페이지는 0부터 시작합니다.")
     @Parameters({
             @Parameter(name = "order", description = "기본적으로 desc(내림차순) 상태이며 desc로 입력되지 않으면 Asc(오름차순) 상태가 됩니다."),
