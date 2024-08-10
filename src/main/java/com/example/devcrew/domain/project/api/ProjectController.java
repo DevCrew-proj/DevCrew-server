@@ -1,7 +1,6 @@
 package com.example.devcrew.domain.project.api;
 
 
-import com.example.devcrew.domain.member.dto.request.PostMemberProfileRequest;
 import com.example.devcrew.domain.project.dto.request.PostProjectRequest;
 import com.example.devcrew.domain.project.dto.response.GetOneProjectResponse;
 import com.example.devcrew.domain.project.dto.response.GetProjectsListResponse;
@@ -11,10 +10,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,8 +32,10 @@ public class ProjectController {
 
     @Operation(summary = "참여 프로젝트들 조회")
     @GetMapping()
-    public ResponseEntity<GetProjectsListResponse> getProjects(){
-        return ResponseEntity.ok(projectService.getProjects());
+    public ResponseEntity<GetProjectsListResponse> getProjects(@RequestParam(defaultValue = "1") int page,
+                                                               @RequestParam(defaultValue = "9") int size){
+        Pageable pageable = PageRequest.of(page - 1, size);
+        return ResponseEntity.ok(projectService.getProjects(pageable));
     }
 
 
