@@ -15,7 +15,6 @@ public interface ProjectRepository extends JpaRepository<Project,Long> {
 
     @Query("SELECT p FROM Project p LEFT JOIN FETCH p.projectImages WHERE p.member = :member ORDER BY p.id DESC")
     Page<Project> findProjectsWithImagesByMember(@Param("member") Member member, Pageable pageable);
-//    Optional<List<Project>> findProjectsWithImagesByMember(@Param("member") Member member);
 
     @Query("SELECT p FROM Project p LEFT JOIN FETCH p.projectImages WHERE p.id = :projectId  ORDER BY p.id DESC")
     Optional<Project> findRecruitWithImagesById(@Param("projectId") Long projectId);
