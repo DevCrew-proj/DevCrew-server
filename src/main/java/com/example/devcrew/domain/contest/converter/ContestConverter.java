@@ -7,15 +7,21 @@ import com.example.devcrew.domain.contest.dto.response.GetContestOneResponseDTO;
 import com.example.devcrew.domain.contest.dto.response.GetTeamInfoOneResponseDTO;
 import com.example.devcrew.domain.contest.entity.Contest;
 import com.example.devcrew.domain.contest.entity.Sector;
+import com.example.devcrew.domain.contest.exception.AcceptancePeriodInvalidException;
 import com.example.devcrew.domain.member.entity.CompanyMember;
 import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.domain.team.entity.Team;
+import com.example.devcrew.global.error.ErrorCode;
+import com.example.devcrew.global.error.exception.BusinessException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ContestConverter {
@@ -31,6 +37,8 @@ public class ContestConverter {
     }
 
     public static Contest toContest(CreateContestRequestDTO requestDTO, Member member) {
+        String acceptancePeriod = requestDTO.getAcceptancePeriod();
+        validateAcceptancePeriod(acceptancePeriod);
 
         return Contest.builder()
                 .posterUrl(requestDTO.getPoster())
@@ -39,13 +47,32 @@ public class ContestConverter {
                 .participantTarget(requestDTO.getParticipantTarget())
                 .award(requestDTO.getAward())
                 .homepageUrl(requestDTO.getHomepageUrl())
-                .acceptancePeriod(requestDTO.getAcceptancePeriod())
+                .acceptancePeriod(acceptancePeriod)
                 .sector(requestDTO.getSector())
                 .benefits(requestDTO.getBenefits())
                 .plusBenefits(requestDTO.getPlusBenefits())
                 .description(requestDTO.getDescription())
                 .member(member)
                 .build();
+    }
+
+    // 공모전 기간 입력형식 검사
+    private static void validateAcceptancePeriod(String acceptancePeriod) {
+        String pattern = "^\\d{4}-\\d{2}-\\d{2} ~ \\d{4}-\\d{2}-\\d{2}$";
+        if (!Pattern.matches(pattern, acceptancePeriod)) {
+            throw new AcceptancePeriodInvalidException();
+        }
+
+        String[] dates = acceptancePeriod.split(" ~ ");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+
+        try {
+            dateFormat.parse(dates[0]);
+            dateFormat.parse(dates[1]);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException("Invalid date format in acceptance period");
+        }
     }
 
 
@@ -74,6 +101,10 @@ public class ContestConverter {
     public static GetContestDetailResponseDTO toGetContestDetailResponseDTO(Contest contest, Member member) {
 
         String[] periods = contest.getAcceptancePeriod().split(" ~ ");
+        if (periods.length != 2) {
+            throw new BusinessException(ErrorCode.INVALID_ACCEPTANCE_PERIOD);
+        }
+
         LocalDate endDate = LocalDate.parse(periods[1], DATE_FORMATTER);
 
         // 공모전 남은기간 계산

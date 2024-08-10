@@ -5,6 +5,7 @@ import com.example.devcrew.domain.contest.dto.request.CreateContestRequestDTO;
 import com.example.devcrew.domain.contest.entity.Contest;
 import com.example.devcrew.domain.contest.repository.ContestRepository;
 import com.example.devcrew.domain.member.entity.Member;
+import com.example.devcrew.domain.member.entity.Role;
 import com.example.devcrew.domain.member.repository.MemberRepository;
 import com.example.devcrew.global.error.ErrorCode;
 import com.example.devcrew.global.error.exception.BusinessException;
@@ -29,6 +30,11 @@ public class ContestCommandServiceImpl implements ContestCommandService {
 
         if (member == null) {
             throw new BusinessException(ErrorCode.MEMBER_NOT_FOUND_ERROR);
+        }
+
+        Role role = member.getRole();
+        if (role != Role.COMPANY_USER && role != Role.ADMIN) {
+            throw new BusinessException(ErrorCode.NOT_COMPANY_USER_ERROR);
         }
 
         Contest newContest = ContestConverter.toContest(request, member);
