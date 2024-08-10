@@ -38,7 +38,8 @@ public class ContestRestController {
     public ResponseEntity<CreateContestResponseDTO> createContest(@RequestBody @Valid CreateContestRequestDTO request) {
         Contest contest = contestCommandService.createContestsByMember(request);
         CreateContestResponseDTO response = ContestConverter.toCreateContestResponseDTO(contest);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+//        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return ResponseEntity.ok(response);
     }
 
 
@@ -56,7 +57,8 @@ public class ContestRestController {
             @RequestParam(value = "order", defaultValue = "desc") String order) {
 
         GetContestListResponseDTO response = contestQueryService.getContests(sector, page, size, sort, order);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+        return ResponseEntity.ok(response);
     }
 
 
@@ -67,7 +69,8 @@ public class ContestRestController {
     })
     public ResponseEntity<GetContestDetailResponseDTO> getContestDetail(@PathVariable Long contestId) {
         GetContestDetailResponseDTO contestDetail = contestQueryService.findContestDetailById(contestId);
-        return new ResponseEntity<>(contestDetail, HttpStatus.OK);
+//        return new ResponseEntity<>(contestDetail, HttpStatus.OK);
+        return ResponseEntity.ok(contestDetail);
     }
 
 
@@ -78,7 +81,8 @@ public class ContestRestController {
     })
     public ResponseEntity<GetTeamInfoListResponseDTO> getTeamsInContest(@PathVariable Long contestId) {
         GetTeamInfoListResponseDTO teamInfoList = contestQueryService.findTeamsInContest(contestId);
-        return new ResponseEntity<>(teamInfoList, HttpStatus.OK);
+//        return new ResponseEntity<>(teamInfoList, HttpStatus.OK);
+        return ResponseEntity.ok(teamInfoList);
     }
 
 }
