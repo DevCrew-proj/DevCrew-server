@@ -21,12 +21,16 @@ public class Project extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String projectName;
 
+    @Column(nullable = false)
     private String teamName;
 
+    @Column(nullable = false)
     private String period;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private ProjectTag projectTag;
@@ -35,6 +39,7 @@ public class Project extends BaseTimeEntity {
 
     private String role;
 
+    @Column(nullable = false)
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<ProjectImage> projectImages;
 
