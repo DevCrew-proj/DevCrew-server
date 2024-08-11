@@ -20,6 +20,8 @@ import com.example.devcrew.domain.feedback.dto.response.planfeedback.ReadPlanFee
 import com.example.devcrew.domain.feedback.entity.*;
 import com.example.devcrew.domain.feedback.service.*;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -62,6 +64,9 @@ public class FeedbackController {
 
     @GetMapping("/advices")
     @Operation(summary = "현직자 조언 게시글 목록 조회 API")
+    @Parameters({
+            @Parameter(name = "page", description = "페이지 번호, 0번이 1 페이지 입니다."),
+    })
     public ResponseEntity<ReadAdviceFeedbackListResponseDTO> readAdviceFeedbackList(
             @RequestParam FeedbackTag feedbackTag,
             @RequestParam int page) {
@@ -92,6 +97,9 @@ public class FeedbackController {
 
     @GetMapping("/codes")
     @Operation(summary = "코드 리뷰 게시글 목록 조회 API")
+    @Parameters({
+            @Parameter(name = "page", description = "페이지 번호, 0번이 1 페이지 입니다."),
+    })
     public ResponseEntity<ReadCodeFeedbackListResponseDTO> readCodeFeedbackList(
             @RequestParam Language language,
             @RequestParam int page) {
@@ -119,6 +127,9 @@ public class FeedbackController {
 
     @GetMapping("/plans")
     @Operation(summary = "기획 피드백 게시글 목록 조회 API")
+    @Parameters({
+            @Parameter(name = "page", description = "페이지 번호, 0번이 1 페이지 입니다."),
+    })
     public ResponseEntity<ReadPlanFeedbackListResponseDTO> readPlanFeedbackList(
             @RequestParam int page) {
 
@@ -147,6 +158,9 @@ public class FeedbackController {
 
     @GetMapping("/designs")
     @Operation(summary = "디자인 피드백 게시글 목록 조회 API")
+    @Parameters({
+            @Parameter(name = "page", description = "페이지 번호, 0번이 1 페이지 입니다."),
+    })
     public ResponseEntity<ReadDesignFeedbackListResponseDTO> readDesignFeedbackList(
             @RequestParam int page) {
 
