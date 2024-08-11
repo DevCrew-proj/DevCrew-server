@@ -15,7 +15,7 @@ public class PostProjectRequest {
 
     private String teamName;
 
-    private String period;
+    private String duration;
 
     private ProjectTag projectTag;
 

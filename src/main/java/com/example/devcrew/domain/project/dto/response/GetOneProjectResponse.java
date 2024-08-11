@@ -21,7 +21,7 @@ public class GetOneProjectResponse {
     private ProjectTag tag;
     private String summary;
     private String teamName;
-    private String period;
+    private String duration;
 
     public static GetOneProjectResponse of(Project project,List<String> images){
         return GetOneProjectResponse.builder()
@@ -31,7 +31,7 @@ public class GetOneProjectResponse {
                 .tag(project.getProjectTag())
                 .summary(project.getSummary())
                 .teamName(project.getTeamName())
-                .period(project.getPeriod())
+                .duration(project.getDuration())
                 .build();
     }
 
