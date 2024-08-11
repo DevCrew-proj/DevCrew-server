@@ -24,7 +24,7 @@ public class ProjectController {
 
     private final ProjectService projectService;
 
-    @Operation(summary = "참여 프로젝트 업로드")
+    @Operation(summary = "참여 프로젝트 업로드",description = " STARTUP,GENERATIVE_AI,PLATFORM,GAME,OTHERS")
     @PostMapping()
     public ResponseEntity<PostProjectResponse> postProject(@RequestBody @Valid PostProjectRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(projectService.postProject(request));

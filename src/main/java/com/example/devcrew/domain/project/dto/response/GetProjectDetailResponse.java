@@ -23,7 +23,7 @@ public class GetProjectDetailResponse {
 
     private String role;
 
-    private String period;
+    private String duration;
 
     public static GetProjectDetailResponse from (Project project){
         return GetProjectDetailResponse.builder()
@@ -33,7 +33,7 @@ public class GetProjectDetailResponse {
                 .summary(project.getSummary())
                 .teamName(project.getTeamName())
                 .role(project.getRole())
-                .period(project.getPeriod())
+                .duration(project.getDuration())
                 .build();
     }
 }

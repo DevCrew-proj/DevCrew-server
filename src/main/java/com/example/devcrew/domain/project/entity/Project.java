@@ -28,7 +28,7 @@ public class Project extends BaseTimeEntity {
     private String teamName;
 
     @Column(nullable = false)
-    private String period;
+    private String duration;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -53,7 +53,7 @@ public class Project extends BaseTimeEntity {
         return Project.builder()
                 .projectName(request.getProjectName())
                 .teamName(request.getTeamName())
-                .period(request.getPeriod())
+                .duration(request.getDuration())
                 .projectTag(request.getProjectTag())
                 .summary(request.getSummary())
                 .role(request.getRole())

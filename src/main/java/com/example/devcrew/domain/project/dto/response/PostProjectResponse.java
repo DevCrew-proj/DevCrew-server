@@ -25,7 +25,7 @@ public class PostProjectResponse {
 
     private String teamName;
 
-    private String period;
+    private String duration;
 
     private ProjectTag projectTag;
 
@@ -39,7 +39,7 @@ public class PostProjectResponse {
                 .projectName(project.getProjectName())
                 .images(images)
                 .teamName(project.getTeamName())
-                .period(project.getPeriod())
+                .duration(project.getDuration())
                 .projectTag(project.getProjectTag())
                 .summary(project.getSummary())
                 .role(project.getRole())
