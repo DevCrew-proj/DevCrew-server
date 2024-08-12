@@ -13,4 +13,5 @@ import java.util.List;
 @NoArgsConstructor
 public class GetCommentResponseDTO {
     private List<SingleCommentResponseDTO> comments;
+    private int totalPages;
 }

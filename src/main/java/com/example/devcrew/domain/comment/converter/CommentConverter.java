@@ -85,7 +85,7 @@ public class CommentConverter {
                 .build();
     }
 
-    public static GetCommentResponseDTO toGetCodeCommentResponseDTO(List<CodeComment> comments) {
+    public static GetCommentResponseDTO toGetCodeCommentResponseDTO(List<CodeComment> comments, int totalPages) {
         List<SingleCommentResponseDTO> commentsDTO = comments.stream()
                 .map(comment -> SingleCommentResponseDTO.builder()
                         .id(comment.getId())
@@ -98,10 +98,11 @@ public class CommentConverter {
 
         return GetCommentResponseDTO.builder().
                 comments(commentsDTO)
+                .totalPages(totalPages)
                 .build();
     }
 
-    public static GetCommentResponseDTO toGetAdviceCommentResponseDTO(List<AdviceComment> comments) {
+    public static GetCommentResponseDTO toGetAdviceCommentResponseDTO(List<AdviceComment> comments, int totalPages) {
         List<SingleCommentResponseDTO> commentsDTO = comments.stream()
                 .map(comment -> SingleCommentResponseDTO.builder()
                         .id(comment.getId())
@@ -112,12 +113,13 @@ public class CommentConverter {
                         .build())
                 .collect(Collectors.toList());
 
-        return GetCommentResponseDTO.builder().
-                comments(commentsDTO)
+        return GetCommentResponseDTO.builder()
+                .comments(commentsDTO)
+                .totalPages(totalPages)
                 .build();
     }
 
-    public static GetCommentResponseDTO toGetDesignCommentResponseDTO(List<DesignComment> comments) {
+    public static GetCommentResponseDTO toGetDesignCommentResponseDTO(List<DesignComment> comments, int totalPages) {
         List<SingleCommentResponseDTO> commentsDTO = comments.stream()
                 .map(comment -> SingleCommentResponseDTO.builder()
                         .id(comment.getId())
@@ -130,10 +132,11 @@ public class CommentConverter {
 
         return GetCommentResponseDTO.builder().
                 comments(commentsDTO)
+                .totalPages(totalPages)
                 .build();
     }
 
-    public static GetCommentResponseDTO toGetPlanCommentResponseDTO(List<PlanComment> comments) {
+    public static GetCommentResponseDTO toGetPlanCommentResponseDTO(List<PlanComment> comments, int totalPages) {
         List<SingleCommentResponseDTO> commentsDTO = comments.stream()
                 .map(comment -> SingleCommentResponseDTO.builder()
                         .id(comment.getId())
@@ -146,6 +149,7 @@ public class CommentConverter {
 
         return GetCommentResponseDTO.builder().
                 comments(commentsDTO)
+                .totalPages(totalPages)
                 .build();
     }
 

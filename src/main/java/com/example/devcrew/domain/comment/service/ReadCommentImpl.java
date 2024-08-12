@@ -9,6 +9,8 @@ import com.example.devcrew.domain.comment.repository.CodeCommentRepository;
 import com.example.devcrew.domain.comment.repository.DesignCommentRepository;
 import com.example.devcrew.domain.comment.repository.PlanCommentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,23 +26,27 @@ public class ReadCommentImpl {
     private final PlanCommentRepository planCommentRepository;
 
     @Transactional
-    public List<CodeComment> getCodeComments(Long feedbackId) {
-        return codeCommentRepository.findByCodeFeedback_Id(feedbackId);
+    public Page<CodeComment> getCodeComments(Long feedbackId, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return codeCommentRepository.findByCodeFeedback_Id(feedbackId, pageRequest);
     }
 
     @Transactional
-    public List<AdviceComment> getAdviceComments(Long feedbackId) {
-        return adviceCommentRepository.findByAdviceFeedback_Id(feedbackId);
+    public Page<AdviceComment> getAdviceComments(Long feedbackId, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return adviceCommentRepository.findByAdviceFeedback_Id(feedbackId, pageRequest);
     }
 
     @Transactional
-    public List<DesignComment> getDesignComments(Long feedbackId) {
-        return designCommentRepository.findByDesignFeedback_Id(feedbackId);
+    public Page<DesignComment> getDesignComments(Long feedbackId, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return designCommentRepository.findByDesignFeedback_Id(feedbackId, pageRequest);
     }
 
     @Transactional
-    public List<PlanComment> getPlanComments(Long feedbackId) {
-        return planCommentRepository.findByPlanFeedback_Id(feedbackId);
+    public Page<PlanComment> getPlanComments(Long feedbackId, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return planCommentRepository.findByPlanFeedback_Id(feedbackId, pageRequest);
     }
 
 
