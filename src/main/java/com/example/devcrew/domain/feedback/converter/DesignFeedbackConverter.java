@@ -35,9 +35,11 @@ public class DesignFeedbackConverter {
     public static ReadDesignFeedbackResponseDTO toReadDesignFeedbackResponseDTO(DesignFeedback designFeedback){
         return ReadDesignFeedbackResponseDTO.builder()
                 .id(designFeedback.getId())
+                .memberId(designFeedback.getMember().getId())
                 .title(designFeedback.getTitle())
                 .content(designFeedback.getContent())
                 .memberName(designFeedback.getMember().getNickname())
+                .memberImageUrl(designFeedback.getMember().getImageUrl())
                 .imageUrls(designFeedback.getImages().stream()
                         .map(image -> image.getImageUrl())
                         .collect(Collectors.toList()))
