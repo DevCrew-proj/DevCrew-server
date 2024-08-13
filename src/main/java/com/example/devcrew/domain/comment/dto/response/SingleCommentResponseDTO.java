@@ -13,7 +13,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class SingleCommentResponseDTO {
     private Long id;
+    private Long feedbackId;
+    private Long memberId;
     private String memberName;
+    private String memberImageUrl;
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
