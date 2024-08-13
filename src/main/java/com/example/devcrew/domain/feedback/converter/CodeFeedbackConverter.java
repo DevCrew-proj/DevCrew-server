@@ -40,9 +40,11 @@ public class CodeFeedbackConverter {
     public static ReadCodeFeedbackResponseDTO toReadCodeFeedbackResponseDTO(CodeFeedback codeFeedback) {
         return ReadCodeFeedbackResponseDTO.builder()
                 .id(codeFeedback.getId())
+                .memberId(codeFeedback.getMember().getId())
                 .title(codeFeedback.getTitle())
                 .content(codeFeedback.getContent())
                 .memberName(codeFeedback.getMember().getNickname())
+                .memberImageUrl(codeFeedback.getMember().getImageUrl())
                 .imageUrls(codeFeedback.getImages().stream()
                         .map(image -> image.getImageUrl())
                         .collect(Collectors.toList()))

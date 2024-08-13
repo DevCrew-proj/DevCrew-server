@@ -39,9 +39,11 @@ public class PlanFeedbackConverter {
     public static ReadPlanFeedbackResponseDTO toReadPlanFeedbackResponseDTO(PlanFeedback planFeedback){
         return ReadPlanFeedbackResponseDTO.builder()
                 .id(planFeedback.getId())
+                .memberId(planFeedback.getMember().getId())
                 .title(planFeedback.getTitle())
                 .content(planFeedback.getContent())
                 .memberName(planFeedback.getMember().getNickname())
+                .memberImageUrl(planFeedback.getMember().getImageUrl())
                 .imageUrls(planFeedback.getImages().stream()
                         .map(image -> image.getImageUrl())
                         .collect(Collectors.toList()))

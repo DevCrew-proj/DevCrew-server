@@ -39,9 +39,11 @@
         public static ReadAdviceFeedbackResponseDTO toReadAdviceFeedbackResponseDTO(AdviceFeedback adviceFeedback) {
             return ReadAdviceFeedbackResponseDTO.builder()
                     .id(adviceFeedback.getId())
+                    .memberId(adviceFeedback.getMember().getId())
                     .title(adviceFeedback.getTitle())
                     .content(adviceFeedback.getContent())
                     .memberName(adviceFeedback.getMember().getNickname())
+                    .memberImageUrl(adviceFeedback.getMember().getImageUrl())
                     .imageUrls(adviceFeedback.getImages().stream()
                             .map(image -> image.getImageUrl())
                             .collect(Collectors.toList()))
