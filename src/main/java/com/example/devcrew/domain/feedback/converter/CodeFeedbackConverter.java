@@ -1,5 +1,6 @@
 package com.example.devcrew.domain.feedback.converter;
 
+import com.example.devcrew.domain.comment.repository.CodeCommentRepository;
 import com.example.devcrew.domain.feedback.dto.request.CreateCodeFeedbackRequestDTO;
 import com.example.devcrew.domain.feedback.dto.response.codefeedback.CreateCodeFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.dto.response.codefeedback.ReadCodeFeedbackListResponseDTO;
@@ -37,7 +38,7 @@ public class CodeFeedbackConverter {
     }
 
 
-    public static ReadCodeFeedbackResponseDTO toReadCodeFeedbackResponseDTO(CodeFeedback codeFeedback) {
+    public static ReadCodeFeedbackResponseDTO toReadCodeFeedbackResponseDTO(CodeFeedback codeFeedback, long commentCount) {
         return ReadCodeFeedbackResponseDTO.builder()
                 .id(codeFeedback.getId())
                 .memberId(codeFeedback.getMember().getId())
@@ -51,13 +52,17 @@ public class CodeFeedbackConverter {
                 .fileUrls(codeFeedback.getFiles().stream()
                         .map(file -> file.getFileUrl())
                         .collect(Collectors.toList()))
+                .commentCount(commentCount)
                 .build();
     }
 
 
-    public static ReadCodeFeedbackListResponseDTO toReadCodeFeedbackListResponseDTO(Page<CodeFeedback> feedbackPage) {
+    public static ReadCodeFeedbackListResponseDTO toReadCodeFeedbackListResponseDTO(Page<CodeFeedback> feedbackPage, CodeCommentRepository codeCommentRepository) {
         List<ReadCodeFeedbackResponseDTO> codeFeedbackList = feedbackPage.getContent().stream()
-                .map(CodeFeedbackConverter::toReadCodeFeedbackResponseDTO)
+                .map(codeFeedback -> {
+                    long commentCount = codeCommentRepository.countByCodeFeedback_Id(codeFeedback.getId());
+                    return toReadCodeFeedbackResponseDTO(codeFeedback, commentCount);
+                })
                 .collect(Collectors.toList());
 
         return ReadCodeFeedbackListResponseDTO.builder()

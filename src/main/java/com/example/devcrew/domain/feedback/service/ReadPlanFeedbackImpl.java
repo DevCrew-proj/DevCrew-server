@@ -31,10 +31,7 @@ public class ReadPlanFeedbackImpl {
 
         long commentCount = planCommentRepository.countByPlanFeedback_Id(planFeedbackId);
 
-        ReadPlanFeedbackResponseDTO responseDTO = PlanFeedbackConverter.toReadPlanFeedbackResponseDTO(planFeedback);
-        responseDTO.setCommentCount(commentCount);
-
-        return responseDTO;
+        return PlanFeedbackConverter.toReadPlanFeedbackResponseDTO(planFeedback, commentCount);
     }
 
     @Transactional
@@ -43,10 +40,6 @@ public class ReadPlanFeedbackImpl {
 
         Page<PlanFeedback> planFeedbackPage = planFeedbackRepository.findAll(pageRequest);
 
-        List<ReadPlanFeedbackResponseDTO> planFeedbackList = planFeedbackPage.getContent().stream()
-                .map(PlanFeedbackConverter::toReadPlanFeedbackResponseDTO)
-                .collect(Collectors.toList());
-
-        return new ReadPlanFeedbackListResponseDTO(planFeedbackList, planFeedbackPage.getTotalPages());
+        return PlanFeedbackConverter.toReadPlanFeedbackListResponseDTO(planFeedbackPage, planCommentRepository);
     }
 }

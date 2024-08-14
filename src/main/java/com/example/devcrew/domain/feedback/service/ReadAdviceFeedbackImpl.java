@@ -32,10 +32,7 @@ public class ReadAdviceFeedbackImpl {
 
         long commentCount = adviceCommentRepository.countByAdviceFeedback_Id(feedbackId);
 
-        ReadAdviceFeedbackResponseDTO responseDTO = AdviceFeedbackConverter.toReadAdviceFeedbackResponseDTO(adviceFeedback);
-        responseDTO.setCommentCount(commentCount);
-
-        return responseDTO;
+        return AdviceFeedbackConverter.toReadAdviceFeedbackResponseDTO(adviceFeedback, commentCount);
     }
 
     @Transactional
@@ -44,11 +41,7 @@ public class ReadAdviceFeedbackImpl {
 
         Page<AdviceFeedback> feedbackPage = adviceFeedbackRepository.findByFeedbackTag(feedbackTag, pageRequest);
 
-        List<ReadAdviceFeedbackResponseDTO> feedbackList = feedbackPage.getContent().stream()
-                .map(AdviceFeedbackConverter::toReadAdviceFeedbackResponseDTO)
-                .collect(Collectors.toList());
-
-        return new ReadAdviceFeedbackListResponseDTO(feedbackList, feedbackPage.getTotalPages());
+        return AdviceFeedbackConverter.toReadAdviceFeedbackListResponseDTO(feedbackPage, adviceCommentRepository);
     }
 
     @Transactional
@@ -57,11 +50,7 @@ public class ReadAdviceFeedbackImpl {
 
         Page<AdviceFeedback> feedbackPage = adviceFeedbackRepository.findAll(pageable);
 
-        List<ReadAdviceFeedbackResponseDTO> feedbackList = feedbackPage.getContent().stream()
-                .map(AdviceFeedbackConverter::toReadAdviceFeedbackResponseDTO)
-                .collect(Collectors.toList());
-
-        return new ReadAdviceFeedbackListResponseDTO(feedbackList, feedbackPage.getTotalPages());
+        return AdviceFeedbackConverter.toReadAdviceFeedbackListResponseDTO(feedbackPage, adviceCommentRepository);
     }
 
 }

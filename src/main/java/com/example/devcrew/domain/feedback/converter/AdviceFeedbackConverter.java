@@ -1,5 +1,6 @@
     package com.example.devcrew.domain.feedback.converter;
 
+    import com.example.devcrew.domain.comment.repository.AdviceCommentRepository;
     import com.example.devcrew.domain.feedback.dto.request.CreateAdviceFeedbackRequestDTO;
     import com.example.devcrew.domain.feedback.dto.response.advicefeedback.CreateAdviceFeedbackResponseDTO;
     import com.example.devcrew.domain.feedback.dto.response.advicefeedback.ReadAdviceFeedbackListResponseDTO;
@@ -36,7 +37,7 @@
         }
 
 
-        public static ReadAdviceFeedbackResponseDTO toReadAdviceFeedbackResponseDTO(AdviceFeedback adviceFeedback) {
+        public static ReadAdviceFeedbackResponseDTO toReadAdviceFeedbackResponseDTO(AdviceFeedback adviceFeedback, long commentCount) {
             return ReadAdviceFeedbackResponseDTO.builder()
                     .id(adviceFeedback.getId())
                     .memberId(adviceFeedback.getMember().getId())
@@ -50,13 +51,17 @@
                     .fileUrls(adviceFeedback.getFiles().stream()
                             .map(file -> file.getFileUrl())
                             .collect(Collectors.toList()))
+                    .commentCount(commentCount)
                     .build();
         }
 
 
-        public static ReadAdviceFeedbackListResponseDTO toReadAdviceFeedbackListResponseDTO(Page<AdviceFeedback> adviceFeedbackPage) {
+        public static ReadAdviceFeedbackListResponseDTO toReadAdviceFeedbackListResponseDTO(Page<AdviceFeedback> adviceFeedbackPage, AdviceCommentRepository adviceCommentRepository) {
             List<ReadAdviceFeedbackResponseDTO> adviceFeedbackList = adviceFeedbackPage.getContent().stream()
-                    .map(AdviceFeedbackConverter::toReadAdviceFeedbackResponseDTO)
+                    .map(adviceFeedback -> {
+                        long commentCount = adviceCommentRepository.countByAdviceFeedback_Id(adviceFeedback.getId());
+                        return toReadAdviceFeedbackResponseDTO(adviceFeedback, commentCount);
+                    })
                     .collect(Collectors.toList());
 
             return ReadAdviceFeedbackListResponseDTO.builder()

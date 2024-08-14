@@ -35,10 +35,7 @@ public class ReadCodeFeedbackImpl {
 
         long commentCount = codeCommentRepository.countByCodeFeedback_Id(feedbackId);
 
-        ReadCodeFeedbackResponseDTO responseDTO = CodeFeedbackConverter.toReadCodeFeedbackResponseDTO(codeFeedback);
-        responseDTO.setCommentCount(commentCount);
-
-        return responseDTO;
+        return CodeFeedbackConverter.toReadCodeFeedbackResponseDTO(codeFeedback, commentCount);
     }
 
     @Transactional
@@ -47,11 +44,7 @@ public class ReadCodeFeedbackImpl {
 
         Page<CodeFeedback> feedbackPage = codeFeedbackRepository.findByLanguage(language, pageRequest);
 
-        List<ReadCodeFeedbackResponseDTO> feedbackList = feedbackPage.getContent().stream()
-                .map(CodeFeedbackConverter::toReadCodeFeedbackResponseDTO)
-                .collect(Collectors.toList());
-
-        return new ReadCodeFeedbackListResponseDTO(feedbackList, feedbackPage.getTotalPages());
+        return CodeFeedbackConverter.toReadCodeFeedbackListResponseDTO(feedbackPage, codeCommentRepository);
     }
 
     @Transactional
@@ -60,10 +53,6 @@ public class ReadCodeFeedbackImpl {
 
         Page<CodeFeedback> feedbackPage = codeFeedbackRepository.findAll(pageable);
 
-        List<ReadCodeFeedbackResponseDTO> feedbackList = feedbackPage.getContent().stream()
-                .map(CodeFeedbackConverter::toReadCodeFeedbackResponseDTO)
-                .collect(Collectors.toList());
-
-        return new ReadCodeFeedbackListResponseDTO(feedbackList, feedbackPage.getTotalPages());
+        return CodeFeedbackConverter.toReadCodeFeedbackListResponseDTO(feedbackPage, codeCommentRepository);
     }
 }

@@ -31,10 +31,7 @@ public class ReadDesignFeedbackImpl {
 
         long commentCount = designCommentRepository.countByDesignFeedback_Id(designFeedbackId);
 
-        ReadDesignFeedbackResponseDTO responseDTO = DesignFeedbackConverter.toReadDesignFeedbackResponseDTO(designFeedback);
-        responseDTO.setCommentCount(commentCount);
-
-        return responseDTO;
+        return DesignFeedbackConverter.toReadDesignFeedbackResponseDTO(designFeedback, commentCount);
     }
 
     @Transactional
@@ -43,10 +40,6 @@ public class ReadDesignFeedbackImpl {
 
         Page<DesignFeedback> designFeedbackPage = designFeedbackRepository.findAll(pageRequest);
 
-        List<ReadDesignFeedbackResponseDTO> designFeedbackList = designFeedbackPage.getContent().stream()
-                .map(DesignFeedbackConverter::toReadDesignFeedbackResponseDTO)
-                .collect(Collectors.toList());
-
-        return new ReadDesignFeedbackListResponseDTO(designFeedbackList, designFeedbackPage.getTotalPages());
+        return DesignFeedbackConverter.toReadDesignFeedbackListResponseDTO(designFeedbackPage, designCommentRepository);
     }
 }
