@@ -21,4 +21,10 @@ public class ReadCodeFeedbackResponseDTO {
 
     private List<String> imageUrls;
     private List<String> fileUrls;
+
+    private long commnetCount;
+
+    public void setCommnetCount(long commentCount) {
+        this.commnetCount = commentCount;
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.devcrew.domain.feedback.service;
 
+import com.example.devcrew.domain.comment.repository.AdviceCommentRepository;
 import com.example.devcrew.domain.feedback.converter.AdviceFeedbackConverter;
 import com.example.devcrew.domain.feedback.dto.response.advicefeedback.ReadAdviceFeedbackListResponseDTO;
 import com.example.devcrew.domain.feedback.dto.response.advicefeedback.ReadAdviceFeedbackResponseDTO;
@@ -21,13 +22,19 @@ import java.util.stream.Collectors;
 public class ReadAdviceFeedbackImpl {
 
     private final AdviceFeedbackRepository adviceFeedbackRepository;
+    private final AdviceCommentRepository adviceCommentRepository;
 
     @Transactional
     public ReadAdviceFeedbackResponseDTO readAdviceFeedback(Long feedbackId) {
         AdviceFeedback adviceFeedback = adviceFeedbackRepository.findById(feedbackId)
                 .orElseThrow(() -> new RuntimeException("Feedback not found"));
 
-        return AdviceFeedbackConverter.toReadAdviceFeedbackResponseDTO(adviceFeedback);
+        long commentCount = adviceCommentRepository.countByAdviceFeedback_Id(feedbackId);
+
+        ReadAdviceFeedbackResponseDTO responseDTO = AdviceFeedbackConverter.toReadAdviceFeedbackResponseDTO(adviceFeedback);
+        responseDTO.setCommnetCount(commentCount);
+
+        return responseDTO;
     }
 
     @Transactional

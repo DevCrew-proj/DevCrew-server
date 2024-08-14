@@ -1,6 +1,9 @@
 package com.example.devcrew.domain.feedback.service;
 
+import com.example.devcrew.domain.comment.repository.CodeCommentRepository;
+import com.example.devcrew.domain.feedback.converter.AdviceFeedbackConverter;
 import com.example.devcrew.domain.feedback.converter.CodeFeedbackConverter;
+import com.example.devcrew.domain.feedback.dto.response.advicefeedback.ReadAdviceFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.dto.response.codefeedback.ReadCodeFeedbackListResponseDTO;
 import com.example.devcrew.domain.feedback.dto.response.codefeedback.ReadCodeFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.entity.CodeFeedback;
@@ -20,13 +23,19 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class ReadCodeFeedbackImpl {
     private final CodeFeedbackRepository codeFeedbackRepository;
+    private final CodeCommentRepository codeCommentRepository;
 
     @Transactional
     public ReadCodeFeedbackResponseDTO readCodeFeedback(Long feedbackId) {
         CodeFeedback codeFeedback = codeFeedbackRepository.findById(feedbackId)
                 .orElseThrow(() -> new RuntimeException("Feedback not found"));
 
-        return CodeFeedbackConverter.toReadCodeFeedbackResponseDTO(codeFeedback);
+        long commentCount = codeCommentRepository.countByCodeFeedback_Id(feedbackId);
+
+        ReadCodeFeedbackResponseDTO responseDTO = CodeFeedbackConverter.toReadCodeFeedbackResponseDTO(codeFeedback);
+        responseDTO.setCommnetCount(commentCount);
+
+        return responseDTO;
     }
 
     @Transactional
