@@ -22,9 +22,9 @@ public class ReadPlanFeedbackResponseDTO {
     private List<String> imageUrls;
     private List<String> fileUrls;
 
-    private long commnetCount;
+    private long commentCount;
 
-    public void setCommnetCount(long commentCount) {
-        this.commnetCount = commentCount;
+    public void setCommentCount(long commentCount) {
+        this.commentCount = commentCount;
     }
 }

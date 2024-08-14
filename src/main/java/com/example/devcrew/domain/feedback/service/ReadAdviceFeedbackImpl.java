@@ -32,7 +32,7 @@ public class ReadAdviceFeedbackImpl {
         long commentCount = adviceCommentRepository.countByAdviceFeedback_Id(feedbackId);
 
         ReadAdviceFeedbackResponseDTO responseDTO = AdviceFeedbackConverter.toReadAdviceFeedbackResponseDTO(adviceFeedback);
-        responseDTO.setCommnetCount(commentCount);
+        responseDTO.setCommentCount(commentCount);
 
         return responseDTO;
     }

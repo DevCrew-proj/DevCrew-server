@@ -32,7 +32,7 @@ public class ReadDesignFeedbackImpl {
         long commentCount = designCommentRepository.countByDesignFeedback_Id(designFeedbackId);
 
         ReadDesignFeedbackResponseDTO responseDTO = DesignFeedbackConverter.toReadDesignFeedbackResponseDTO(designFeedback);
-        responseDTO.setCommnetCount(commentCount);
+        responseDTO.setCommentCount(commentCount);
 
         return responseDTO;
     }

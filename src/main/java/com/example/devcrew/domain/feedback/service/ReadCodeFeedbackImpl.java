@@ -33,7 +33,7 @@ public class ReadCodeFeedbackImpl {
         long commentCount = codeCommentRepository.countByCodeFeedback_Id(feedbackId);
 
         ReadCodeFeedbackResponseDTO responseDTO = CodeFeedbackConverter.toReadCodeFeedbackResponseDTO(codeFeedback);
-        responseDTO.setCommnetCount(commentCount);
+        responseDTO.setCommentCount(commentCount);
 
         return responseDTO;
     }

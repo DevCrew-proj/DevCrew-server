@@ -32,7 +32,7 @@ public class ReadPlanFeedbackImpl {
         long commentCount = planCommentRepository.countByPlanFeedback_Id(planFeedbackId);
 
         ReadPlanFeedbackResponseDTO responseDTO = PlanFeedbackConverter.toReadPlanFeedbackResponseDTO(planFeedback);
-        responseDTO.setCommnetCount(commentCount);
+        responseDTO.setCommentCount(commentCount);
 
         return responseDTO;
     }
