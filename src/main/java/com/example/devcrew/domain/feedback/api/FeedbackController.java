@@ -75,6 +75,18 @@ public class FeedbackController {
         return ResponseEntity.ok(responseDTO);
     }
 
+    @GetMapping("/advices/all")
+    @Operation(summary = "현직자 조언 전체 게시글 목록 조회 API")
+    @Parameters({
+            @Parameter(name = "page", description = "페이지 번호, 0번이 1 페이지 입니다."),
+    })
+    public ResponseEntity<ReadAdviceFeedbackListResponseDTO> readAllAdviceFeedbackList(
+            @RequestParam int page) {
+
+        ReadAdviceFeedbackListResponseDTO responseDTO = readAdviceFeedbackImpl.readAllAdviceFeedbackList(page);
+        return ResponseEntity.ok(responseDTO);
+    }
+
 
     @PostMapping("/code/create")
     @Operation(summary = "코드 리뷰 게시글 생성 API")
@@ -105,6 +117,18 @@ public class FeedbackController {
             @RequestParam int page) {
 
         ReadCodeFeedbackListResponseDTO responseDTO = readCodeFeedbackImpl.readCodeFeedbackList(language, page);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @GetMapping("/codes/all")
+    @Operation(summary = "코드 리뷰 전체 게시글 목록 조회 API")
+    @Parameters({
+            @Parameter(name = "page", description = "페이지 번호, 0번이 1 페이지 입니다."),
+    })
+    public ResponseEntity<ReadCodeFeedbackListResponseDTO> readAllCodeFeedbackList(
+            @RequestParam int page) {
+
+        ReadCodeFeedbackListResponseDTO responseDTO = readCodeFeedbackImpl.readAllCodeFeedbackList(page);
         return ResponseEntity.ok(responseDTO);
     }
 

@@ -11,4 +11,6 @@ import java.util.List;
 public interface PlanCommentRepository extends JpaRepository<PlanComment, Long> {
     // 특정 게시글의 모든 댓글 조회
     Page<PlanComment> findByPlanFeedback_Id(Long planFeedbackId, Pageable pageable);
+
+    long countByPlanFeedback_Id(Long planFeedbackId);
 }

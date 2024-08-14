@@ -1,5 +1,6 @@
 package com.example.devcrew.domain.feedback.converter;
 
+import com.example.devcrew.domain.comment.repository.DesignCommentRepository;
 import com.example.devcrew.domain.feedback.dto.request.CreateDesignFeedbackRequestDTO;
 import com.example.devcrew.domain.feedback.dto.response.designfeedback.CreateDesignFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.dto.response.designfeedback.ReadDesignFeedbackListResponseDTO;
@@ -32,7 +33,7 @@ public class DesignFeedbackConverter {
                 .build();
     }
 
-    public static ReadDesignFeedbackResponseDTO toReadDesignFeedbackResponseDTO(DesignFeedback designFeedback){
+    public static ReadDesignFeedbackResponseDTO toReadDesignFeedbackResponseDTO(DesignFeedback designFeedback, long commentCount){
         return ReadDesignFeedbackResponseDTO.builder()
                 .id(designFeedback.getId())
                 .memberId(designFeedback.getMember().getId())
@@ -46,12 +47,16 @@ public class DesignFeedbackConverter {
                 .fileUrls(designFeedback.getFiles().stream()
                         .map(file -> file.getFileUrl())
                         .collect(Collectors.toList()))
+                .commentCount(commentCount)
                 .build();
     }
 
-    public static ReadDesignFeedbackListResponseDTO toReadDesignFeedbackListResponseDTO(Page<DesignFeedback> feedbackPage){
+    public static ReadDesignFeedbackListResponseDTO toReadDesignFeedbackListResponseDTO(Page<DesignFeedback> feedbackPage, DesignCommentRepository designCommentRepository) {
         List<ReadDesignFeedbackResponseDTO> designFeedbackList = feedbackPage.getContent().stream()
-                .map(DesignFeedbackConverter::toReadDesignFeedbackResponseDTO)
+                .map(designFeedback -> {
+                    long commentCount = designCommentRepository.countByDesignFeedback_Id(designFeedback.getId());
+                    return toReadDesignFeedbackResponseDTO(designFeedback, commentCount);
+                })
                 .collect(Collectors.toList());
 
         return ReadDesignFeedbackListResponseDTO.builder()

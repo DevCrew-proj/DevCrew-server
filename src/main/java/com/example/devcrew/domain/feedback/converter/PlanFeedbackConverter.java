@@ -1,5 +1,6 @@
 package com.example.devcrew.domain.feedback.converter;
 
+import com.example.devcrew.domain.comment.repository.PlanCommentRepository;
 import com.example.devcrew.domain.feedback.dto.request.CreateDesignFeedbackRequestDTO;
 import com.example.devcrew.domain.feedback.dto.request.CreatePlanFeedbackRequestDTO;
 import com.example.devcrew.domain.feedback.dto.response.designfeedback.CreateDesignFeedbackResponseDTO;
@@ -36,7 +37,7 @@ public class PlanFeedbackConverter {
                 .build();
     }
 
-    public static ReadPlanFeedbackResponseDTO toReadPlanFeedbackResponseDTO(PlanFeedback planFeedback){
+    public static ReadPlanFeedbackResponseDTO toReadPlanFeedbackResponseDTO(PlanFeedback planFeedback, long commentCount){
         return ReadPlanFeedbackResponseDTO.builder()
                 .id(planFeedback.getId())
                 .memberId(planFeedback.getMember().getId())
@@ -50,13 +51,18 @@ public class PlanFeedbackConverter {
                 .fileUrls(planFeedback.getFiles().stream()
                         .map(file -> file.getFileUrl())
                         .collect(Collectors.toList()))
+                .commentCount(commentCount)
                 .build();
     }
 
-    public static ReadPlanFeedbackListResponseDTO toReadPlanFeedbackListResponseDTO(Page<PlanFeedback> feedbackPage){
+    public static ReadPlanFeedbackListResponseDTO toReadPlanFeedbackListResponseDTO(Page<PlanFeedback> feedbackPage, PlanCommentRepository planCommentRepository) {
         List<ReadPlanFeedbackResponseDTO> planFeedbackList = feedbackPage.getContent().stream()
-                .map(PlanFeedbackConverter::toReadPlanFeedbackResponseDTO)
+                .map(planFeedback -> {
+                    long commentCount = planCommentRepository.countByPlanFeedback_Id(planFeedback.getId());
+                    return toReadPlanFeedbackResponseDTO(planFeedback, commentCount);
+                })
                 .collect(Collectors.toList());
+
 
         return ReadPlanFeedbackListResponseDTO.builder()
                 .planFeedbackList(planFeedbackList)

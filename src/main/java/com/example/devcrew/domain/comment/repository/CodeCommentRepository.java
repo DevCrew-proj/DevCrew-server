@@ -10,4 +10,6 @@ import java.util.List;
 public interface CodeCommentRepository extends JpaRepository<CodeComment, Long> {
     // 특정 게시글의 모든 댓글 조회
     Page<CodeComment> findByCodeFeedback_Id(Long codeFeedbackId, Pageable pageable);
+
+    long countByCodeFeedback_Id(Long codeFeedbackId);
 }

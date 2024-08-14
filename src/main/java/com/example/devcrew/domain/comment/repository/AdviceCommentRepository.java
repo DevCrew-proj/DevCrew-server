@@ -11,4 +11,6 @@ import java.util.List;
 public interface AdviceCommentRepository extends JpaRepository<AdviceComment, Long> {
     // 특정 게시글의 모든 댓글 조회
     Page<AdviceComment> findByAdviceFeedback_Id(Long adviceFeedbackId, Pageable pageable);
+
+    long countByAdviceFeedback_Id(Long adviceFeedbackId);
 }
