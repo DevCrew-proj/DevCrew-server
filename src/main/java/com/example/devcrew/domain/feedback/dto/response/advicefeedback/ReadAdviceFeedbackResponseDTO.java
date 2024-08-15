@@ -1,5 +1,6 @@
 package com.example.devcrew.domain.feedback.dto.response.advicefeedback;
 
+import com.example.devcrew.domain.feedback.entity.FeedbackTag;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,6 +24,8 @@ public class ReadAdviceFeedbackResponseDTO {
     private List<String> fileUrls;
 
     private long commentCount;
+
+    private FeedbackTag feedbackTag;
 
     public void setCommentCount(long commentCount) {
         this.commentCount = commentCount;

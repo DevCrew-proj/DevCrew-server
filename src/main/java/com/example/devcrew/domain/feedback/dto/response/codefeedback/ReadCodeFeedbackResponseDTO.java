@@ -1,5 +1,6 @@
 package com.example.devcrew.domain.feedback.dto.response.codefeedback;
 
+import com.example.devcrew.domain.feedback.entity.Language;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,6 +24,8 @@ public class ReadCodeFeedbackResponseDTO {
     private List<String> fileUrls;
 
     private long commentCount;
+
+    private Language language;
 
     public void setCommentCount(long commentCount) {
         this.commentCount = commentCount;
