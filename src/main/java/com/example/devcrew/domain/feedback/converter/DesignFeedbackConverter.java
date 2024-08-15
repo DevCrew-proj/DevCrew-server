@@ -48,6 +48,7 @@ public class DesignFeedbackConverter {
                         .map(file -> file.getFileUrl())
                         .collect(Collectors.toList()))
                 .commentCount(commentCount)
+                .createAt(designFeedback.getCreatedAt())
                 .build();
     }
 

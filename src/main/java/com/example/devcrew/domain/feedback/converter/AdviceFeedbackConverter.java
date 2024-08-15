@@ -53,6 +53,7 @@
                             .collect(Collectors.toList()))
                     .commentCount(commentCount)
                     .feedbackTag(adviceFeedback.getFeedbackTag().getFeedbackTag())
+                    .createAt(adviceFeedback.getCreatedAt())
                     .build();
         }
 

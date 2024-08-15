@@ -52,6 +52,7 @@ public class PlanFeedbackConverter {
                         .map(file -> file.getFileUrl())
                         .collect(Collectors.toList()))
                 .commentCount(commentCount)
+                .createAt(planFeedback.getCreatedAt())
                 .build();
     }
 

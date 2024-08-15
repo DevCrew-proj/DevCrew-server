@@ -54,6 +54,7 @@ public class CodeFeedbackConverter {
                         .collect(Collectors.toList()))
                 .commentCount(commentCount)
                 .language(codeFeedback.getLanguage().getLanguage())
+                .createAt(codeFeedback.getCreatedAt())
                 .build();
     }
 

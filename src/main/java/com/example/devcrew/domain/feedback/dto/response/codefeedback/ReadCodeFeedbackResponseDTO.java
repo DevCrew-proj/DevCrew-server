@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -26,6 +27,8 @@ public class ReadCodeFeedbackResponseDTO {
     private long commentCount;
 
     private String language;
+
+    private LocalDateTime createAt;
 
     public void setCommentCount(long commentCount) {
         this.commentCount = commentCount;
