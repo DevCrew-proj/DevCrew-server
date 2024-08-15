@@ -53,13 +53,14 @@ public class CodeFeedbackConverter {
                         .map(file -> file.getFileUrl())
                         .collect(Collectors.toList()))
                 .commentCount(commentCount)
-                .language(codeFeedback.getLanguage())
+                .language(codeFeedback.getLanguage().getLanguage())
+                .createAt(codeFeedback.getCreatedAt())
                 .build();
     }
 
 
-    public static ReadCodeFeedbackListResponseDTO toReadCodeFeedbackListResponseDTO(Page<CodeFeedback> feedbackPage, CodeCommentRepository codeCommentRepository) {
-        List<ReadCodeFeedbackResponseDTO> codeFeedbackList = feedbackPage.getContent().stream()
+    public static ReadCodeFeedbackListResponseDTO toReadCodeFeedbackListResponseDTO(Page<CodeFeedback> codeFeedbackPage, CodeCommentRepository codeCommentRepository) {
+        List<ReadCodeFeedbackResponseDTO> codeFeedbackList = codeFeedbackPage.getContent().stream()
                 .map(codeFeedback -> {
                     long commentCount = codeCommentRepository.countByCodeFeedback_Id(codeFeedback.getId());
                     return toReadCodeFeedbackResponseDTO(codeFeedback, commentCount);
@@ -68,7 +69,8 @@ public class CodeFeedbackConverter {
 
         return ReadCodeFeedbackListResponseDTO.builder()
                 .codeFeedbackList(codeFeedbackList)
-                .totalPages(feedbackPage.getTotalPages())
+                .totalPages(codeFeedbackPage.getTotalPages())
+                .totalFeedbacks(codeFeedbackPage.getTotalElements())
                 .build();
     }
 }

@@ -52,7 +52,8 @@
                             .map(file -> file.getFileUrl())
                             .collect(Collectors.toList()))
                     .commentCount(commentCount)
-                    .feedbackTag(adviceFeedback.getFeedbackTag())
+                    .feedbackTag(adviceFeedback.getFeedbackTag().getFeedbackTag())
+                    .createAt(adviceFeedback.getCreatedAt())
                     .build();
         }
 
@@ -68,6 +69,7 @@
             return ReadAdviceFeedbackListResponseDTO.builder()
                     .adviceFeedbackList(adviceFeedbackList)
                     .totalPages(adviceFeedbackPage.getTotalPages())
+                    .totalFeedbacks(adviceFeedbackPage.getTotalElements())
                     .build();
         }
     }

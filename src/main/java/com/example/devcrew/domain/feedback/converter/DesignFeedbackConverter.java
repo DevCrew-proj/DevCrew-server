@@ -48,11 +48,12 @@ public class DesignFeedbackConverter {
                         .map(file -> file.getFileUrl())
                         .collect(Collectors.toList()))
                 .commentCount(commentCount)
+                .createAt(designFeedback.getCreatedAt())
                 .build();
     }
 
-    public static ReadDesignFeedbackListResponseDTO toReadDesignFeedbackListResponseDTO(Page<DesignFeedback> feedbackPage, DesignCommentRepository designCommentRepository) {
-        List<ReadDesignFeedbackResponseDTO> designFeedbackList = feedbackPage.getContent().stream()
+    public static ReadDesignFeedbackListResponseDTO toReadDesignFeedbackListResponseDTO(Page<DesignFeedback> designFeedbackPage, DesignCommentRepository designCommentRepository) {
+        List<ReadDesignFeedbackResponseDTO> designFeedbackList = designFeedbackPage.getContent().stream()
                 .map(designFeedback -> {
                     long commentCount = designCommentRepository.countByDesignFeedback_Id(designFeedback.getId());
                     return toReadDesignFeedbackResponseDTO(designFeedback, commentCount);
@@ -61,8 +62,8 @@ public class DesignFeedbackConverter {
 
         return ReadDesignFeedbackListResponseDTO.builder()
                 .designFeedbackList(designFeedbackList)
-
-                .totalPages(feedbackPage.getTotalPages())
+                .totalPages(designFeedbackPage.getTotalPages())
+                .totalFeedbacks(designFeedbackPage.getTotalElements())
                 .build();
     }
 

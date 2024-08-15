@@ -52,11 +52,12 @@ public class PlanFeedbackConverter {
                         .map(file -> file.getFileUrl())
                         .collect(Collectors.toList()))
                 .commentCount(commentCount)
+                .createAt(planFeedback.getCreatedAt())
                 .build();
     }
 
-    public static ReadPlanFeedbackListResponseDTO toReadPlanFeedbackListResponseDTO(Page<PlanFeedback> feedbackPage, PlanCommentRepository planCommentRepository) {
-        List<ReadPlanFeedbackResponseDTO> planFeedbackList = feedbackPage.getContent().stream()
+    public static ReadPlanFeedbackListResponseDTO toReadPlanFeedbackListResponseDTO(Page<PlanFeedback> planFeedbackPage, PlanCommentRepository planCommentRepository) {
+        List<ReadPlanFeedbackResponseDTO> planFeedbackList = planFeedbackPage.getContent().stream()
                 .map(planFeedback -> {
                     long commentCount = planCommentRepository.countByPlanFeedback_Id(planFeedback.getId());
                     return toReadPlanFeedbackResponseDTO(planFeedback, commentCount);
@@ -66,8 +67,8 @@ public class PlanFeedbackConverter {
 
         return ReadPlanFeedbackListResponseDTO.builder()
                 .planFeedbackList(planFeedbackList)
-
-                .totalPages(feedbackPage.getTotalPages())
+                .totalPages(planFeedbackPage.getTotalPages())
+                .totalFeedbacks(planFeedbackPage.getTotalElements())
                 .build();
     }
 }

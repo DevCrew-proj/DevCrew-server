@@ -14,4 +14,5 @@ import java.util.List;
 public class ReadDesignFeedbackListResponseDTO {
     private List<ReadDesignFeedbackResponseDTO> designFeedbackList;
     private int totalPages;
+    private long totalFeedbacks;
 }
