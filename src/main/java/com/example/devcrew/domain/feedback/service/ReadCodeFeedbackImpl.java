@@ -40,7 +40,7 @@ public class ReadCodeFeedbackImpl {
 
     @Transactional
     public ReadCodeFeedbackListResponseDTO readCodeFeedbackList(Language language, int page) {
-        PageRequest pageRequest = PageRequest.of(page, 4);  // 한 페이지에 4개의 게시글
+        PageRequest pageRequest = PageRequest.of(page, 4);
 
         Page<CodeFeedback> feedbackPage = codeFeedbackRepository.findByLanguage(language, pageRequest);
 
@@ -49,7 +49,7 @@ public class ReadCodeFeedbackImpl {
 
     @Transactional
     public ReadCodeFeedbackListResponseDTO readAllCodeFeedbackList(int page) {
-        Pageable pageable = PageRequest.of(page, 4);  // 한 페이지에 4개의 게시글
+        Pageable pageable = PageRequest.of(page, 4);
 
         Page<CodeFeedback> feedbackPage = codeFeedbackRepository.findAll(pageable);
 

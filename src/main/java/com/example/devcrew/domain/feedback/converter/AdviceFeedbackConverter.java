@@ -68,6 +68,7 @@
             return ReadAdviceFeedbackListResponseDTO.builder()
                     .adviceFeedbackList(adviceFeedbackList)
                     .totalPages(adviceFeedbackPage.getTotalPages())
+                    .totalFeedbacks(adviceFeedbackPage.getTotalElements())
                     .build();
         }
     }

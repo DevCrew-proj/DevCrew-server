@@ -46,7 +46,7 @@ public class ReadAdviceFeedbackImpl {
 
     @Transactional
     public ReadAdviceFeedbackListResponseDTO readAllAdviceFeedbackList(int page) {
-        Pageable pageable = PageRequest.of(page, 4);  // 한 페이지에 4개의 게시글
+        Pageable pageable = PageRequest.of(page, 4);
 
         Page<AdviceFeedback> feedbackPage = adviceFeedbackRepository.findAll(pageable);
 
