@@ -52,7 +52,7 @@ public class OAuthAttributes {
                 .email(oauth2UserInfo.getEmail())
                 .nickname(oauth2UserInfo.getNickname())
                 .imageUrl(oauth2UserInfo.getImageUrl())
-                .role(Role.GUEST)
+                .role(Role.NORMAL_USER)
                 .status(Status.ACTIVE)
                 .build();
     }
