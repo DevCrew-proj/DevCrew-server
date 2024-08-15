@@ -53,7 +53,7 @@ public class CodeFeedbackConverter {
                         .map(file -> file.getFileUrl())
                         .collect(Collectors.toList()))
                 .commentCount(commentCount)
-                .language(codeFeedback.getLanguage())
+                .language(codeFeedback.getLanguage().getLanguage())
                 .build();
     }
 

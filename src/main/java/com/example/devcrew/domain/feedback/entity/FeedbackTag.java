@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum FeedbackTag {
     PLAN("기획"),
     DESIGN("디자인"),
-    FRONTEND("Frond-end"),
+    FRONTEND("Front-end"),
     BACKEND("Back-end"),
     OTHER("기타");
 

@@ -52,7 +52,7 @@
                             .map(file -> file.getFileUrl())
                             .collect(Collectors.toList()))
                     .commentCount(commentCount)
-                    .feedbackTag(adviceFeedback.getFeedbackTag())
+                    .feedbackTag(adviceFeedback.getFeedbackTag().getFeedbackTag())
                     .build();
         }
 

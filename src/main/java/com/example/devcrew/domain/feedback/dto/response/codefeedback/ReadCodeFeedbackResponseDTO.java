@@ -25,7 +25,7 @@ public class ReadCodeFeedbackResponseDTO {
 
     private long commentCount;
 
-    private Language language;
+    private String language;
 
     public void setCommentCount(long commentCount) {
         this.commentCount = commentCount;

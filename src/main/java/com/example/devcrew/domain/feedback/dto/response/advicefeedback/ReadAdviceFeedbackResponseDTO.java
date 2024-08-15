@@ -25,7 +25,7 @@ public class ReadAdviceFeedbackResponseDTO {
 
     private long commentCount;
 
-    private FeedbackTag feedbackTag;
+    private String feedbackTag;
 
     public void setCommentCount(long commentCount) {
         this.commentCount = commentCount;
