@@ -25,7 +25,7 @@ public class MemberController {
         memberService.registerDetailCompanyMember(request);
     }
 
-    @Operation(summary = "자기 소개 작성")
+    @Operation(summary = "자기 소개 작성",description = "highschoolStatus=ENROLLMENT(재학),GRADUATION(졸업) & collegeStatus=ENROLLMENT(재학),ON_LEAVE(휴학),GRADUATION(졸업)")
     @PostMapping("/v1/profile")
     public ResponseEntity<PostMemberProfileResponse> postMemberProfile(@RequestBody @Valid PostMemberProfileRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(memberService.postMemberProfile(request));
