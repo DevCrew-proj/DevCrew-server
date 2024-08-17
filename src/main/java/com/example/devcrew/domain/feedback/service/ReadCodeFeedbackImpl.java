@@ -10,6 +10,7 @@ import com.example.devcrew.domain.feedback.dto.response.codefeedback.ReadCodeFee
 import com.example.devcrew.domain.feedback.entity.AdviceFeedback;
 import com.example.devcrew.domain.feedback.entity.CodeFeedback;
 import com.example.devcrew.domain.feedback.entity.Language;
+import com.example.devcrew.domain.feedback.exception.FeedbackNotFoundException;
 import com.example.devcrew.domain.feedback.repository.CodeFeedbackRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,7 +32,7 @@ public class ReadCodeFeedbackImpl {
     @Transactional
     public ReadCodeFeedbackResponseDTO readCodeFeedback(Long feedbackId) {
         CodeFeedback codeFeedback = codeFeedbackRepository.findById(feedbackId)
-                .orElseThrow(() -> new RuntimeException("Feedback not found"));
+                .orElseThrow(FeedbackNotFoundException::new);
 
         long commentCount = codeCommentRepository.countByCodeFeedback_Id(feedbackId);
 

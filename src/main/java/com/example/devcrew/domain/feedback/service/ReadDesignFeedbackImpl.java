@@ -7,6 +7,7 @@ import com.example.devcrew.domain.feedback.dto.response.codefeedback.ReadCodeFee
 import com.example.devcrew.domain.feedback.dto.response.designfeedback.ReadDesignFeedbackListResponseDTO;
 import com.example.devcrew.domain.feedback.dto.response.designfeedback.ReadDesignFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.entity.DesignFeedback;
+import com.example.devcrew.domain.feedback.exception.FeedbackNotFoundException;
 import com.example.devcrew.domain.feedback.repository.DesignFeedbackRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,7 +28,7 @@ public class ReadDesignFeedbackImpl {
     @Transactional
     public ReadDesignFeedbackResponseDTO readDesignFeedback(Long designFeedbackId) {
         DesignFeedback designFeedback = designFeedbackRepository.findById(designFeedbackId)
-                .orElseThrow(() -> new RuntimeException("DesignFeedback not found"));
+                .orElseThrow(FeedbackNotFoundException::new);
 
         long commentCount = designCommentRepository.countByDesignFeedback_Id(designFeedbackId);
 
