@@ -6,6 +6,7 @@ import com.example.devcrew.domain.feedback.dto.response.advicefeedback.ReadAdvic
 import com.example.devcrew.domain.feedback.dto.response.advicefeedback.ReadAdviceFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.entity.AdviceFeedback;
 import com.example.devcrew.domain.feedback.entity.FeedbackTag;
+import com.example.devcrew.domain.feedback.exception.FeedbackNotFoundException;
 import com.example.devcrew.domain.feedback.repository.AdviceFeedbackRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,7 +29,7 @@ public class ReadAdviceFeedbackImpl {
     @Transactional
     public ReadAdviceFeedbackResponseDTO readAdviceFeedback(Long feedbackId) {
         AdviceFeedback adviceFeedback = adviceFeedbackRepository.findById(feedbackId)
-                .orElseThrow(() -> new RuntimeException("Feedback not found"));
+                .orElseThrow(FeedbackNotFoundException::new);
 
         long commentCount = adviceCommentRepository.countByAdviceFeedback_Id(feedbackId);
 

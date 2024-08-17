@@ -8,6 +8,7 @@ import com.example.devcrew.domain.feedback.repository.CodeFeedbackFileRepository
 import com.example.devcrew.domain.feedback.repository.CodeFeedbackImageRepository;
 import com.example.devcrew.domain.feedback.repository.CodeFeedbackRepository;
 import com.example.devcrew.domain.member.entity.Member;
+import com.example.devcrew.domain.member.exception.MemberNotFoundException;
 import com.example.devcrew.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,10 @@ public class CreateCodeFeedbackImpl {
     public CodeFeedback createCodeFeedback(CreateCodeFeedbackRequestDTO request) {
        // 멤버 조회
         Member member = authService.getLoginUser();
+
+        if (member == null) {
+            throw new MemberNotFoundException();
+        }
 
         CodeFeedback codeFeedback = CodeFeedbackConverter.toCodeFeedback(request, member);
 

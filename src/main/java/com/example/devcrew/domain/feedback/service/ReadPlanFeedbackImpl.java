@@ -7,6 +7,7 @@ import com.example.devcrew.domain.feedback.dto.response.designfeedback.ReadDesig
 import com.example.devcrew.domain.feedback.dto.response.planfeedback.ReadPlanFeedbackListResponseDTO;
 import com.example.devcrew.domain.feedback.dto.response.planfeedback.ReadPlanFeedbackResponseDTO;
 import com.example.devcrew.domain.feedback.entity.PlanFeedback;
+import com.example.devcrew.domain.feedback.exception.FeedbackNotFoundException;
 import com.example.devcrew.domain.feedback.repository.PlanFeedbackRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,7 +28,7 @@ public class ReadPlanFeedbackImpl {
     @Transactional
     public ReadPlanFeedbackResponseDTO readPlanFeedback(Long planFeedbackId) {
         PlanFeedback planFeedback = planFeedbackRepository.findById(planFeedbackId)
-                .orElseThrow(() -> new RuntimeException("PlanFeedback not found"));
+                .orElseThrow(FeedbackNotFoundException::new);
 
         long commentCount = planCommentRepository.countByPlanFeedback_Id(planFeedbackId);
 

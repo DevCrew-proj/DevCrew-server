@@ -8,6 +8,7 @@ import com.example.devcrew.domain.feedback.repository.PlanFeedbackFileRepository
 import com.example.devcrew.domain.feedback.repository.PlanFeedbackImageRepository;
 import com.example.devcrew.domain.feedback.repository.PlanFeedbackRepository;
 import com.example.devcrew.domain.member.entity.Member;
+import com.example.devcrew.domain.member.exception.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,10 @@ public class CreatePlanFeedbackImpl {
     @Transactional
     public PlanFeedback createPlanFeedback(CreatePlanFeedbackRequestDTO request) {
         Member member = authService.getLoginUser();
+
+        if (member == null) {
+            throw new MemberNotFoundException();
+        }
 
         PlanFeedback planFeedback = PlanFeedbackConverter.toPlanFeedback(request, member);
 

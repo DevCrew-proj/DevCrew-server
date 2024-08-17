@@ -10,7 +10,7 @@ import com.example.devcrew.domain.feedback.repository.AdviceFeedbackFileReposito
 import com.example.devcrew.domain.feedback.repository.AdviceFeedbackImageRepository;
 import com.example.devcrew.domain.feedback.repository.AdviceFeedbackRepository;
 import com.example.devcrew.domain.member.entity.Member;
-import com.example.devcrew.domain.member.repository.MemberRepository;
+import com.example.devcrew.domain.member.exception.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +31,9 @@ public class CreateAdviceFeedbackImpl {
     public AdviceFeedback createAdviceFeedback(CreateAdviceFeedbackRequestDTO request) {
         // Member 조회
         Member member = authService.getLoginUser();
+        if (member == null) {
+            throw new MemberNotFoundException();
+        }
 
         // Feedback 생성
         AdviceFeedback adviceFeedback = AdviceFeedbackConverter.toAdviceFeedback(request, member);

@@ -7,6 +7,8 @@ import com.example.devcrew.domain.comment.entity.AdviceComment;
 import com.example.devcrew.domain.comment.entity.CodeComment;
 import com.example.devcrew.domain.comment.entity.DesignComment;
 import com.example.devcrew.domain.comment.entity.PlanComment;
+import com.example.devcrew.domain.comment.exception.CommentFeedbackNotFoundException;
+import com.example.devcrew.domain.comment.exception.CommentMemberNotFoundException;
 import com.example.devcrew.domain.comment.repository.AdviceCommentRepository;
 import com.example.devcrew.domain.comment.repository.CodeCommentRepository;
 import com.example.devcrew.domain.comment.repository.DesignCommentRepository;
@@ -20,6 +22,7 @@ import com.example.devcrew.domain.feedback.repository.CodeFeedbackRepository;
 import com.example.devcrew.domain.feedback.repository.DesignFeedbackRepository;
 import com.example.devcrew.domain.feedback.repository.PlanFeedbackRepository;
 import com.example.devcrew.domain.member.entity.Member;
+import com.example.devcrew.domain.member.exception.MemberNotFoundException;
 import com.example.devcrew.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -49,9 +52,10 @@ public class CreateCommentImpl {
     public CodeComment createCodeComment(Long feedbackId, Long memberId, PostCommentRequestDTO request) {
         memberId = authService.getLoginUserId();
 
-        Member member = memberRepository.findById(memberId).orElse(null);
-        CodeFeedback codeFeedback = codeFeedbackRepository.findById(feedbackId).orElse(null);
-
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new CommentMemberNotFoundException());
+        CodeFeedback codeFeedback = codeFeedbackRepository.findById(feedbackId)
+                .orElseThrow(() -> new CommentFeedbackNotFoundException());
         CodeComment codeComment = CommentConverter.toCodeComment(request);
 
         codeComment.setMembertoComment(member);
@@ -64,8 +68,10 @@ public class CreateCommentImpl {
     public AdviceComment createAdviceComment(Long feedbackId, Long memberId, PostCommentRequestDTO request) {
         memberId = authService.getLoginUserId();
 
-        Member member = memberRepository.findById(memberId).orElse(null);
-        AdviceFeedback adviceFeedback = adviceFeedbackRepository.findById(feedbackId).orElse(null);
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new CommentMemberNotFoundException());
+        AdviceFeedback adviceFeedback = adviceFeedbackRepository.findById(feedbackId)
+                .orElseThrow(() -> new CommentFeedbackNotFoundException());
 
         AdviceComment adviceComment = CommentConverter.toAdviceComment(request);
 
@@ -79,8 +85,11 @@ public class CreateCommentImpl {
     public DesignComment createDesignComment(Long feedbackId, Long memberId, PostCommentRequestDTO request) {
         memberId = authService.getLoginUserId();
 
-        Member member = memberRepository.findById(memberId).orElse(null);
-        DesignFeedback designFeedback = designFeedbackRepository.findById(feedbackId).orElse(null);
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new CommentMemberNotFoundException());
+        DesignFeedback designFeedback = designFeedbackRepository.findById(feedbackId)
+                .orElseThrow(() -> new CommentFeedbackNotFoundException());
+
 
         DesignComment designComment = CommentConverter.toDesignComment(request);
 
@@ -94,8 +103,10 @@ public class CreateCommentImpl {
     public PlanComment createPlanComment(Long feedbackId, Long memberId, PostCommentRequestDTO request) {
         memberId = authService.getLoginUserId();
 
-        Member member = memberRepository.findById(memberId).orElse(null);
-        PlanFeedback planFeedback = planFeedbackRepository.findById(feedbackId).orElse(null);
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new CommentMemberNotFoundException());
+        PlanFeedback planFeedback = planFeedbackRepository.findById(feedbackId)
+                .orElseThrow(() -> new CommentFeedbackNotFoundException());
 
         PlanComment planComment = CommentConverter.toPlanComment(request);
 
