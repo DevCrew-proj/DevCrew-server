@@ -34,14 +34,35 @@ public class S3Service {
 
     //presignedUrl을 생성하는 메서드
     private GeneratePresignedUrlRequest getGeneratePresignedUrlRequest(String bucket, String key, String fileExtension) {
-        GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(
-                bucket, key)
+        String contentType;
+        switch (fileExtension.toLowerCase()) {
+            case "png":
+            case "jpg":
+            case "jpeg":
+            case "gif":
+                contentType = "image/" + fileExtension.toLowerCase();
+                break;
+            case "pdf":
+                contentType = "application/pdf";
+                break;
+            case "txt":
+                contentType = "text/plain";
+                break;
+            case "doc":
+            case "docx":
+                contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                break;
+            // 필요한 경우 다른 파일 형식도 추가 가능
+            default:
+                throw new IllegalArgumentException("Unsupported file type: " + fileExtension);
+        }
+
+        GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(bucket, key)
                 .withMethod(HttpMethod.PUT)
                 .withKey(key)
-                .withContentType("image/" + fileExtension)
+                .withContentType(contentType)  // 확장자에 따른 Content-Type 설정
                 .withExpiration(getPreSignedUrlExpiration());
-//        generatePresignedUrlRequest.addRequestParameter(
-//                Headers.S3_CANNED_ACL, CannedAccessControlList.PublicRead.toString());
+
         return generatePresignedUrlRequest;
     }
 
