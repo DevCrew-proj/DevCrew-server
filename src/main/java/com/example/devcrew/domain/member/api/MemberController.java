@@ -2,6 +2,7 @@ package com.example.devcrew.domain.member.api;
 
 import com.example.devcrew.domain.member.dto.request.PostMemberProfileRequest;
 import com.example.devcrew.domain.member.dto.request.UpdateCompanyMemberSignUpRequest;
+import com.example.devcrew.domain.member.dto.response.GetMemberNameResponse;
 import com.example.devcrew.domain.member.dto.response.GetMemberProfileResponse;
 import com.example.devcrew.domain.member.dto.response.PostMemberProfileResponse;
 import com.example.devcrew.domain.member.service.MemberService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
 
+    @Operation(summary = "기업 회원 상세 정보 입력")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/signup-company")
     public void registerDetailCompanyMember(
@@ -35,6 +37,12 @@ public class MemberController {
     @GetMapping("/v1/profile")
     public ResponseEntity<GetMemberProfileResponse> getMemberProfile(){
         return ResponseEntity.ok(memberService.getMemberProfile());
+    }
+
+    @Operation(summary = "회원 이름 조회")
+    @GetMapping("/name")
+    public ResponseEntity<GetMemberNameResponse> getMemberName() {
+        return ResponseEntity.ok(memberService.getMemberName());
     }
 
 }
