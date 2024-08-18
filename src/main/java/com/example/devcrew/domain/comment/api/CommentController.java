@@ -32,10 +32,9 @@ public class CommentController {
     @Operation(summary = "현직자 조언 게시글 댓글 생성 API")
     public ResponseEntity<PostCommentResponseDTO> createAdviceComment(
             @PathVariable Long feedbackID,
-            @RequestBody PostCommentRequestDTO request,
-            @RequestParam Long memberId) {
+            @RequestBody PostCommentRequestDTO request) {
 
-        AdviceComment newComment = createCommentImpl.createAdviceComment(feedbackID, memberId, request);
+        AdviceComment newComment = createCommentImpl.createAdviceComment(feedbackID, request);
         PostCommentResponseDTO responseDTO = CommentConverter.toPostAdviceCommentResponseDTO(newComment);
 
         return ResponseEntity.ok(responseDTO);
@@ -61,10 +60,9 @@ public class CommentController {
     @Operation(summary = "코드 리뷰 게시글 댓글 생성 API")
     public ResponseEntity<PostCommentResponseDTO> createCodeComment(
             @PathVariable Long feedbackID,
-            @RequestBody PostCommentRequestDTO request,
-            @RequestParam Long memberId) {
+            @RequestBody PostCommentRequestDTO request) {
 
-        CodeComment newComment = createCommentImpl.createCodeComment(feedbackID, memberId, request);
+        CodeComment newComment = createCommentImpl.createCodeComment(feedbackID, request);
         PostCommentResponseDTO responseDTO = CommentConverter.toPostCodeCommentResponseDTO(newComment);
 
         return ResponseEntity.ok(responseDTO);
@@ -91,10 +89,9 @@ public class CommentController {
     @Operation(summary = "디자인 피드백 게시글 댓글 생성 API")
     public ResponseEntity<PostCommentResponseDTO> createDesignComment(
             @PathVariable Long feedbackID,
-            @RequestBody PostCommentRequestDTO request,
-            @RequestParam Long memberId) {
+            @RequestBody PostCommentRequestDTO request) {
 
-        DesignComment newComment = createCommentImpl.createDesignComment(feedbackID, memberId, request);
+        DesignComment newComment = createCommentImpl.createDesignComment(feedbackID, request);
         PostCommentResponseDTO responseDTO = CommentConverter.toPostDesignCommentResponseDTO(newComment);
 
         return ResponseEntity.ok(responseDTO);
@@ -119,10 +116,9 @@ public class CommentController {
     @Operation(summary = "기획 피드백 게시글 댓글 생성 API")
     public ResponseEntity<PostCommentResponseDTO> createPlanComment(
             @PathVariable Long feedbackID,
-            @RequestBody PostCommentRequestDTO request,
-            @RequestParam Long memberId) {
+            @RequestBody PostCommentRequestDTO request) {
 
-        PlanComment newComment = createCommentImpl.createPlanComment(feedbackID, memberId, request);
+        PlanComment newComment = createCommentImpl.createPlanComment(feedbackID, request);
         PostCommentResponseDTO responseDTO = CommentConverter.toPostPlanCommentResponseDTO(newComment);
 
         return ResponseEntity.ok(responseDTO);
