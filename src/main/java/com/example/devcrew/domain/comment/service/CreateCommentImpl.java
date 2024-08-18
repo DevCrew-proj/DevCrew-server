@@ -49,8 +49,8 @@ public class CreateCommentImpl {
 
 
     @Transactional
-    public CodeComment createCodeComment(Long feedbackId, Long memberId, PostCommentRequestDTO request) {
-        memberId = authService.getLoginUserId();
+    public CodeComment createCodeComment(Long feedbackId, PostCommentRequestDTO request) {
+        Long memberId = authService.getLoginUserId();
 
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new CommentMemberNotFoundException());
@@ -65,8 +65,8 @@ public class CreateCommentImpl {
     }
 
     @Transactional
-    public AdviceComment createAdviceComment(Long feedbackId, Long memberId, PostCommentRequestDTO request) {
-        memberId = authService.getLoginUserId();
+    public AdviceComment createAdviceComment(Long feedbackId, PostCommentRequestDTO request) {
+        Long memberId = authService.getLoginUserId();
 
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new CommentMemberNotFoundException());
@@ -82,8 +82,8 @@ public class CreateCommentImpl {
     }
 
     @Transactional
-    public DesignComment createDesignComment(Long feedbackId, Long memberId, PostCommentRequestDTO request) {
-        memberId = authService.getLoginUserId();
+    public DesignComment createDesignComment(Long feedbackId, PostCommentRequestDTO request) {
+        Long memberId = authService.getLoginUserId();
 
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new CommentMemberNotFoundException());
@@ -100,8 +100,8 @@ public class CreateCommentImpl {
     }
 
     @Transactional
-    public PlanComment createPlanComment(Long feedbackId, Long memberId, PostCommentRequestDTO request) {
-        memberId = authService.getLoginUserId();
+    public PlanComment createPlanComment(Long feedbackId, PostCommentRequestDTO request) {
+        Long memberId = authService.getLoginUserId();
 
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new CommentMemberNotFoundException());
