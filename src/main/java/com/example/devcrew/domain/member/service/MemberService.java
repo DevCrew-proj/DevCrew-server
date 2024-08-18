@@ -3,6 +3,7 @@ package com.example.devcrew.domain.member.service;
 import com.example.devcrew.domain.auth.service.AuthService;
 import com.example.devcrew.domain.member.dto.request.PostMemberProfileRequest;
 import com.example.devcrew.domain.member.dto.request.UpdateCompanyMemberSignUpRequest;
+import com.example.devcrew.domain.member.dto.response.GetMemberNameResponse;
 import com.example.devcrew.domain.member.dto.response.GetMemberProfileResponse;
 import com.example.devcrew.domain.member.dto.response.PostMemberProfileResponse;
 import com.example.devcrew.domain.member.entity.Member;
@@ -41,6 +42,11 @@ public class MemberService {
 
         return GetMemberProfileResponse.from(member);
 
+    }
+
+    public GetMemberNameResponse getMemberName() {
+        Member member = authService.getLoginUser();
+        return new GetMemberNameResponse(member.getName());
     }
 }
 
