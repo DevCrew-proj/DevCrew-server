@@ -122,7 +122,7 @@ public class ContestConverter {
         CompanyMember companyMember = member.getCompanyMember();
         String ceoName = getCeoName(companyMember);
         String ceoPhoneNum = getContactNumber(companyMember);
-
+        String contactEmail = companyMember.getContactEmail();
 
         return GetContestDetailResponseDTO.builder()
                 .id(contest.getId())
@@ -140,7 +140,7 @@ public class ContestConverter {
                 .description(contest.getDescription())
                 .ceoName(ceoName)
                 .ceoPhoneNum(ceoPhoneNum)
-                .ceoEmail(member.getEmail())
+                .ceoEmail(contactEmail)
                 .build();
     }
 

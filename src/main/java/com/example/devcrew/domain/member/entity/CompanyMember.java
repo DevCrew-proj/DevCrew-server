@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CompanyMember {
     private String contactNumber;
+    private String contactEmail;
     private String responsiblePartyName;
 
     private String companyName;
@@ -20,9 +21,10 @@ public class CompanyMember {
     private CompanySize companySize;
 
     @Builder
-    public CompanyMember(String contactNumber, String responsiblePartyName, String companyName,
+    public CompanyMember(String contactNumber, String contactEmail, String responsiblePartyName, String companyName,
                          String businessRegistrationNumber, String ceoName, CompanySize companySize) {
         this.contactNumber = contactNumber;
+        this.contactEmail = contactEmail;
         this.responsiblePartyName = responsiblePartyName;
         this.companyName = companyName;
         this.businessRegistrationNumber = businessRegistrationNumber;
