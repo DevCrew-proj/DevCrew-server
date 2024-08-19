@@ -12,6 +12,8 @@ public class GetContestListResponseDTO {
 
     private int totalResult;
 
+    private int totalPages;
+
     private List<GetContestOneResponseDTO> contests;
 
 }

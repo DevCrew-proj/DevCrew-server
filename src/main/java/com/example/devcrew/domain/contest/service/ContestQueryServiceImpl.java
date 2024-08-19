@@ -73,7 +73,8 @@ public class ContestQueryServiceImpl implements ContestQueryService{
 
         List<GetContestOneResponseDTO> contests = contestsPage.stream().collect(Collectors.toList());
         return GetContestListResponseDTO.builder()
-                .totalResult((int) contestsPage.getTotalElements())
+                .totalResult((int) contestsPage.getTotalElements()) // 총 결과 수
+                .totalPages(contestsPage.getTotalPages()) // 총 페이지 수 추가
                 .contests(contests)
                 .build();
     }
