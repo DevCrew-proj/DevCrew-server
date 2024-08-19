@@ -12,6 +12,7 @@ import com.example.devcrew.domain.feedback.repository.DesignFeedbackRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +38,7 @@ public class ReadDesignFeedbackImpl {
 
     @Transactional
     public ReadDesignFeedbackListResponseDTO readDesignFeedbackList(int page) {
-        PageRequest pageRequest = PageRequest.of(page, 4);
+        PageRequest pageRequest = PageRequest.of(page, 4, Sort.by(Sort.Direction.DESC, "createdAt"));
 
         Page<DesignFeedback> designFeedbackPage = designFeedbackRepository.findAll(pageRequest);
 
