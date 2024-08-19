@@ -16,11 +16,16 @@ public class GetProjectsListResponse {
 
     private Long memberId;
     private List<GetOneProjectResponse> projectList;
+    private Long totalElements;
+    private int totalPages;
 
-    public static GetProjectsListResponse of(Member member,List<GetOneProjectResponse> projects){
+
+    public static GetProjectsListResponse of(Member member,List<GetOneProjectResponse> projects,Long totalElements,int totalPages){
         return GetProjectsListResponse.builder()
                 .memberId(member.getId())
                 .projectList((projects))
+                .totalElements(totalElements)
+                .totalPages(totalPages)
                 .build();
     }
 

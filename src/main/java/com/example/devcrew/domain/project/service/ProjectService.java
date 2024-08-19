@@ -65,7 +65,10 @@ public class ProjectService {
                 })
                 .collect(Collectors.toList());
 
-        return GetProjectsListResponse.of(member,projectList);
+        int totalPages=projects.getTotalPages();
+        long totalElements=projects.getTotalElements();
+
+        return GetProjectsListResponse.of(member,projectList,totalElements,totalPages);
 
     }
 
