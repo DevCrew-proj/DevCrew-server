@@ -11,6 +11,7 @@ import com.example.devcrew.domain.comment.repository.PlanCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,25 +28,25 @@ public class ReadCommentImpl {
 
     @Transactional
     public Page<CodeComment> getCodeComments(Long feedbackId, int page, int size) {
-        PageRequest pageRequest = PageRequest.of(page, size);
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
         return codeCommentRepository.findByCodeFeedback_Id(feedbackId, pageRequest);
     }
 
     @Transactional
     public Page<AdviceComment> getAdviceComments(Long feedbackId, int page, int size) {
-        PageRequest pageRequest = PageRequest.of(page, size);
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
         return adviceCommentRepository.findByAdviceFeedback_Id(feedbackId, pageRequest);
     }
 
     @Transactional
     public Page<DesignComment> getDesignComments(Long feedbackId, int page, int size) {
-        PageRequest pageRequest = PageRequest.of(page, size);
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
         return designCommentRepository.findByDesignFeedback_Id(feedbackId, pageRequest);
     }
 
     @Transactional
     public Page<PlanComment> getPlanComments(Long feedbackId, int page, int size) {
-        PageRequest pageRequest = PageRequest.of(page, size);
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
         return planCommentRepository.findByPlanFeedback_Id(feedbackId, pageRequest);
     }
 

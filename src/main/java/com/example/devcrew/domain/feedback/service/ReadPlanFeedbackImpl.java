@@ -12,6 +12,7 @@ import com.example.devcrew.domain.feedback.repository.PlanFeedbackRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +38,7 @@ public class ReadPlanFeedbackImpl {
 
     @Transactional
     public ReadPlanFeedbackListResponseDTO readPlanFeedbackList(int page) {
-        PageRequest pageRequest = PageRequest.of(page, 4);
+        PageRequest pageRequest = PageRequest.of(page, 4, Sort.by(Sort.Direction.DESC, "createdAt"));
 
         Page<PlanFeedback> planFeedbackPage = planFeedbackRepository.findAll(pageRequest);
 

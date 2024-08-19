@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,7 +39,7 @@ public class ReadAdviceFeedbackImpl {
 
     @Transactional
     public ReadAdviceFeedbackListResponseDTO readAdviceFeedbackList(FeedbackTag feedbackTag, int page) {
-        PageRequest pageRequest = PageRequest.of(page, 4);
+        PageRequest pageRequest = PageRequest.of(page, 4, Sort.by(Sort.Direction.DESC, "createdAt"));
 
         Page<AdviceFeedback> feedbackPage = adviceFeedbackRepository.findByFeedbackTag(feedbackTag, pageRequest);
 
@@ -47,7 +48,7 @@ public class ReadAdviceFeedbackImpl {
 
     @Transactional
     public ReadAdviceFeedbackListResponseDTO readAllAdviceFeedbackList(int page) {
-        Pageable pageable = PageRequest.of(page, 4);
+        Pageable pageable = PageRequest.of(page, 4, Sort.by(Sort.Direction.DESC, "createdAt"));
 
         Page<AdviceFeedback> feedbackPage = adviceFeedbackRepository.findAll(pageable);
 
