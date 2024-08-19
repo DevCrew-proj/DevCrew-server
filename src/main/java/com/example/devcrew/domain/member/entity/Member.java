@@ -68,13 +68,17 @@ public class Member extends BaseTimeEntity {
         this.role = role;
     }
 
+    public void updateRoleCompanyMember() {
+        this.role = Role.COMPANY_USER;
+    }
+
     public void updateCompanyMember(CompanyMember companyMember) {
         this.companyMember = companyMember;
     }
 
-    public void updateMemberProfile(PostMemberProfileRequest request){
-        this.name=request.getName();
-        this.normalMember=new NormalMember();
+    public void updateMemberProfile(PostMemberProfileRequest request) {
+        this.name = request.getName();
+        this.normalMember = new NormalMember();
         this.normalMember.updateNormalMemberProfile(request);
 
     }

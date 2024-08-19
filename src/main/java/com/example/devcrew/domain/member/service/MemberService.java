@@ -22,7 +22,7 @@ public class MemberService {
     @Transactional
     public void registerDetailCompanyMember(UpdateCompanyMemberSignUpRequest request) {
         final Member member = authService.getLoginUser();
-
+        member.updateRoleCompanyMember();
         member.updateCompanyMember(request.getCompanyMemberEntity());
     }
 
