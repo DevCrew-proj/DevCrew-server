@@ -38,13 +38,12 @@ public class ContestRestController {
     public ResponseEntity<CreateContestResponseDTO> createContest(@RequestBody @Valid CreateContestRequestDTO request) {
         Contest contest = contestCommandService.createContestsByMember(request);
         CreateContestResponseDTO response = ContestConverter.toCreateContestResponseDTO(contest);
-//        return new ResponseEntity<>(response, HttpStatus.CREATED);
         return ResponseEntity.ok(response);
     }
 
 
     @GetMapping("/")
-    @Operation(summary = "공모전 전체 및 섹터별 조회", description = "공모전을 페이지별로 조회합니다. 섹터를 지정하면 해당 섹터의 공모전만 조회합니다. 페이지는 0부터 시작합니다.")
+    @Operation(summary = "공모전 전체 및 섹터별 조회", description = "공모전을 페이지별로 조회합니다. 섹터를 지정하면 해당 섹터의 공모전만 조회합니다. totalResult 전체 결과수, totalPages가 전체 페이지수 입니다.")
     @Parameters({
             @Parameter(name = "order", description = "기본적으로 desc(내림차순) 상태이며 desc로 입력되지 않으면 Asc(오름차순) 상태가 됩니다."),
             @Parameter(name = "page", description = "페이지 번호, 0번이 1 페이지 입니다."),
@@ -57,7 +56,6 @@ public class ContestRestController {
             @RequestParam(value = "order", defaultValue = "desc") String order) {
 
         GetContestListResponseDTO response = contestQueryService.getContests(sector, page, size, sort, order);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
         return ResponseEntity.ok(response);
     }
 
@@ -69,7 +67,6 @@ public class ContestRestController {
     })
     public ResponseEntity<GetContestDetailResponseDTO> getContestDetail(@PathVariable Long contestId) {
         GetContestDetailResponseDTO contestDetail = contestQueryService.findContestDetailById(contestId);
-//        return new ResponseEntity<>(contestDetail, HttpStatus.OK);
         return ResponseEntity.ok(contestDetail);
     }
 
@@ -81,7 +78,6 @@ public class ContestRestController {
     })
     public ResponseEntity<GetTeamInfoListResponseDTO> getTeamsInContest(@PathVariable Long contestId) {
         GetTeamInfoListResponseDTO teamInfoList = contestQueryService.findTeamsInContest(contestId);
-//        return new ResponseEntity<>(teamInfoList, HttpStatus.OK);
         return ResponseEntity.ok(teamInfoList);
     }
 
