@@ -24,7 +24,7 @@ public class CodeComment extends BaseTimeEntity {
     @JoinColumn(name = "codefeedback_id", nullable = false)
     private CodeFeedback codeFeedback;      // 피드백 게시글 외래 키
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;     // 댓글 내용
 
     public void setMembertoComment(Member member) {

@@ -25,7 +25,7 @@ public class AdviceComment extends BaseTimeEntity {
     @JoinColumn(name = "advicefeedback_id", nullable = false)
     private AdviceFeedback adviceFeedback;      // 피드백 게시글 외래 키
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;     // 댓글 내용
 
 
