@@ -44,7 +44,7 @@ public class TeamService {
         Team team = Team.builder()
                 .contest(contest)
                 .member(member)
-                .name(request.getTeamName())
+                .name(request.getName())
                 .password(request.getPassword())
                 .peopleNum(request.getPeopleNum())
                 .serviceName(request.getServiceName())

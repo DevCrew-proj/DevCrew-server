@@ -13,7 +13,7 @@ public class CreateTeamRequestDTO {
     private Long memberId;
 
     @NotNull(message = "팀 이름을 입력해주세요.")
-    private String teamName;
+    private String name;
 
     @NotNull(message = "팀 비밀번호를 입력해주세요.")
     private String password;
@@ -26,6 +26,8 @@ public class CreateTeamRequestDTO {
 
     @NotNull(message = "서비스 기획안 URL을 입력해주세")
     private String planUrl;
+
+    //private String formDevelop;
 
     @NotNull(message = "소요 장비 및 SW를 입력해주세요.")
     private String equipment;
