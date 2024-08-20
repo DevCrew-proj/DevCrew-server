@@ -62,21 +62,20 @@ public class TeamService {
     @Transactional
     public GetMemberInfoResponseDTO GetMemberInfo() {
         Member member = authService.getLoginUser();
-        return new GetMemberInfoResponseDTO(member.getName());
+        String memberName = member.getName();
+        if(memberName == null) {
+            return null;
+        }
+        return new GetMemberInfoResponseDTO(memberName);
     }
 
     @Transactional
     public TeamMatching applyToTeam(ApplyTeamRequestDTO requestDTO) {
-        Team team = teamRepository.findById(requestDTO.getTeamId())
+        //팀명, 팀 패스워드에 일치하는 팀 찾기
+        Team team = teamRepository.findByNameAndPassword(requestDTO.getTeamName(), requestDTO.getTeamPassword())
                 .orElseThrow(TeamNotFoundException::new);
 
-        if( !team.getPassword()
-                .equals(requestDTO.getTeamPassword()) ) {
-            throw new InvalidTeamPasswordException();
-        }
-
         Member member = authService.getLoginUser();
-
 
         TeamMatching teamMatching = TeamMatching.builder()
                 .team(team)
