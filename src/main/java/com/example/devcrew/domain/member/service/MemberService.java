@@ -48,5 +48,6 @@ public class MemberService {
         Member member = authService.getLoginUser();
         return new GetMemberNameResponse(member.getNickname());
     }
+
 }
 
