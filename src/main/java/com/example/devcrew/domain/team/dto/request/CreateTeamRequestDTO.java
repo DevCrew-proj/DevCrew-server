@@ -12,9 +12,6 @@ public class CreateTeamRequestDTO {
     @NotNull(message = "멤버 아이디 필수.")
     private Long memberId;
 
-    @NotNull(message="신청자 정보를 입력해주세요.")
-    private String memberName;
-
     @NotNull(message = "팀 이름을 입력해주세요.")
     private String teamName;
 
@@ -23,9 +20,6 @@ public class CreateTeamRequestDTO {
 
     @NotNull(message = "인원수를 입력해주세요.")
     private Integer peopleNum;
-
-    @NotNull(message = "전화번호를 입력해주세요.")
-    private String phoneNumber;
 
     @NotNull(message = "서비스명을 입력해주세요.")
     private String serviceName;

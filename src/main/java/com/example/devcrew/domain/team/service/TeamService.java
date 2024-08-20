@@ -47,7 +47,6 @@ public class TeamService {
                 .name(request.getTeamName())
                 .password(request.getPassword())
                 .peopleNum(request.getPeopleNum())
-                .phoneNumber(request.getPhoneNumber())
                 .serviceName(request.getServiceName())
                 .planUrl(request.getPlanUrl())
                 .equipment(request.getEquipment())

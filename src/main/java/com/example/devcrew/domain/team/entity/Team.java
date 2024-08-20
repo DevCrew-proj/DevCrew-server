@@ -47,8 +47,6 @@ public class Team extends BaseTimeEntity {
 
     private Integer peopleNum;
 
-    private String phoneNumber;
-
     @Column(length = 30)
     private String serviceName;
 
