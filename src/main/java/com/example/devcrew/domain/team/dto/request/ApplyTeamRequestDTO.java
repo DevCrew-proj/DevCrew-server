@@ -18,7 +18,7 @@ public class ApplyTeamRequestDTO {
 
     private String name;
 
-    private String phoneNumber;
+    //private String phoneNumber;
 
     @NotNull(message = "포트폴리오 URL을 입력해주세요.")
     private String portfolioUrl;
