@@ -6,8 +6,10 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostMemberProfileRequest {
 
@@ -26,4 +28,8 @@ public class PostMemberProfileRequest {
     private HighSchoolStatus highSchoolStatus;
 
     private CollegeStatus collegeStatus;
+
+    private String imageUrl;
+
+    private String userEmail;
 }
