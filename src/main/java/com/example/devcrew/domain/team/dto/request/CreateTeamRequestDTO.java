@@ -9,8 +9,8 @@ public class CreateTeamRequestDTO {
     @NotNull(message = "공모전 아이디 필수.")
     private Long contestId;
 
-    @NotNull(message = "멤버 아이디 필수.")
-    private Long memberId;
+    //@NotNull(message = "멤버 아이디 필수.")
+    //private Long memberId;
 
     @NotNull(message = "팀 이름을 입력해주세요.")
     private String name;

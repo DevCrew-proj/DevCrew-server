@@ -62,7 +62,7 @@ public class TeamService {
     @Transactional
     public GetMemberInfoResponseDTO GetMemberInfo() {
         Member member = authService.getLoginUser();
-        return new GetMemberInfoResponseDTO(member.getName(), member.getNormalMember().getPhoneNumber());
+        return new GetMemberInfoResponseDTO(member.getName());
     }
 
     @Transactional

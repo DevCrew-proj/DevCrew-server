@@ -26,7 +26,7 @@ public class TeamController {
     private final ContestQueryService contestQueryService;
 
     @GetMapping("/create")
-    @Operation(summary = "팀 구성 기능에서 멤버 정보 조회", description = "팀 생성 시 해당 멤버의 이름과 전화번호 반환(자동완성기능).")
+    @Operation(summary = "팀 구성 기능에서 멤버 정보 조회", description = "팀 생성 시 해당 멤버의 이름 반환(자동완성기능).")
     public GetMemberInfoResponseDTO getMemberInfoForCreate() {
         return teamService.GetMemberInfo();
     }
@@ -38,7 +38,7 @@ public class TeamController {
     }
 
     @GetMapping("/apply")
-    @Operation(summary = "팀 신청 기능에서 멤버 정보 조회", description = "팀원 신청서 작성 시 해당 멤버의 이름과 전화번호를 반환(자동완성기능)")
+    @Operation(summary = "팀 신청 기능에서 멤버 정보 조회", description = "팀원 신청서 작성 시 해당 멤버의 이름 반환(자동완성기능)")
     public GetMemberInfoResponseDTO getMemberInfoForApply() {
         return teamService.GetMemberInfo();
     }
