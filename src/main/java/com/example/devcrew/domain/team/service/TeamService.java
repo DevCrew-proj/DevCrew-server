@@ -44,17 +44,16 @@ public class TeamService {
         Team team = Team.builder()
                 .contest(contest)
                 .member(member)
-                .name(request.getName())
+                .name(request.getTeamName())
                 .password(request.getPassword())
                 .peopleNum(request.getPeopleNum())
+                .phoneNumber(request.getPhoneNumber())
                 .serviceName(request.getServiceName())
                 .planUrl(request.getPlanUrl())
                 .equipment(request.getEquipment())
                 .os(request.getOs())
                 .build();
 
-        team.setMember(member);
-        team.setContest(contest);
 
         return teamRepository.save(team);
     }
