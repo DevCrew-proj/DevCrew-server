@@ -44,6 +44,7 @@ public class UpdateCompanyMemberSignUpRequest {
     public CompanyMember getCompanyMemberEntity() {
         return CompanyMember.builder()
                 .contactNumber(contactNumber)
+                .contactEmail(contactEmail)
                 .responsiblePartyName(responsiblePartyName)
                 .companyName(companyName)
                 .businessRegistrationNumber(businessRegistrationNumber)
