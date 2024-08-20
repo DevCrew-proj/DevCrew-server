@@ -26,4 +26,8 @@ public class PostMemberProfileRequest {
     private HighSchoolStatus highSchoolStatus;
 
     private CollegeStatus collegeStatus;
+
+    private String imageUrl;
+
+    private String userEmail;
 }

@@ -78,6 +78,8 @@ public class Member extends BaseTimeEntity {
 
     public void updateMemberProfile(PostMemberProfileRequest request) {
         this.name = request.getName();
+        this.email = request.getUserEmail();
+        this.imageUrl = request.getImageUrl();
         this.normalMember = new NormalMember();
         this.normalMember.updateNormalMemberProfile(request);
 
