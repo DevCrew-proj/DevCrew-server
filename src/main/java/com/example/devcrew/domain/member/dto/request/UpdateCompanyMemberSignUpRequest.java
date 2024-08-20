@@ -32,7 +32,6 @@ public class UpdateCompanyMemberSignUpRequest {
     private String companyName;
 
     @Schema(description = "사업자 등록 번호")
-    @NotBlank(message = "사업자 등록 번호는 필수입니다.")
     private String businessRegistrationNumber;
 
     @Schema(description = "대표자명")
@@ -44,6 +43,7 @@ public class UpdateCompanyMemberSignUpRequest {
     public CompanyMember getCompanyMemberEntity() {
         return CompanyMember.builder()
                 .contactNumber(contactNumber)
+                .contactEmail(contactEmail)
                 .responsiblePartyName(responsiblePartyName)
                 .companyName(companyName)
                 .businessRegistrationNumber(businessRegistrationNumber)
