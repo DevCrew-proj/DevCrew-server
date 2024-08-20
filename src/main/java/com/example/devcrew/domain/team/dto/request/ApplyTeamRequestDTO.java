@@ -9,10 +9,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ApplyTeamRequestDTO {
-    @NotNull(message = "팀 아이디 필수.")
-    private Long teamId;
+    //@NotNull(message = "팀 아이디 필수.")
+    //private Long teamId;
     //@NotNull(message = "멤버 아이디 필수.")
     //private Long memberId;
+
+    @NotNull(message = "팀 이름  필수.")
+    private String teamName;
+
     @NotNull(message = "팀 비밀번호를 입력해주세요.")
     private String teamPassword;
 
