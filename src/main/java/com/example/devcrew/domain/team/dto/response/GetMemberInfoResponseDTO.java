@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 public class GetMemberInfoResponseDTO {
 
     private String name;
-    private String phoneNumber;
 
 }
