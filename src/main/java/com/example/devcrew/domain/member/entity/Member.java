@@ -58,11 +58,6 @@ public class Member extends BaseTimeEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Project> projectList = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-//    private List<Feedback> feedbackList = new ArrayList<>();
-
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-//    private List<CodeComment> commentList = new ArrayList<>();
 
     public void updateRole(Role role) {
         this.role = role;
@@ -83,6 +78,10 @@ public class Member extends BaseTimeEntity {
         this.normalMember = new NormalMember();
         this.normalMember.updateNormalMemberProfile(request);
 
+    }
+
+    public void initializeNormalMember(){
+        this.normalMember = new NormalMember();
     }
 }
 
