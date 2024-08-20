@@ -7,6 +7,7 @@ import com.example.devcrew.domain.member.dto.response.GetMemberNameResponse;
 import com.example.devcrew.domain.member.dto.response.GetMemberProfileResponse;
 import com.example.devcrew.domain.member.dto.response.PostMemberProfileResponse;
 import com.example.devcrew.domain.member.entity.Member;
+import com.example.devcrew.domain.member.entity.NormalMember;
 import com.example.devcrew.domain.member.exception.MemberNotFoundException;
 import com.example.devcrew.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,10 @@ public class MemberService {
     public GetMemberProfileResponse getMemberProfile(){
 
         Member member = authService.getLoginUser();
+
+        if (member.getNormalMember() == null) {
+            member.initializeNormalMember();
+        }
 
         return GetMemberProfileResponse.from(member);
 
