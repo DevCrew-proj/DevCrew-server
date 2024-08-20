@@ -8,6 +8,7 @@ import com.example.devcrew.domain.project.dto.response.GetProjectsListResponse;
 import com.example.devcrew.domain.project.dto.response.PostProjectResponse;
 import com.example.devcrew.domain.project.entity.Project;
 import com.example.devcrew.domain.project.entity.ProjectImage;
+import com.example.devcrew.domain.project.entity.ProjectTag;
 import com.example.devcrew.domain.project.exception.ProjectNotFoundException;
 import com.example.devcrew.domain.project.repository.ProjectImageRepository;
 import com.example.devcrew.domain.project.repository.ProjectRepository;
@@ -71,6 +72,33 @@ public class ProjectService {
         return GetProjectsListResponse.of(member,projectList,totalElements,totalPages);
 
     }
+
+    //프로젝트 테그 별 프로젝트 반환
+    public GetProjectsListResponse getProjectsByTag(Pageable pageable,ProjectTag projectTag){
+
+        Member member = authService.getLoginUser();
+
+        Page<Project> projects=projectRepository.findProjectsByMemberAndProjectTag(member,projectTag,pageable);
+        if (projects.isEmpty()) {
+            throw new BusinessException(ErrorCode.PROJECT_NOT_FOUND_ERROR);
+        }
+
+        List<GetOneProjectResponse> projectList= projects.stream()
+                .map(project -> {
+                    List<String>images=project.getProjectImages().stream()
+                            .map(ProjectImage::getImageUrl)
+                            .collect(Collectors.toList());
+                    return GetOneProjectResponse.of(project,images);
+                })
+                .collect(Collectors.toList());
+
+        int totalPages=projects.getTotalPages();
+        long totalElements=projects.getTotalElements();
+
+        return GetProjectsListResponse.of(member,projectList,totalElements,totalPages);
+
+    }
+
 
 
     //개별 프로젝트 반환
