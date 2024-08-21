@@ -20,7 +20,7 @@ public class PostMemberProfileResponse {
 
     private String name;
 
-    private String email;
+    private String userEmail;
 
     private String imageUrl;
 
@@ -40,7 +40,7 @@ public class PostMemberProfileResponse {
         return  PostMemberProfileResponse.builder()
                 .id(member.getId())
                 .name(member.getName())
-                .email(member.getEmail())
+                .userEmail(member.getNormalMember().getUserEmail())
                 .imageUrl(member.getImageUrl())
                 .phoneNumber(member.getNormalMember().getPhoneNumber())
                 .highSchool(member.getNormalMember().getHighSchool())
