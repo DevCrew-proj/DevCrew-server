@@ -20,6 +20,8 @@ public class NormalMember {
 
     private String phoneNumber;
 
+    private String userEmail;
+
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
@@ -34,6 +36,7 @@ public class NormalMember {
         this.college= request.getCollege();
         this.introduction=request.getIntroduction();
         this.phoneNumber=request.getPhoneNumber();
+        this.userEmail=request.getUserEmail();
         this.gender=request.getGender();
         this.highSchoolStatus=request.getHighSchoolStatus();
         this.collegeStatus=request.getCollegeStatus();
