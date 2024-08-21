@@ -5,6 +5,7 @@ import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.domain.member.entity.NormalMember;
 import com.example.devcrew.global.common.BaseTimeEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -41,6 +42,9 @@ public class Team extends BaseTimeEntity {
 
     @Column(length = 30)
     private String name;
+
+    @Column(length = 30)
+    private String teamName;
 
     @Column(length = 20)
     private String password;
