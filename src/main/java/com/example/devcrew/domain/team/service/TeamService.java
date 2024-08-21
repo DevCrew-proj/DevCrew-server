@@ -10,6 +10,7 @@ import com.example.devcrew.domain.team.dto.request.CreateTeamRequestDTO;
 import com.example.devcrew.domain.team.dto.response.GetMemberInfoResponseDTO;
 import com.example.devcrew.domain.team.entity.Team;
 import com.example.devcrew.domain.team.entity.TeamMatching;
+import com.example.devcrew.domain.team.exception.DuplicateTeamException;
 import com.example.devcrew.domain.team.exception.InvalidTeamPasswordException;
 import com.example.devcrew.domain.team.exception.TeamNotFoundException;
 import com.example.devcrew.domain.team.repository.TeamMatchingRepository;
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +38,11 @@ public class TeamService {
 
     @Transactional
     public Team createTeamsByContestAndMember(CreateTeamRequestDTO request) {
-
+        // Check if a team with the same name and password already exists
+        List<Team> existingTeams = teamRepository.findByNameAndPassword(request.getTeamName(), request.getPassword());
+        if (!existingTeams.isEmpty()) {
+            throw new DuplicateTeamException();
+        }
         Contest contest = contestRepository.findById(request.getContestId())
                 .orElseThrow(ContestNotFoundException::new);
 
@@ -73,8 +80,14 @@ public class TeamService {
     @Transactional
     public TeamMatching applyToTeam(ApplyTeamRequestDTO requestDTO) {
         //팀명, 팀 패스워드에 일치하는 팀 찾기
-        Team team = teamRepository.findByNameAndPassword(requestDTO.getTeamName(), requestDTO.getTeamPassword())
-                .orElseThrow(TeamNotFoundException::new);
+        List<Team> teams = teamRepository.findByNameAndPassword(requestDTO.getTeamName(), requestDTO.getTeamPassword());
+        if (teams.isEmpty()) {
+            throw new TeamNotFoundException();
+        }
+        if (teams.size() > 1) {
+            throw new DuplicateTeamException();
+        }
+        Team team = teams.get(0);
 
         Member member = authService.getLoginUser();
 
