@@ -15,7 +15,7 @@ public enum ErrorCode {
     //TEAM
     TEAM_NOT_FOUND_ERROR(404, "팀 정보를 찾지 못했습니다." ),
     INVALID_TEAM_PASSWORD(400, "팀 비밀번호가 일치하지 않습니다."),
-    DUPLICATE_TEAM(404, "동일한 팀 이름과 비밀번호를 가진 팀이 존재합니다."),
+    DUPLICATE_TEAM(404, "동일한 이름의 팀이 존재합니다."),
 
     //PROJECT
     PROJECT_NOT_FOUND_ERROR(404,"해당 멤버와 매핑되는 프로젝트가 없습니다."),
