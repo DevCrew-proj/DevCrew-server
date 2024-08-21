@@ -37,6 +37,7 @@ public class MemberService {
 
     }
 
+    @Transactional
     public GetMemberProfileResponse getMemberProfile(){
 
         Member member = authService.getLoginUser();

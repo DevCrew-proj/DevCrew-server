@@ -23,7 +23,7 @@ public class GetMemberProfileResponse {
 
     private String name;
 
-    private String email;
+    private String userEmail;
 
     private String highSchool;
     private HighSchoolStatus highSchoolStatus;
@@ -39,7 +39,7 @@ public class GetMemberProfileResponse {
                 .imageUrl(member.getImageUrl())
                 .phoneNumber(member.getNormalMember().getPhoneNumber())
                 .name(member.getName())
-                .email(member.getEmail())
+                .userEmail(member.getNormalMember().getUserEmail())
                 .highSchool(member.getNormalMember().getHighSchool())
                 .highSchoolStatus(member.getNormalMember().getHighSchoolStatus())
                 .college(member.getNormalMember().getCollege())
