@@ -170,7 +170,7 @@ public class ContestConverter {
     public static GetTeamInfoOneResponseDTO toGetTeamInfoOneResponseDTO(Team team) {
         return GetTeamInfoOneResponseDTO.builder()
                 .teamId(team.getId())
-                .teamName(team.getName())
+                .teamName(team.getTeamName())
                 .planUrl(team.getPlanUrl())
                 .teamEmail(team.getMember().getEmail())
                 .build();
