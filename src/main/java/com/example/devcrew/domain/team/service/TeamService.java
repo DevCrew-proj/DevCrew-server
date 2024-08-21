@@ -38,11 +38,12 @@ public class TeamService {
 
     @Transactional
     public Team createTeamsByContestAndMember(CreateTeamRequestDTO request) {
-        // Check if a team with the same name and password already exists
-        List<Team> existingTeams = teamRepository.findByNameAndPassword(request.getTeamName(), request.getPassword());
+
+        List<Team> existingTeams = teamRepository.findByName(request.getTeamName());
         if (!existingTeams.isEmpty()) {
             throw new DuplicateTeamException();
         }
+
         Contest contest = contestRepository.findById(request.getContestId())
                 .orElseThrow(ContestNotFoundException::new);
 
