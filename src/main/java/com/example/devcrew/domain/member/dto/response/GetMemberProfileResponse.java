@@ -25,6 +25,8 @@ public class GetMemberProfileResponse {
 
     private String userEmail;
 
+    private Gender gender;
+
     private String highSchool;
     private HighSchoolStatus highSchoolStatus;
 
@@ -40,6 +42,7 @@ public class GetMemberProfileResponse {
                 .phoneNumber(member.getNormalMember().getPhoneNumber())
                 .name(member.getName())
                 .userEmail(member.getNormalMember().getUserEmail())
+                .gender(member.getNormalMember().getGender())
                 .highSchool(member.getNormalMember().getHighSchool())
                 .highSchoolStatus(member.getNormalMember().getHighSchoolStatus())
                 .college(member.getNormalMember().getCollege())
