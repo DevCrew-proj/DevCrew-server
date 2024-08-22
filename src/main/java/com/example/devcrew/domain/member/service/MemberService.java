@@ -5,6 +5,7 @@ import com.example.devcrew.domain.member.dto.request.PostMemberProfileRequest;
 import com.example.devcrew.domain.member.dto.request.UpdateCompanyMemberSignUpRequest;
 import com.example.devcrew.domain.member.dto.response.GetMemberNameResponse;
 import com.example.devcrew.domain.member.dto.response.GetMemberProfileResponse;
+import com.example.devcrew.domain.member.dto.response.GetMemberRoleResponse;
 import com.example.devcrew.domain.member.dto.response.PostMemberProfileResponse;
 import com.example.devcrew.domain.member.entity.Member;
 import com.example.devcrew.domain.member.entity.NormalMember;
@@ -53,6 +54,11 @@ public class MemberService {
     public GetMemberNameResponse getMemberName() {
         Member member = authService.getLoginUser();
         return new GetMemberNameResponse(member.getNickname());
+    }
+
+    public GetMemberRoleResponse getMemberRole() {
+        Member member = authService.getLoginUser();
+        return new GetMemberRoleResponse(member.getRole());
     }
 
 }

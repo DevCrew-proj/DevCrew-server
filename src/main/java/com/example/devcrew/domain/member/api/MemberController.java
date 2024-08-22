@@ -4,6 +4,7 @@ import com.example.devcrew.domain.member.dto.request.PostMemberProfileRequest;
 import com.example.devcrew.domain.member.dto.request.UpdateCompanyMemberSignUpRequest;
 import com.example.devcrew.domain.member.dto.response.GetMemberNameResponse;
 import com.example.devcrew.domain.member.dto.response.GetMemberProfileResponse;
+import com.example.devcrew.domain.member.dto.response.GetMemberRoleResponse;
 import com.example.devcrew.domain.member.dto.response.PostMemberProfileResponse;
 import com.example.devcrew.domain.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,6 +44,12 @@ public class MemberController {
     @GetMapping("/name")
     public ResponseEntity<GetMemberNameResponse> getMemberName() {
         return ResponseEntity.ok(memberService.getMemberName());
+    }
+
+    @Operation(summary = "회원 권한 조회")
+    @GetMapping("/role")
+    public ResponseEntity<GetMemberRoleResponse> getMemberRole() {
+        return ResponseEntity.ok(memberService.getMemberRole());
     }
 
 }
