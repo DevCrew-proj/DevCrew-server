@@ -53,9 +53,6 @@ public class ProjectService {
         Member member = authService.getLoginUser();
 
         Page<Project> projects=projectRepository.findProjectsWithImagesByMember(member,pageable);
-        if (projects.isEmpty()) {
-            throw new BusinessException(ErrorCode.PROJECT_NOT_FOUND_ERROR);
-        }
 
         List<GetOneProjectResponse> projectList= projects.stream()
                 .map(project -> {
@@ -79,9 +76,6 @@ public class ProjectService {
         Member member = authService.getLoginUser();
 
         Page<Project> projects=projectRepository.findProjectsByMemberAndProjectTag(member,projectTag,pageable);
-        if (projects.isEmpty()) {
-            throw new BusinessException(ErrorCode.PROJECT_NOT_FOUND_ERROR);
-        }
 
         List<GetOneProjectResponse> projectList= projects.stream()
                 .map(project -> {
