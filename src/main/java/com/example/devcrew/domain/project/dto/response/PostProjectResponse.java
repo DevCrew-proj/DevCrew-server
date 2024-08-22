@@ -29,6 +29,8 @@ public class PostProjectResponse {
 
     private ProjectTag projectTag;
 
+    private String oneLineSummary;
+
     private String summary;
 
     private String role;
@@ -41,6 +43,7 @@ public class PostProjectResponse {
                 .teamName(project.getTeamName())
                 .duration(project.getDuration())
                 .projectTag(project.getProjectTag())
+                .oneLineSummary(project.getOneLineSummary())
                 .summary(project.getSummary())
                 .role(project.getRole())
                 .build();

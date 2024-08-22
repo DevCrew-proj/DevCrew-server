@@ -35,6 +35,8 @@ public class Project extends BaseTimeEntity {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private ProjectTag projectTag;
 
+    private String oneLineSummary;
+
     private String summary;
 
     private String role;
@@ -55,6 +57,7 @@ public class Project extends BaseTimeEntity {
                 .teamName(request.getTeamName())
                 .duration(request.getDuration())
                 .projectTag(request.getProjectTag())
+                .oneLineSummary(request.getOneLineSummary())
                 .summary(request.getSummary())
                 .role(request.getRole())
                 .member(member)

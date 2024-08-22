@@ -19,6 +19,7 @@ public class GetOneProjectResponse {
     private String projectName;
     private List<String> images;
     private ProjectTag tag;
+    private String oneLineSummary;
     private String summary;
     private String teamName;
     private String duration;
@@ -29,6 +30,7 @@ public class GetOneProjectResponse {
                 .projectName(project.getProjectName())
                 .images(images)
                 .tag(project.getProjectTag())
+                .oneLineSummary(project.getOneLineSummary())
                 .summary(project.getSummary())
                 .teamName(project.getTeamName())
                 .duration(project.getDuration())

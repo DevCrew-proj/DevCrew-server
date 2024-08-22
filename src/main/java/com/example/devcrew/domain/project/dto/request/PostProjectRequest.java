@@ -19,6 +19,8 @@ public class PostProjectRequest {
 
     private ProjectTag projectTag;
 
+    private String oneLineSummary;
+
     private String summary;
 
     private String role;
