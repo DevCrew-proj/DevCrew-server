@@ -1,9 +1,12 @@
 package com.example.devcrew;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
+
+import java.util.TimeZone;
 
 @SpringBootApplication
 @EnableJpaAuditing
@@ -14,4 +17,8 @@ public class DevcrewApplication {
         SpringApplication.run(DevcrewApplication.class, args);
     }
 
+    @PostConstruct
+    void started(){
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
+    }
 }
