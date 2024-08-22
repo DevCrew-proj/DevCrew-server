@@ -17,6 +17,8 @@ public class GetProjectDetailResponse {
 
     private String tag;
 
+    private String oneLineSummary;
+
     private String summary;
 
     private String teamName;
@@ -30,6 +32,7 @@ public class GetProjectDetailResponse {
                 .id(project.getId())
                 .name(project.getProjectName())
                 .tag(project.getProjectTag().getTag())
+                .oneLineSummary(project.getOneLineSummary())
                 .summary(project.getSummary())
                 .teamName(project.getTeamName())
                 .role(project.getRole())
