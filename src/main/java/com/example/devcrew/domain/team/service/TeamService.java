@@ -79,16 +79,17 @@ public class TeamService {
 
     @Transactional
     public TeamMatching applyToTeam(ApplyTeamRequestDTO requestDTO) {
-        //팀명, 팀 패스워드에 일치하는 팀 찾기
-        List<Team> teams = teamRepository.findByNameAndPassword(requestDTO.getTeamName(), requestDTO.getTeamPassword());
+
+        // Find teams by team name and contest ID
+        List<Team> teams = teamRepository.findByNameAndContestId(requestDTO.getTeamName(), requestDTO.getContestId());
         if (teams.isEmpty()) {
             throw new TeamNotFoundException();
         }
-        if (teams.size() > 1) {
-            throw new DuplicateTeamException();
-        }
         Team team = teams.get(0);
-
+        // Check if the team password matches
+        if (!team.getPassword().equals(requestDTO.getTeamPassword())) {
+            throw new InvalidTeamPasswordException();
+        }
         Member member = authService.getLoginUser();
 
         TeamMatching teamMatching = TeamMatching.builder()
