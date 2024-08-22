@@ -39,11 +39,10 @@ public class TeamService {
     @Transactional
     public Team createTeamsByContestAndMember(CreateTeamRequestDTO request) {
 
-        List<Team> existingTeams = teamRepository.findByName(request.getTeamName());
+        List<Team> existingTeams = teamRepository.findByNameAndContestId(request.getTeamName(), request.getContestId());
         if (!existingTeams.isEmpty()) {
             throw new DuplicateTeamException();
         }
-
         Contest contest = contestRepository.findById(request.getContestId())
                 .orElseThrow(ContestNotFoundException::new);
 
