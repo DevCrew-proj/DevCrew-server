@@ -20,6 +20,9 @@ public class ApplyTeamRequestDTO {
     @NotNull(message = "팀 비밀번호를 입력해주세요.")
     private String teamPassword;
 
+    @NotNull(message = "공모전 아이디.")
+    private Long contestId;
+
     private String name;
 
     //private String phoneNumber;
