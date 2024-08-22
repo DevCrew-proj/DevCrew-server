@@ -22,6 +22,7 @@ public class GetOneProjectResponse {
     private String oneLineSummary;
     private String summary;
     private String teamName;
+    private String role;
     private String duration;
 
     public static GetOneProjectResponse of(Project project,List<String> images){
@@ -33,6 +34,7 @@ public class GetOneProjectResponse {
                 .oneLineSummary(project.getOneLineSummary())
                 .summary(project.getSummary())
                 .teamName(project.getTeamName())
+                .role(project.getRole())
                 .duration(project.getDuration())
                 .build();
     }
