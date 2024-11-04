@@ -61,3 +61,8 @@ refactor/#32-쿼리-최적화
 feat(#32) : User 도메인 구현<br>
 feat(#32) : User 필드값 annotation 추가<br>
 
+----------------
+
+### 서비스 소개 페이지
+https://imminent-mail-488.notion.site/PM-Day-faab0c35544d42dfbf9bc562977b8c8b?pvs=4
+
